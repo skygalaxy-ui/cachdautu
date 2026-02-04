@@ -3,6 +3,27 @@ import Image from "next/image";
 import { getFeaturedPosts } from "@/lib/posts";
 import { ArrowRight, Clock, ArrowUpRight, BookOpen } from "lucide-react";
 
+const getCategoryImage = (category: string) => {
+    switch (category) {
+        case 'chung-khoan':
+        case 'quy-dau-tu':
+        case 'trai-phieu':
+        case 'tai-chinh-ca-nhan':
+            return '/images/blog/stocks.png';
+        case 'crypto':
+        case 'khoi-nghiep':
+            return '/images/blog/crypto.png';
+        case 'bat-dong-san':
+            return '/images/blog/real-estate.png';
+        case 'vang':
+        case 'forex':
+        case 'dau-tu-thay-the':
+            return '/images/blog/gold.png';
+        default:
+            return '/images/blog/stocks.png'; // Default fallback
+    }
+};
+
 export default function FeaturedPosts() {
     const posts = getFeaturedPosts();
 
@@ -39,19 +60,13 @@ export default function FeaturedPosts() {
                             <article className="bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.06] rounded-2xl sm:rounded-3xl overflow-hidden hover:border-purple-500/30 hover:shadow-glow-purple transition-all duration-500 h-full flex flex-col">
                                 {/* Image - responsive height */}
                                 <div className="h-36 sm:h-44 lg:h-48 bg-gradient-to-br from-purple-900/30 to-pink-900/30 relative overflow-hidden">
-                                    {post.image ? (
-                                        <Image
-                                            src={post.image}
-                                            alt={post.title}
-                                            fill
-                                            className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                                        />
-                                    ) : (
-                                        <div className="absolute inset-0 flex items-center justify-center">
-                                            <BookOpen className="w-10 h-10 sm:w-12 sm:h-12 text-white/20" />
-                                        </div>
-                                    )}
+                                    <Image
+                                        src={post.image || getCategoryImage(post.category)}
+                                        alt={post.title}
+                                        fill
+                                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                    />
                                     <div className="absolute inset-0 bg-gradient-to-t from-primary to-transparent" />
 
                                     {/* Category badge */}

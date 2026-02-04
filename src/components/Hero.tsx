@@ -5,14 +5,14 @@ import { TrendingUp, Building2, PiggyBank, Coins, Bitcoin, DollarSign, BarChart3
 
 // Floating icon data - optimized positions for all screen sizes
 const floatingIcons = [
-    { icon: <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6" />, color: "from-purple-500 to-pink-500", delay: "0s", position: "top-[15%] left-[5%] sm:left-[10%]" },
-    { icon: <Building2 className="w-5 h-5 sm:w-6 sm:h-6" />, color: "from-pink-500 to-orange-500", delay: "1s", position: "top-[12%] right-[5%] sm:right-[15%]" },
-    { icon: <PiggyBank className="w-5 h-5 sm:w-6 sm:h-6" />, color: "from-orange-500 to-yellow-500", delay: "2s", position: "top-[32%] left-[2%] sm:left-[5%]" },
-    { icon: <Coins className="w-5 h-5 sm:w-6 sm:h-6" />, color: "from-yellow-500 to-green-500", delay: "0.5s", position: "top-[35%] right-[3%] sm:right-[8%]" },
-    { icon: <Bitcoin className="w-5 h-5 sm:w-6 sm:h-6" />, color: "from-orange-400 to-orange-600", delay: "1.5s", position: "bottom-[32%] left-[5%] sm:left-[12%]" },
-    { icon: <DollarSign className="w-5 h-5 sm:w-6 sm:h-6" />, color: "from-green-500 to-emerald-500", delay: "2.5s", position: "bottom-[28%] right-[5%] sm:right-[10%]" },
-    { icon: <BarChart3 className="w-5 h-5 sm:w-6 sm:h-6" />, color: "from-blue-500 to-purple-500", delay: "0.8s", position: "bottom-[42%] left-[8%] sm:left-[20%] hidden sm:flex" },
-    { icon: <Wallet className="w-5 h-5 sm:w-6 sm:h-6" />, color: "from-purple-400 to-pink-400", delay: "1.8s", position: "bottom-[38%] right-[8%] sm:right-[18%] hidden sm:flex" },
+    { icon: <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6" />, label: "Chứng khoán", color: "from-purple-500 to-pink-500", delay: "0s", position: "top-[15%] left-[5%] sm:left-[10%]" },
+    { icon: <Building2 className="w-5 h-5 sm:w-6 sm:h-6" />, label: "Bất động sản", color: "from-pink-500 to-orange-500", delay: "1s", position: "top-[12%] right-[5%] sm:right-[15%]" },
+    { icon: <PiggyBank className="w-5 h-5 sm:w-6 sm:h-6" />, label: "Tiết kiệm", color: "from-orange-500 to-yellow-500", delay: "2s", position: "top-[32%] left-[2%] sm:left-[5%]" },
+    { icon: <Coins className="w-5 h-5 sm:w-6 sm:h-6" />, label: "Vàng", color: "from-yellow-500 to-green-500", delay: "0.5s", position: "top-[35%] right-[3%] sm:right-[8%]" },
+    { icon: <Bitcoin className="w-5 h-5 sm:w-6 sm:h-6" />, label: "Crypto", color: "from-orange-400 to-orange-600", delay: "1.5s", position: "bottom-[32%] left-[5%] sm:left-[12%]" },
+    { icon: <DollarSign className="w-5 h-5 sm:w-6 sm:h-6" />, label: "Forex", color: "from-green-500 to-emerald-500", delay: "2.5s", position: "bottom-[28%] right-[5%] sm:right-[10%]" },
+    { icon: <BarChart3 className="w-5 h-5 sm:w-6 sm:h-6" />, label: "Phân tích", color: "from-blue-500 to-purple-500", delay: "0.8s", position: "bottom-[42%] left-[8%] sm:left-[20%] hidden sm:flex" },
+    { icon: <Wallet className="w-5 h-5 sm:w-6 sm:h-6" />, label: "Tài chính", color: "from-purple-400 to-pink-400", delay: "1.8s", position: "bottom-[38%] right-[8%] sm:right-[18%] hidden sm:flex" },
 ];
 
 export default function Hero() {
@@ -44,13 +44,18 @@ export default function Hero() {
             {floatingIcons.map((item, idx) => (
                 <div
                     key={idx}
-                    className={`absolute ${item.position} animate-float`}
+                    className={`absolute ${item.position} animate-float group cursor-pointer z-20`}
                     style={{ animationDelay: item.delay }}
                     aria-hidden="true"
                 >
-                    <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${item.color} p-0.5 shadow-lg`}>
-                        <div className="w-full h-full rounded-[10px] bg-primary/80 backdrop-blur-sm flex items-center justify-center text-white">
+                    <div className={`relative w-10 h-10 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br ${item.color} p-0.5 shadow-lg transition-transform duration-300 group-hover:scale-110`}>
+                        <div className="w-full h-full rounded-[14px] bg-primary/80 backdrop-blur-sm flex items-center justify-center text-white group-hover:bg-primary/60 transition-colors">
                             {item.icon}
+                        </div>
+
+                        {/* Tooltip */}
+                        <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-xs font-bold text-white opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 pointer-events-none whitespace-nowrap">
+                            {item.label}
                         </div>
                     </div>
                 </div>
@@ -60,48 +65,52 @@ export default function Hero() {
             <div className="container mx-auto px-4 text-center relative z-10">
                 <div className="max-w-4xl mx-auto">
                     {/* Badge */}
-                    <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-6 sm:mb-8">
-                        <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                        <span className="text-xs sm:text-sm text-text-secondary">Nền tảng đầu tư thông minh #1 Việt Nam</span>
+                    <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-6 sm:mb-8 hover:bg-white/10 transition-colors cursor-default">
+                        <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                        </span>
+                        <span className="text-xs sm:text-sm text-text-secondary font-medium">Nền tảng đầu tư thông minh #1 Việt Nam</span>
                     </div>
 
                     {/* Main Heading - Responsive font sizes */}
-                    <h1 id="hero-heading" className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 leading-tight">
-                        <span className="text-white">Đầu tư </span>
+                    <h1 id="hero-heading" className="text-4xl xs:text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 sm:mb-8 leading-tight tracking-tight">
+                        <span className="text-white drop-shadow-2xl">Đầu tư </span>
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 bg-[length:200%_auto] animate-gradient-shift">
                             Thông minh
                         </span>
                         <br className="hidden xs:block" />
-                        <span className="text-white"> cùng </span>
+                        <span className="text-white drop-shadow-2xl"> cùng </span>
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-pink-400 to-purple-400 bg-[length:200%_auto] animate-gradient-shift">
                             Cách Đầu Tư
                         </span>
                     </h1>
 
                     {/* Subtitle */}
-                    <p className="text-base sm:text-lg lg:text-xl text-text-secondary mb-8 sm:mb-10 max-w-2xl mx-auto px-2">
-                        Kiến thức, công cụ và chiến lược để giúp bạn đạt được <strong className="text-white">tự do tài chính</strong> nhanh hơn bao giờ hết.
+                    <p className="text-base sm:text-lg lg:text-xl text-text-secondary mb-8 sm:mb-12 max-w-2xl mx-auto px-4 leading-relaxed">
+                        Kiến thức, công cụ và chiến lược thực chiến để giúp bạn đạt được <strong className="text-white">tự do tài chính</strong> nhanh hơn bao giờ hết.
                     </p>
 
                     {/* CTA Buttons - Stack on mobile, row on larger */}
-                    <nav className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0" aria-label="Hành động chính">
+                    <nav className="flex flex-col sm:flex-row gap-4 justify-center px-4 sm:px-0" aria-label="Hành động chính">
                         <Link
                             href="/blog"
-                            className="group relative px-6 sm:px-8 py-3 sm:py-4 rounded-full overflow-hidden"
+                            className="group relative px-8 sm:px-10 py-4 sm:py-4.5 rounded-full overflow-hidden shadow-xl shadow-purple-500/20 hover:shadow-purple-500/40 transition-all transform hover:-translate-y-1"
                         >
                             {/* Gradient background */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 opacity-100 group-hover:opacity-90 transition-opacity" />
-                            {/* Glow effect */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 blur-xl opacity-50 group-hover:opacity-70 transition-opacity" />
-                            <span className="relative z-10 text-white font-bold text-base sm:text-lg flex items-center justify-center gap-2">
+                            <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 opacity-100 group-hover:opacity-110 transition-all font-bold" />
+                            {/* Shine effect */}
+                            <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out skew-x-12" />
+
+                            <span className="relative z-10 text-white font-bold text-base sm:text-lg flex items-center justify-center gap-3">
                                 Khám phá ngay
-                                <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
+                                <TrendingUp className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                             </span>
                         </Link>
 
                         <Link
                             href="/about"
-                            className="px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-white/5 border border-white/10 text-white font-bold text-base sm:text-lg hover:bg-white/10 hover:border-white/20 transition-all backdrop-blur-sm"
+                            className="px-8 sm:px-10 py-4 sm:py-4.5 rounded-full bg-white/5 border border-white/10 text-white font-bold text-base sm:text-lg hover:bg-white/10 hover:border-white/20 transition-all backdrop-blur-sm hover:-translate-y-1"
                         >
                             Tìm hiểu thêm
                         </Link>
@@ -110,7 +119,7 @@ export default function Hero() {
             </div>
 
             {/* Bottom gradient fade */}
-            <div className="absolute bottom-0 left-0 right-0 h-24 sm:h-32 bg-gradient-to-t from-primary to-transparent" aria-hidden="true" />
+            <div className="absolute bottom-0 left-0 right-0 h-32 sm:h-48 bg-gradient-to-t from-primary via-primary/80 to-transparent pointer-events-none" aria-hidden="true" />
         </section>
     );
 }

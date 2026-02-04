@@ -41,7 +41,7 @@ export const blogPosts: BlogPost[] = [
         readingTime: "8 phút",
         tags: ["phân tích cơ bản", "người mới"],
         featured: true,
-        image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80",
+        image: "/images/blog/chung-khoan/huong-dan-doc-bao-cao-tai-chinh.png",
     },
     {
         slug: "phan-tich-ky-thuat-co-ban",
@@ -51,6 +51,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-28",
         readingTime: "10 phút",
         tags: ["phân tích kỹ thuật", "biểu đồ"],
+        image: "/images/blog/chung-khoan/phan-tich-ky-thuat-co-ban.png",
     },
     {
         slug: "top-10-co-phieu-blue-chip-2026",
@@ -60,6 +61,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-25",
         readingTime: "12 phút",
         tags: ["blue-chip", "danh mục"],
+        image: "/images/blog/chung-khoan/top-10-co-phieu-blue-chip.png",
     },
     {
         slug: "cach-mo-tai-khoan-chung-khoan",
@@ -69,6 +71,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-20",
         readingTime: "7 phút",
         tags: ["người mới", "hướng dẫn"],
+        image: "/images/blog/chung-khoan/cach-mo-tai-khoan-chung-khoan.png",
     },
     {
         slug: "chien-luoc-dca-co-phieu",
@@ -78,6 +81,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-15",
         readingTime: "8 phút",
         tags: ["chiến lược", "DCA"],
+        image: "/images/blog/chung-khoan/chien-luoc-dca-co-phieu.png",
     },
 
     // ==================== CRYPTO (5 bài) ====================
@@ -90,7 +94,7 @@ export const blogPosts: BlogPost[] = [
         readingTime: "12 phút",
         tags: ["bitcoin", "người mới", "blockchain"],
         featured: true,
-        image: "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=800&q=80",
+        image: "/images/blog/crypto/bitcoin-la-gi.png",
     },
     {
         slug: "ethereum-va-smart-contract",
@@ -100,6 +104,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-25",
         readingTime: "10 phút",
         tags: ["ethereum", "defi", "smart contract"],
+        image: "/images/blog/crypto/ethereum-smart-contracts.png",
     },
     {
         slug: "cach-bao-mat-vi-crypto",
@@ -109,6 +114,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-22",
         readingTime: "8 phút",
         tags: ["bảo mật", "ví crypto"],
+        image: "/images/blog/crypto/cach-tao-vi-crypto.png",
     },
     {
         slug: "staking-crypto-huong-dan",
@@ -118,6 +124,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-18",
         readingTime: "9 phút",
         tags: ["staking", "passive income"],
+        image: "/images/blog/crypto/defi-la-gi.png",
     },
     {
         slug: "altcoin-tiem-nang-2026",
@@ -127,6 +134,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-15",
         readingTime: "11 phút",
         tags: ["altcoin", "phân tích"],
+        image: "/images/blog/crypto/nft-co-ban.png",
     },
 
     // ==================== BẤT ĐỘNG SẢN (5 bài) ====================
@@ -139,7 +147,7 @@ export const blogPosts: BlogPost[] = [
         readingTime: "10 phút",
         tags: ["bất động sản", "chiến lược"],
         featured: true,
-        image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80",
+        image: "/images/blog/bat-dong-san/bat-dong-san-co-ban.png",
     },
     {
         slug: "mua-nha-cho-thue-huong-dan",
@@ -149,6 +157,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-22",
         readingTime: "12 phút",
         tags: ["cho thuê", "hướng dẫn"],
+        image: "/images/blog/bat-dong-san/loi-nhuan-cho-thue.png",
     },
     {
         slug: "phan-tich-thi-truong-bds-2026",
@@ -158,6 +167,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-18",
         readingTime: "9 phút",
         tags: ["thị trường", "phân tích"],
+        image: "/images/blog/bat-dong-san/xu-huong-bds-2024.png",
     },
     {
         slug: "reits-la-gi-cach-dau-tu",
@@ -167,6 +177,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-15",
         readingTime: "8 phút",
         tags: ["REITs", "vốn nhỏ"],
+        image: "/images/blog/bat-dong-san/dat-nen-hay-can-ho.png",
     },
     {
         slug: "sai-lam-dau-tu-bds-can-tranh",
@@ -176,6 +187,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-10",
         readingTime: "7 phút",
         tags: ["sai lầm", "kinh nghiệm"],
+        image: "/images/blog/bat-dong-san/phap-ly-bat-dong-san.png",
     },
 
     // ==================== VÀNG (5 bài) ====================
@@ -187,6 +199,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-22",
         readingTime: "7 phút",
         tags: ["vàng", "phân tích"],
+        image: "/images/blog/vang/dau-tu-vang-co-ban.png",
     },
     {
         slug: "vang-vat-chat-vs-vang-tai-khoan",
@@ -196,6 +209,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-18",
         readingTime: "8 phút",
         tags: ["so sánh", "hình thức đầu tư"],
+        image: "/images/blog/vang/vang-sjc-hay-vang-nhan.png",
     },
     {
         slug: "cach-mua-vang-sjc-tiet-kiem",
@@ -205,6 +219,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-15",
         readingTime: "6 phút",
         tags: ["SJC", "hướng dẫn"],
+        image: "/images/blog/vang/thoi-diem-mua-vang.png",
     },
     {
         slug: "vang-trong-danh-muc-dau-tu",
@@ -214,6 +229,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-12",
         readingTime: "7 phút",
         tags: ["danh mục", "phòng hộ"],
+        image: "/images/blog/vang/vang-chong-lam-phat.png",
     },
     {
         slug: "du-bao-gia-vang-2026",
@@ -223,6 +239,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-08",
         readingTime: "9 phút",
         tags: ["dự báo", "2026"],
+        image: "/images/blog/vang/luu-tru-vang-an-toan.png",
     },
 
     // ==================== FOREX (5 bài) ====================
@@ -234,6 +251,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-20",
         readingTime: "9 phút",
         tags: ["forex", "người mới"],
+        image: "/images/blog/forex/forex-la-gi.png",
     },
     {
         slug: "phan-tich-ky-thuat-forex",
@@ -243,6 +261,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-17",
         readingTime: "10 phút",
         tags: ["indicator", "phân tích"],
+        image: "/images/blog/forex/pip-va-lot.png",
     },
     {
         slug: "quan-ly-rui-ro-forex",
@@ -252,6 +271,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-14",
         readingTime: "8 phút",
         tags: ["rủi ro", "quản lý vốn"],
+        image: "/images/blog/forex/quan-ly-rui-ro-forex.png",
     },
     {
         slug: "chon-san-forex-uy-tin",
@@ -261,6 +281,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-11",
         readingTime: "7 phút",
         tags: ["sàn forex", "lựa chọn"],
+        image: "/images/blog/forex/chon-san-forex.png",
     },
     {
         slug: "chien-luoc-scalping-forex",
@@ -270,6 +291,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-08",
         readingTime: "11 phút",
         tags: ["scalping", "chiến lược"],
+        image: "/images/blog/forex/giao-dich-vang-forex.png",
     },
 
     // ==================== TRÁI PHIẾU (5 bài) ====================
@@ -281,6 +303,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-20",
         readingTime: "8 phút",
         tags: ["trái phiếu", "người mới"],
+        image: "/images/blog/trai-phieu/trai-phieu-chinh-phu.png",
     },
     {
         slug: "trai-phieu-chinh-phu-vs-doanh-nghiep",
@@ -290,6 +313,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-17",
         readingTime: "9 phút",
         tags: ["so sánh", "rủi ro"],
+        image: "/images/blog/trai-phieu/trai-phieu-doanh-nghiep.png",
     },
     {
         slug: "cach-tinh-loi-suat-trai-phieu",
@@ -299,6 +323,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-14",
         readingTime: "7 phút",
         tags: ["lợi suất", "tính toán"],
+        image: "/images/blog/trai-phieu/lai-suat-trai-phieu.png",
     },
     {
         slug: "rui-ro-dau-tu-trai-phieu",
@@ -308,6 +333,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-11",
         readingTime: "6 phút",
         tags: ["rủi ro", "cảnh báo"],
+        image: "/images/blog/trai-phieu/so-sanh-trai-phieu.png",
     },
     {
         slug: "trai-phieu-trong-danh-muc",
@@ -317,6 +343,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-08",
         readingTime: "8 phút",
         tags: ["danh mục", "chiến lược"],
+        image: "/images/blog/trai-phieu/danh-muc-trai-phieu.png",
     },
 
     // ==================== QUỸ ĐẦU TƯ (5 bài) ====================
@@ -328,6 +355,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-20",
         readingTime: "9 phút",
         tags: ["quỹ mở", "người mới"],
+        image: "/images/blog/quy-dau-tu/quy-mo-co-ban.png",
     },
     {
         slug: "so-sanh-cac-quy-etf-viet-nam",
@@ -337,6 +365,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-17",
         readingTime: "10 phút",
         tags: ["ETF", "so sánh"],
+        image: "/images/blog/quy-dau-tu/quy-etf-la-gi.png",
     },
     {
         slug: "quy-huu-tri-tu-nguyen",
@@ -346,6 +375,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-14",
         readingTime: "8 phút",
         tags: ["hưu trí", "lập kế hoạch"],
+        image: "/images/blog/quy-dau-tu/quy-chi-so-vnindex.png",
     },
     {
         slug: "cach-chon-quy-dau-tu-phu-hop",
@@ -355,6 +385,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-11",
         readingTime: "7 phút",
         tags: ["lựa chọn", "mục tiêu"],
+        image: "/images/blog/quy-dau-tu/chon-quy-phu-hop.png",
     },
     {
         slug: "phi-quan-ly-quy-can-biet",
@@ -364,6 +395,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-08",
         readingTime: "6 phút",
         tags: ["phí", "chi phí"],
+        image: "/images/blog/quy-dau-tu/so-sanh-quy-dau-tu.png",
     },
 
     // ==================== KHỞI NGHIỆP (5 bài) ====================
@@ -375,6 +407,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-20",
         readingTime: "10 phút",
         tags: ["angel investing", "startup"],
+        image: "/images/blog/khoi-nghiep/angel-investor.png",
     },
     {
         slug: "crowdfunding-goi-von-cong-dong",
@@ -384,6 +417,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-17",
         readingTime: "8 phút",
         tags: ["crowdfunding", "cộng đồng"],
+        image: "/images/blog/khoi-nghiep/startup-funding-stages.png",
     },
     {
         slug: "esop-co-phieu-nhan-vien",
@@ -393,6 +427,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-14",
         readingTime: "7 phút",
         tags: ["ESOP", "cổ phiếu"],
+        image: "/images/blog/khoi-nghiep/khoi-nghiep-co-ban.png",
     },
     {
         slug: "danh-gia-startup-truoc-dau-tu",
@@ -402,6 +437,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-11",
         readingTime: "9 phút",
         tags: ["đánh giá", "due diligence"],
+        image: "/images/blog/khoi-nghiep/dinh-gia-startup.png",
     },
     {
         slug: "rui-ro-dau-tu-startup",
@@ -411,6 +447,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-08",
         readingTime: "8 phút",
         tags: ["rủi ro", "chiến lược"],
+        image: "/images/blog/khoi-nghiep/exit-strategy.png",
     },
 
     // ==================== ĐẦU TƯ THAY THẾ (5 bài) ====================
@@ -422,6 +459,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-20",
         readingTime: "9 phút",
         tags: ["NFT", "digital art"],
+        image: "/images/blog/dau-tu-thay-the/dau-tu-thay-the.png",
     },
     {
         slug: "dau-tu-nghe-thuat-huong-dan",
@@ -431,6 +469,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-17",
         readingTime: "8 phút",
         tags: ["nghệ thuật", "sưu tầm"],
+        image: "/images/blog/dau-tu-thay-the/dau-tu-nghe-thuat.png",
     },
     {
         slug: "collectibles-va-do-co",
@@ -440,6 +479,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-14",
         readingTime: "7 phút",
         tags: ["collectibles", "đồ cổ"],
+        image: "/images/blog/dau-tu-thay-the/hang-hoa-phai-sinh.png",
     },
     {
         slug: "dau-tu-ruou-vang-cao-cap",
@@ -449,6 +489,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-11",
         readingTime: "8 phút",
         tags: ["rượu vang", "fine wine"],
+        image: "/images/blog/dau-tu-thay-the/dau-tu-ruou-vang.png",
     },
     {
         slug: "da-dang-hoa-voi-tai-san-thay-the",
@@ -458,6 +499,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-08",
         readingTime: "6 phút",
         tags: ["đa dạng hóa", "danh mục"],
+        image: "/images/blog/dau-tu-thay-the/private-equity.png",
     },
 
     // ==================== TÀI CHÍNH CÁ NHÂN (5 bài) ====================
@@ -469,6 +511,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-18",
         readingTime: "6 phút",
         tags: ["tiết kiệm", "người mới"],
+        image: "/images/blog/tai-chinh-ca-nhan/quy-khan-cap.png",
     },
     {
         slug: "quy-tac-50-30-20",
@@ -478,6 +521,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-15",
         readingTime: "5 phút",
         tags: ["ngân sách", "quy tắc"],
+        image: "/images/blog/tai-chinh-ca-nhan/quan-ly-tai-chinh.png",
     },
     {
         slug: "tra-no-nhanh-phuong-phap",
@@ -487,6 +531,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-12",
         readingTime: "7 phút",
         tags: ["trả nợ", "chiến lược"],
+        image: "/images/blog/tai-chinh-ca-nhan/da-dang-hoa-dau-tu.png",
     },
     {
         slug: "lap-ke-hoach-tai-chinh-ca-nhan",
@@ -496,6 +541,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-09",
         readingTime: "10 phút",
         tags: ["kế hoạch", "mục tiêu"],
+        image: "/images/blog/tai-chinh-ca-nhan/huu-tri-tu-som.png",
     },
     {
         slug: "thoi-quen-tai-chinh-tot",
@@ -505,6 +551,7 @@ export const blogPosts: BlogPost[] = [
         date: "2026-01-05",
         readingTime: "8 phút",
         tags: ["thói quen", "lifestyle"],
+        image: "/images/blog/tai-chinh-ca-nhan/thu-nhap-thu-dong.png",
     },
 ];
 
