@@ -192,7 +192,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                         </div>
                     }>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-                            {posts.map((post: Post) => (
+                            {posts.map((post: Post, index: number) => (
                                 <Link
                                     key={post.id}
                                     href={`/blog/${post.categories?.slug || 'uncategorized'}/${post.slug}`}
@@ -207,6 +207,8 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                                                 fill
                                                 className="object-cover group-hover:scale-105 transition-transform duration-500"
                                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                priority={index < 3}
+                                                quality={75}
                                             />
                                         ) : (
                                             <div className="w-full h-full flex items-center justify-center">
