@@ -133,7 +133,7 @@ export default function InvestorQuiz() {
                             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-medium mb-6">
                                 <Brain className="w-4 h-4" /> Quiz thông minh
                             </span>
-                            <h2 id="quiz-heading" className="text-3xl md:text-4xl font-bold text-white mb-4">
+                            <h2 id="quiz-heading" className="text-xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
                                 Bạn thuộc tuýp <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">nhà đầu tư</span> nào?
                             </h2>
 
@@ -143,7 +143,7 @@ export default function InvestorQuiz() {
                                     <div
                                         key={idx}
                                         className={`h-1.5 rounded-full transition-all ${idx === currentQ ? 'bg-gradient-to-r from-purple-500 to-pink-500 w-8' :
-                                                idx < currentQ ? 'bg-purple-500 w-4' : 'bg-white/10 w-4'
+                                            idx < currentQ ? 'bg-purple-500 w-4' : 'bg-white/10 w-4'
                                             }`}
                                     />
                                 ))}
@@ -194,7 +194,7 @@ export default function InvestorQuiz() {
                             </div>
                         </div>
 
-                        <h2 className={`text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${profile?.gradient} mb-4`}>
+                        <h2 className={`text-xl sm:text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${profile?.gradient} mb-4`}>
                             {profile?.title}
                         </h2>
 

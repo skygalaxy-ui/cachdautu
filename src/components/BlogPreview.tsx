@@ -31,7 +31,7 @@ export default async function BlogPreview() {
                         <span className="text-sm font-medium uppercase tracking-wider text-accent-blue">
                             Bài viết nổi bật
                         </span>
-                        <h2 className="text-3xl sm:text-4xl font-bold mt-2 text-white">
+                        <h2 className="text-xl sm:text-3xl md:text-4xl font-bold mt-2 text-white">
                             Nhận định & <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-emerald to-emerald-400">Phân tích</span>
                         </h2>
                     </div>

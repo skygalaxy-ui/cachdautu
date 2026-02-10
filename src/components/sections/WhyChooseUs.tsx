@@ -51,7 +51,7 @@ export default function WhyChooseUs() {
                     <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs sm:text-sm font-medium mb-4 sm:mb-6">
                         Chiến lược
                     </span>
-                    <h2 id="strategies-heading" className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4 px-2">
+                    <h2 id="strategies-heading" className="text-xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4 px-2">
                         Chiến lược cho <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Mọi Khẩu vị Rủi ro</span>
                     </h2>
                     <p className="text-text-secondary text-sm sm:text-base lg:text-lg max-w-2xl mx-auto px-2">

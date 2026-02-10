@@ -61,7 +61,7 @@ export default function Testimonials() {
                         <span className="inline-block px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-medium mb-6">
                             Đánh giá
                         </span>
-                        <h2 id="testimonials-heading" className="text-4xl md:text-5xl font-bold text-white mb-4">
+                        <h2 id="testimonials-heading" className="text-xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
                             Cộng đồng <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">nói gì về chúng tôi</span>
                         </h2>
                         <p className="text-text-secondary text-lg max-w-xl mx-auto">

@@ -20,7 +20,7 @@ export default function NewsletterSection() {
                     <div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/20 flex items-center justify-center mb-8" aria-hidden="true">
                         <Mail className="w-10 h-10 text-purple-400" />
                     </div>
-                    <h2 id="newsletter-heading" className="text-4xl md:text-5xl font-bold mb-6 text-white">
+                    <h2 id="newsletter-heading" className="text-xl sm:text-4xl md:text-5xl font-bold mb-6 text-white">
                         Đăng ký nhận <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400">Bản tin Đầu tư</span>
                     </h2>
                     <p className="text-text-secondary mb-10 text-lg max-w-xl mx-auto">

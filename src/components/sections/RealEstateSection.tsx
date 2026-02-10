@@ -29,7 +29,7 @@ export default function RealEstateSection() {
                             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-400 text-sm font-medium mb-6">
                                 <Building2 className="w-4 h-4" /> Bất động sản
                             </span>
-                            <h2 id="realestate-heading" className="text-4xl md:text-5xl font-bold mb-6 text-white leading-tight">
+                            <h2 id="realestate-heading" className="text-xl sm:text-4xl md:text-5xl font-bold mb-6 text-white leading-tight">
                                 Đầu tư vào <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-orange-400">Giá trị Thực</span>
                             </h2>
                             <p className="text-text-secondary text-lg mb-8 max-w-xl">

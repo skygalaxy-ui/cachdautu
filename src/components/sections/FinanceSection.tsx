@@ -30,7 +30,7 @@ export default function FinanceSection() {
                             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium mb-6">
                                 <TrendingUp className="w-4 h-4" /> Tài chính cá nhân
                             </span>
-                            <h2 id="finance-heading" className="text-4xl md:text-5xl font-bold mb-6 text-white leading-tight">
+                            <h2 id="finance-heading" className="text-xl sm:text-4xl md:text-5xl font-bold mb-6 text-white leading-tight">
                                 Xây dựng <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-400">Tự do Tài chính</span>
                             </h2>
                             <p className="text-text-secondary text-lg mb-8 max-w-xl">

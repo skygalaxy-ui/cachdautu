@@ -53,7 +53,7 @@ export default function CategoryGrid() {
                     <span className="inline-block px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-4">
                         Chuyên mục đầu tư
                     </span>
-                    <h2 className="text-3xl md:text-5xl font-bold mb-6">
+                    <h2 className="text-xl sm:text-3xl md:text-5xl font-bold mb-6">
                         Khám phá <span className="text-transparent bg-clip-text bg-gradient-gold">mọi loại tài sản</span>
                     </h2>
                     <p className="max-w-2xl mx-auto text-text-secondary text-lg">

@@ -12,6 +12,14 @@ export const metadata: Metadata = {
         description: "Học cách đầu tư thông minh vào chứng khoán, crypto, bất động sản, vàng, forex.",
         url: "https://cachdautu.com",
         siteName: "Cách Đầu Tư",
+        images: [
+            {
+                url: "/logo.png",
+                width: 512,
+                height: 512,
+                alt: "Cách Đầu Tư",
+            },
+        ],
         locale: "vi_VN",
         type: "website",
     },
@@ -19,6 +27,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "Cách Đầu Tư - Hiểu thị trường, hiểu rủi ro",
         description: "Học cách đầu tư thông minh vào chứng khoán, crypto, bất động sản, vàng, forex.",
+        images: ["/logo.png"],
     },
     robots: {
         index: true,
