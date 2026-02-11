@@ -17,20 +17,13 @@ export async function GET(request: Request) {
     }
 
     try {
+        // Dùng service_role key để bypass RLS (không cần login)
+        const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
         const supabase = createClient(
             process.env.NEXT_PUBLIC_SUPABASE_URL!,
-            process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+            serviceRoleKey || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
         );
-
-        // Đăng nhập admin để bypass RLS
-        const { error: authError } = await supabase.auth.signInWithPassword({
-            email: "admin@cachdautu.com",
-            password: "CachDauTu@2026!",
-        });
-
-        if (authError) {
-            return NextResponse.json({ error: "Auth failed", details: authError.message }, { status: 500 });
-        }
 
         const now = new Date().toISOString();
 
