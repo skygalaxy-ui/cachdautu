@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
     LayoutDashboard,
     FileText,
@@ -13,20 +13,34 @@ import {
     X,
     ChevronRight,
     Bell,
-    Search
+    Search,
+    ExternalLink,
+    Image as ImageIcon
 } from "lucide-react";
 import { useState } from "react";
+import { createClient } from "@/lib/supabase-browser";
 
 const navItems = [
     { name: "Tổng quan", href: "/admin", icon: LayoutDashboard },
     { name: "Bài viết", href: "/admin/posts", icon: FileText },
     { name: "Chuyên mục", href: "/admin/categories", icon: FolderOpen },
+    { name: "Thư viện ảnh", href: "/admin/media", icon: ImageIcon },
     { name: "Cài đặt", href: "/admin/settings", icon: Settings },
 ];
 
 export default function AdminSidebar() {
     const pathname = usePathname();
+    const router = useRouter();
     const [isOpen, setIsOpen] = useState(false);
+    const [loggingOut, setLoggingOut] = useState(false);
+    const supabase = createClient();
+
+    const handleLogout = async () => {
+        setLoggingOut(true);
+        await supabase.auth.signOut();
+        router.push("/admin/login");
+        router.refresh();
+    };
 
     return (
         <>
@@ -100,8 +114,8 @@ export default function AdminSidebar() {
                                     href={item.href}
                                     onClick={() => setIsOpen(false)}
                                     className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-all group ${isActive
-                                            ? 'bg-gradient-to-r from-emerald-500/20 to-teal-500/10 text-emerald-400 border-l-2 border-emerald-400'
-                                            : 'text-gray-400 hover:text-white hover:bg-white/5'
+                                        ? 'bg-gradient-to-r from-emerald-500/20 to-teal-500/10 text-emerald-400 border-l-2 border-emerald-400'
+                                        : 'text-gray-400 hover:text-white hover:bg-white/5'
                                         }`}
                                 >
                                     <div className="flex items-center gap-3">
@@ -129,15 +143,24 @@ export default function AdminSidebar() {
                     </div>
                 </div>
 
-                {/* Bottom */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/10">
+                {/* Bottom Actions */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/10 space-y-1">
                     <Link
                         href="/"
+                        target="_blank"
                         className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-400 hover:text-white hover:bg-white/5 transition-all"
                     >
-                        <LogOut className="w-[18px] h-[18px]" />
-                        Về trang chủ
+                        <ExternalLink className="w-[18px] h-[18px]" />
+                        Xem trang chủ
                     </Link>
+                    <button
+                        onClick={handleLogout}
+                        disabled={loggingOut}
+                        className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-red-400 hover:text-red-300 hover:bg-red-500/10 transition-all disabled:opacity-50"
+                    >
+                        <LogOut className="w-[18px] h-[18px]" />
+                        {loggingOut ? "Đang đăng xuất..." : "Đăng xuất"}
+                    </button>
                 </div>
             </aside>
         </>

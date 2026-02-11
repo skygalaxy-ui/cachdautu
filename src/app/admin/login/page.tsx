@@ -1,17 +1,34 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { Lock, Mail, AlertCircle, Eye, EyeOff } from "lucide-react";
-import { supabase } from "@/lib/supabase";
+import { useState, useEffect, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Lock, Mail, AlertCircle, Eye, EyeOff, Shield } from "lucide-react";
+import { createClient } from "@/lib/supabase-browser";
 
-export default function AdminLoginPage() {
+function LoginForm() {
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const supabase = createClient();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+    const [checkingSession, setCheckingSession] = useState(true);
+
+    // Check if user is already logged in
+    useEffect(() => {
+        const checkSession = async () => {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session) {
+                const redirectTo = searchParams.get("redirectTo") || "/admin";
+                router.replace(redirectTo);
+            } else {
+                setCheckingSession(false);
+            }
+        };
+        checkSession();
+    }, [router, searchParams]);
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -25,13 +42,20 @@ export default function AdminLoginPage() {
             });
 
             if (error) {
-                setError("Email hoặc mật khẩu không đúng");
+                if (error.message.includes("Invalid login credentials")) {
+                    setError("Email hoặc mật khẩu không đúng");
+                } else if (error.message.includes("Email not confirmed")) {
+                    setError("Email chưa được xác nhận. Vui lòng kiểm tra hộp thư.");
+                } else {
+                    setError(error.message);
+                }
                 setLoading(false);
                 return;
             }
 
             if (data.session) {
-                router.push("/admin");
+                const redirectTo = searchParams.get("redirectTo") || "/admin";
+                router.push(redirectTo);
                 router.refresh();
             }
         } catch {
@@ -40,63 +64,81 @@ export default function AdminLoginPage() {
         }
     };
 
+    // Show loading while checking session
+    if (checkingSession) {
+        return (
+            <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
+                <div className="w-8 h-8 border-2 border-emerald-500/30 border-t-emerald-500 rounded-full animate-spin" />
+            </div>
+        );
+    }
+
     return (
-        <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-            <div className="w-full max-w-md">
-                {/* Logo */}
+        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4 relative overflow-hidden">
+            {/* Background decorations */}
+            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+                <div className="absolute top-1/4 -left-20 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl" />
+                <div className="absolute bottom-1/4 -right-20 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-emerald-600/5 rounded-full blur-3xl" />
+            </div>
+
+            <div className="w-full max-w-md relative z-10">
+                {/* Logo & Branding */}
                 <div className="text-center mb-8">
-                    <div className="w-14 h-14 mx-auto rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center text-white font-bold text-2xl shadow-lg mb-4">
-                        C
+                    <div className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/25 mb-5">
+                        <Shield className="w-8 h-8 text-white" />
                     </div>
-                    <h1 className="text-2xl font-bold text-gray-900">Admin CMS</h1>
-                    <p className="text-gray-500 mt-1">Đăng nhập để quản lý nội dung</p>
+                    <h1 className="text-2xl font-bold text-white">Admin Panel</h1>
+                    <p className="text-slate-400 mt-2 text-sm">Đăng nhập để quản lý nội dung Cách Đầu Tư</p>
                 </div>
 
-                {/* Login Form */}
-                <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+                {/* Login Card */}
+                <div className="bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8 shadow-2xl">
                     <form onSubmit={handleLogin} className="space-y-5">
                         {error && (
-                            <div className="flex items-center gap-2 p-4 rounded-xl bg-red-50 border border-red-100 text-red-600 text-sm">
+                            <div className="flex items-center gap-3 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
                                 <AlertCircle className="w-5 h-5 flex-shrink-0" />
-                                {error}
+                                <span>{error}</span>
                             </div>
                         )}
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                            <label className="block text-sm font-medium text-slate-300 mb-2">
                                 Email
                             </label>
                             <div className="relative">
-                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
                                 <input
                                     type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="admin@example.com"
-                                    className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 text-gray-900 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 focus:outline-none transition-all"
+                                    placeholder="admin@cachdautu.com"
+                                    className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 focus:outline-none transition-all"
                                     required
+                                    autoComplete="email"
                                 />
                             </div>
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                            <label className="block text-sm font-medium text-slate-300 mb-2">
                                 Mật khẩu
                             </label>
                             <div className="relative">
-                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
                                 <input
                                     type={showPassword ? "text" : "password"}
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     placeholder="••••••••"
-                                    className="w-full pl-12 pr-12 py-3 rounded-xl border border-gray-200 text-gray-900 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 focus:outline-none transition-all"
+                                    className="w-full pl-12 pr-12 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 focus:outline-none transition-all"
                                     required
+                                    autoComplete="current-password"
                                 />
                                 <button
                                     type="button"
                                     onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 transition-colors"
                                 >
                                     {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                                 </button>
@@ -106,7 +148,7 @@ export default function AdminLoginPage() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full py-3 rounded-xl bg-emerald-500 text-white font-bold hover:bg-emerald-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                            className="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40"
                         >
                             {loading ? (
                                 <>
@@ -114,17 +156,40 @@ export default function AdminLoginPage() {
                                     Đang đăng nhập...
                                 </>
                             ) : (
-                                "Đăng nhập"
+                                <>
+                                    <Lock className="w-4 h-4" />
+                                    Đăng nhập
+                                </>
                             )}
                         </button>
                     </form>
                 </div>
 
-                {/* Back to site */}
-                <p className="text-center mt-6 text-sm text-gray-500">
-                    <a href="/" className="text-emerald-600 hover:underline">← Quay về trang chủ</a>
+                {/* Footer */}
+                <div className="text-center mt-6">
+                    <a href="/" className="text-sm text-slate-500 hover:text-emerald-400 transition-colors">
+                        ← Quay về trang chủ
+                    </a>
+                </div>
+
+                <p className="text-center mt-4 text-xs text-slate-600">
+                    © {new Date().getFullYear()} Cách Đầu Tư. Bảo mật bởi Supabase Auth.
                 </p>
             </div>
         </div>
+    );
+}
+
+export default function AdminLoginPage() {
+    return (
+        <Suspense
+            fallback={
+                <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
+                    <div className="w-8 h-8 border-2 border-emerald-500/30 border-t-emerald-500 rounded-full animate-spin" />
+                </div>
+            }
+        >
+            <LoginForm />
+        </Suspense>
     );
 }
