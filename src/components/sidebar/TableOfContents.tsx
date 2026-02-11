@@ -18,25 +18,47 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
     const [activeId, setActiveId] = useState<string>("");
 
     useEffect(() => {
-        // Parse headings from content
-        const lines = content.split('\n');
+        // Parse headings from content (support both Markdown and HTML)
         const toc: TOCItem[] = [];
 
-        lines.forEach((line, idx) => {
-            if (line.startsWith('## ')) {
-                toc.push({
-                    id: `heading-${idx}`,
-                    text: line.replace('## ', ''),
-                    level: 2
-                });
-            } else if (line.startsWith('### ')) {
-                toc.push({
-                    id: `heading-${idx}`,
-                    text: line.replace('### ', ''),
-                    level: 3
-                });
+        const isHTML = /<[a-z][\s\S]*>/i.test(content);
+
+        if (isHTML) {
+            // Parse HTML headings
+            const h2Regex = /<h2[^>]*>(.*?)<\/h2>/gi;
+            const h3Regex = /<h3[^>]*>(.*?)<\/h3>/gi;
+            const allHeadings: { text: string; level: number; index: number }[] = [];
+
+            let match;
+            while ((match = h2Regex.exec(content)) !== null) {
+                const text = match[1].replace(/<[^>]+>/g, '').trim();
+                if (text) allHeadings.push({ text, level: 2, index: match.index });
             }
-        });
+            while ((match = h3Regex.exec(content)) !== null) {
+                const text = match[1].replace(/<[^>]+>/g, '').trim();
+                if (text) allHeadings.push({ text, level: 3, index: match.index });
+            }
+
+            allHeadings
+                .sort((a, b) => a.index - b.index)
+                .forEach((h, idx) => {
+                    toc.push({
+                        id: `toc-${idx}`,
+                        text: h.text,
+                        level: h.level
+                    });
+                });
+        } else {
+            // Parse Markdown headings
+            const lines = content.split('\n');
+            lines.forEach((line, idx) => {
+                if (line.startsWith('## ')) {
+                    toc.push({ id: `heading-${idx}`, text: line.replace('## ', ''), level: 2 });
+                } else if (line.startsWith('### ')) {
+                    toc.push({ id: `heading-${idx}`, text: line.replace('### ', ''), level: 3 });
+                }
+            });
+        }
 
         setItems(toc);
     }, [content]);

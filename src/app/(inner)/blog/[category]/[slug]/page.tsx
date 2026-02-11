@@ -105,11 +105,22 @@ export default async function PostPage({ params }: PostPageProps) {
         const isHTML = /<[a-z][\s\S]*>/i.test(content);
 
         if (isHTML) {
+            // Add IDs to h2/h3 headings for TOC scroll
+            let headingIdx = 0;
+            const contentWithIds = content.replace(
+                /<(h[23])([^>]*)>/gi,
+                (match, tag, attrs) => {
+                    const id = `toc-${headingIdx++}`;
+                    if (attrs.includes('id=')) return match;
+                    return `<${tag}${attrs} id="${id}">`;
+                }
+            );
+
             // Render HTML content with dangerouslySetInnerHTML and proper styling
             return (
                 <div
                     className="article-html-content"
-                    dangerouslySetInnerHTML={{ __html: content }}
+                    dangerouslySetInnerHTML={{ __html: contentWithIds }}
                 />
             );
         }
