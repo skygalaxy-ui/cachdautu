@@ -575,11 +575,21 @@ body {
   color: #E6F1FF;
   font-weight: 700;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.article-html-content th:last-child {
+  border-right: none;
 }
 
 .article-html-content td {
   padding: 0.75rem 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.article-html-content td:last-child {
+  border-right: none;
 }
 
 .article-html-content tbody tr:nth-child(even) {
