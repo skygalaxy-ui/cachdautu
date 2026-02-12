@@ -97,10 +97,35 @@ export default async function PostPage({ params }: PostPageProps) {
     const relatedPosts = post.category_id ? await getRelatedPosts(post.category_id, slug) : [];
     const postUrl = `https://cachdautu.com/blog/${category}/${slug}`;
 
-    // Enhanced markdown to HTML conversion with rich styling
+    // Detect if content is HTML or Markdown and render accordingly
     function renderContent(content: string) {
         if (!content) return null;
 
+        // Check if content contains HTML tags
+        const isHTML = /<[a-z][\s\S]*>/i.test(content);
+
+        if (isHTML) {
+            // Add IDs to h2/h3 headings for TOC scroll
+            let headingIdx = 0;
+            const contentWithIds = content.replace(
+                /<(h[23])([^>]*)>/gi,
+                (match, tag, attrs) => {
+                    const id = `toc-${headingIdx++}`;
+                    if (attrs.includes('id=')) return match;
+                    return `<${tag}${attrs} id="${id}">`;
+                }
+            );
+
+            // Render HTML content with dangerouslySetInnerHTML and proper styling
+            return (
+                <div
+                    className="article-html-content"
+                    dangerouslySetInnerHTML={{ __html: contentWithIds }}
+                />
+            );
+        }
+
+        // Fallback: Markdown parsing for non-HTML content
         const lines = content.split('\n');
         const elements: JSX.Element[] = [];
         let inTable = false;
