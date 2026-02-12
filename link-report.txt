@@ -1,0 +1,77 @@
+﻿≡ƒöì Kiß╗âm tra internal links...
+
+≡ƒô¥ 19 b├ái viß║┐t ─æ├ú publish
+Γ£à 19 URLs hß╗úp lß╗ç:
+
+   /blog/crypto/rui-ro-dau-tu-crypto-cach-phong-tranh
+   /blog/kien-thuc-dau-tu/xu-huong-gia-vang-chien-luoc-dau-tu
+   /blog/kien-thuc-dau-tu/dau-tu-vang-kenh-tru-an-an-toan
+   /blog/chung-khoan/dau-tu-chung-khoan-cho-nguoi-moi
+   /blog/crypto/dau-tu-bitcoin-crypto-cho-nguoi-moi
+   /blog/kien-thuc-dau-tu/so-sanh-kenh-dau-tu-pho-bien
+   /blog/chung-khoan/phan-tich-ky-thuat-chung-khoan
+   /blog/kien-thuc-dau-tu/chien-luoc-dca-binh-quan-gia
+   /blog/kien-thuc-dau-tu/xay-dung-danh-muc-dau-tu-da-dang-hoa
+   /blog/tai-chinh-ca-nhan/quy-tac-50-30-20-quan-ly-tai-chinh-ca-nhan
+   /blog/bat-dong-san/dau-tu-bat-dong-san-2026-uu-nhuoc-diem
+   /blog/kien-thuc-dau-tu/so-sanh-gui-tiet-kiem-vs-dau-tu-2026
+   /blog/kien-thuc-dau-tu/nen-dau-tu-gi-nam-2026-so-sanh-cac-kenh
+   /blog/chung-khoan/top-5-sai-lam-dau-tu-chung-khoan
+   /blog/kien-thuc-dau-tu/top-10-kenh-dau-tu-pho-bien-viet-nam-2026
+   /blog/kien-thuc-dau-tu/dau-tu-la-gi-huong-dan-toan-dien
+   /blog/kien-thuc-dau-tu/lai-kep-la-gi-suc-manh-lai-kep-dau-tu
+   /blog/kinh-nghiem/10-sai-lam-pho-bien-khi-dau-tu-cach-tranh
+   /blog/chung-khoan/cach-dau-tu-chung-khoan-nguoi-moi-2026
+
+
+≡ƒöù T├¼m thß║Ñy 12 broken links:
+
+Γ¥î "Rß╗ºi ro khi ─æß║ºu t╞░ crypto v├á c├ích ph├▓ng tr├ính hiß╗çu ..."
+   Link: https://cachdautu.com
+   Normalized: 
+
+Γ¥î "Xu h╞░ß╗¢ng gi├í v├áng 2025 v├á chiß║┐n l╞░ß╗úc ─æß║ºu t╞░ v├áng t..."
+   Link: https://cachdautu.com
+   Normalized: 
+
+Γ¥î "─Éß║ºu t╞░ v├áng 2026 ΓÇô Tß║Ñt cß║ú nhß╗»ng g├¼ bß║ín cß║ºn biß║┐t..."
+   Link: https://cachdautu.com
+   Normalized: 
+
+Γ¥î "─Éß║ºu t╞░ chß╗⌐ng kho├ín cho ng╞░ß╗¥i mß╗¢i bß║»t ─æß║ºu ΓÇô Tß╗½ A ─æß║┐..."
+   Link: https://cachdautu.com
+   Normalized: 
+
+Γ¥î "─Éß║ºu t╞░ Bitcoin v├á Crypto cho ng╞░ß╗¥i mß╗¢i ΓÇô To├án bß╗Ö k..."
+   Link: https://cachdautu.com
+   Normalized: 
+
+Γ¥î "So s├ính c├íc k├¬nh ─æß║ºu t╞░ phß╗ò biß║┐n nhß║Ñt 2025 ΓÇô N├¬n c..."
+   Link: https://cachdautu.com
+   Normalized: 
+
+Γ¥î "Ph├ón t├¡ch kß╗╣ thuß║¡t trong ─æß║ºu t╞░ chß╗⌐ng kho├ín ΓÇô C├┤ng..."
+   Link: https://cachdautu.com
+   Normalized: 
+
+Γ¥î "Chiß║┐n l╞░ß╗úc DCA ΓÇô B├¼nh qu├ón gi├í ─æß║ºu t╞░ hiß╗çu quß║ú cho..."
+   Link: https://cachdautu.com
+   Normalized: 
+
+Γ¥î "X├óy dß╗▒ng danh mß╗Ñc ─æß║ºu t╞░ ─æa dß║íng h├│a ΓÇô Ch├¼a kh├│a t..."
+   Link: https://cachdautu.com
+   Normalized: 
+
+Γ¥î "N├¬n ─æß║ºu t╞░ g├¼ n─âm 2026? So s├ính 5 k├¬nh ─æß║ºu t╞░ phß╗ò ..."
+   Link: https://cachdautu.com
+   Normalized: 
+
+Γ¥î "─Éß║ºu t╞░ l├á g├¼? H╞░ß╗¢ng dß║½n to├án diß╗çn cho ng╞░ß╗¥i mß╗¢i bß║»..."
+   Link: https://cachdautu.com
+   Normalized: 
+
+Γ¥î "C├ích ─æß║ºu t╞░ chß╗⌐ng kho├ín cho ng╞░ß╗¥i mß╗¢i 2026 ΓÇô H╞░ß╗¢ng..."
+   Link: https://cachdautu.com
+   Normalized: 
+
+≡ƒÆ╛ Saved to broken-links.json

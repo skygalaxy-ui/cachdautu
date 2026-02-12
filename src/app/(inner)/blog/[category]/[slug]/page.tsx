@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { Calendar, Clock, ArrowLeft, BookOpen, Mail, ChevronRight, ArrowRight, Sparkles, ArrowUpRight, Link as LinkIcon, Info, AlertTriangle, Lightbulb } from "lucide-react";
+import { Calendar, Clock, ArrowLeft, BookOpen, Mail, ChevronRight, ArrowRight, Sparkles, ArrowUpRight, Link as LinkIcon, Info, AlertTriangle, Lightbulb, MessageCircle, Zap, Star, Users } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
 import ReadingProgress from "@/components/ReadingProgress";
 import SocialShare from "@/components/SocialShare";
@@ -264,7 +264,19 @@ export default async function PostPage({ params }: PostPageProps) {
         return elements;
     }
 
-    // JSON-LD structured data
+    // Extract FAQ data from content (look for Q&A patterns)
+    const faqItems: { question: string; answer: string }[] = [];
+    if (post.content) {
+        const faqMatch = post.content.match(/##\s*(?:FAQ|Câu hỏi thường gặp)[\s\S]*?(?=##\s|$)/i);
+        if (faqMatch) {
+            const qaPairs = faqMatch[0].matchAll(/###\s*(.+?)\n([\s\S]*?)(?=###|$)/g);
+            for (const match of qaPairs) {
+                faqItems.push({ question: match[1].trim(), answer: match[2].trim() });
+            }
+        }
+    }
+
+    // JSON-LD structured data - Article
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
@@ -273,14 +285,20 @@ export default async function PostPage({ params }: PostPageProps) {
         image: post.featured_image,
         datePublished: post.created_at,
         dateModified: post.updated_at || post.created_at,
+        wordCount: post.content?.split(/\s+/).length || 0,
+        articleSection: post.categories?.name || "Đầu tư",
+        keywords: post.tags?.join(", ") || "",
+        inLanguage: "vi-VN",
         author: {
             "@type": "Organization",
-            name: "Cách Đầu Tư",
-            url: "https://cachdautu.com"
+            name: "Đội ngũ CachDauTu",
+            url: "https://cachdautu.com",
+            description: "Nhóm chuyên gia tài chính với hơn 10 năm kinh nghiệm trong lĩnh vực đầu tư"
         },
         publisher: {
             "@type": "Organization",
-            name: "Cách Đầu Tư",
+            name: "CachDauTu.com",
+            url: "https://cachdautu.com",
             logo: {
                 "@type": "ImageObject",
                 url: "https://cachdautu.com/logo.png"
@@ -292,6 +310,20 @@ export default async function PostPage({ params }: PostPageProps) {
         }
     };
 
+    // FAQ Schema
+    const faqSchema = faqItems.length > 0 ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqItems.map(item => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: {
+                "@type": "Answer",
+                text: item.answer
+            }
+        }))
+    } : null;
+
     return (
         <>
             <ReadingProgress />
@@ -299,6 +331,12 @@ export default async function PostPage({ params }: PostPageProps) {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
+            {faqSchema && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+                />
+            )}
 
             <div className="pt-24 sm:pt-32 pb-16 bg-primary min-h-screen relative overflow-hidden">
                 {/* Background effects */}
@@ -408,6 +446,37 @@ export default async function PostPage({ params }: PostPageProps) {
                             <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-white/5 flex items-center gap-4">
                                 <span className="text-xs sm:text-sm text-text-muted">Chia sẻ:</span>
                                 <SocialShare url={postUrl} title={post.title} />
+                            </div>
+
+                            {/* CTA Banner */}
+                            <div className="mt-8 sm:mt-10 p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-purple-500/10 via-pink-500/10 to-orange-500/10 border border-purple-500/20 relative overflow-hidden">
+                                <div className="absolute -top-10 -right-10 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl" />
+                                <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-pink-500/10 rounded-full blur-3xl" />
+                                <div className="relative z-10">
+                                    <div className="flex items-center gap-2 mb-3">
+                                        <Zap className="w-5 h-5 text-yellow-400" />
+                                        <span className="text-xs font-bold text-yellow-400 uppercase tracking-wider">Đừng bỏ lỡ</span>
+                                    </div>
+                                    <h3 className="text-lg sm:text-xl font-bold text-white mb-2">
+                                        Nhận phân tích đầu tư <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">miễn phí</span> mỗi tuần
+                                    </h3>
+                                    <p className="text-sm text-text-muted mb-5">Đăng ký newsletter để nhận bài viết mới, phân tích thị trường và cơ hội đầu tư trực tiếp vào email.</p>
+                                    <form className="flex flex-col sm:flex-row gap-3">
+                                        <input
+                                            type="email"
+                                            placeholder="Email của bạn"
+                                            className="flex-1 px-4 py-3 rounded-xl text-sm bg-white/[0.05] border border-white/[0.1] text-white focus:border-purple-500 focus:outline-none transition-colors placeholder-text-muted"
+                                        />
+                                        <button type="submit" className="px-6 py-3 rounded-xl bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 text-white font-bold text-sm hover:shadow-glow-purple transition-all whitespace-nowrap">
+                                            Đăng ký ngay ✨
+                                        </button>
+                                    </form>
+                                    <div className="flex items-center gap-4 mt-4 text-xs text-text-muted">
+                                        <span className="flex items-center gap-1"><Users className="w-3 h-3" /> 5,000+ độc giả</span>
+                                        <span className="flex items-center gap-1"><Star className="w-3 h-3 text-yellow-400" /> Miễn phí 100%</span>
+                                        <span className="flex items-center gap-1"><MessageCircle className="w-3 h-3" /> Hủy bất cứ lúc nào</span>
+                                    </div>
+                                </div>
                             </div>
 
                             {/* Back Button */}
