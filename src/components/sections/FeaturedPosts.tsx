@@ -1,7 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getFeaturedPosts } from "@/lib/posts";
-import { ArrowRight, Clock, ArrowUpRight, BookOpen } from "lucide-react";
+import { ArrowRight, Clock, ArrowUpRight } from "lucide-react";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
 const getCategoryImage = (category: string) => {
     switch (category) {
@@ -20,12 +25,28 @@ const getCategoryImage = (category: string) => {
         case 'dau-tu-thay-the':
             return '/images/blog/gold.png';
         default:
-            return '/images/blog/stocks.png'; // Default fallback
+            return '/images/blog/stocks.png';
     }
 };
 
-export default function FeaturedPosts() {
-    const posts = getFeaturedPosts();
+export default async function FeaturedPosts() {
+    // Fetch 3 bài mới nhất từ Supabase
+    const { data: posts } = await supabase
+        .from('posts')
+        .select('id, title, slug, excerpt, featured_image, reading_time, created_at, tags')
+        .eq('is_published', true)
+        .order('created_at', { ascending: false })
+        .limit(3);
+
+    const displayPosts = (posts || []).map((post: any) => ({
+        slug: post.slug,
+        title: post.title,
+        excerpt: post.excerpt || '',
+        image: post.featured_image,
+        readingTime: post.reading_time || '5 phút',
+        date: post.created_at,
+        category: (post.tags && post.tags[0]) ? post.tags[0].toLowerCase().replace(/\s+/g, '-') : 'kien-thuc',
+    }));
 
     return (
         <section
@@ -33,7 +54,7 @@ export default function FeaturedPosts() {
             aria-labelledby="featured-heading"
             id="featured-posts"
         >
-            {/* Background glow - responsive sizing */}
+            {/* Background glow */}
             <div className="absolute right-0 bottom-0 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-purple-500/10 rounded-full blur-[120px]" aria-hidden="true" />
             <div className="absolute left-0 top-0 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-pink-500/10 rounded-full blur-[120px]" aria-hidden="true" />
 
@@ -53,12 +74,10 @@ export default function FeaturedPosts() {
                     </Link>
                 </header>
 
-                {/* Grid - 1 column on mobile, 2 on tablet, 3 on desktop */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6" role="list">
-                    {posts.slice(0, 3).map((post, idx) => (
+                    {displayPosts.map((post: any, idx: number) => (
                         <Link key={post.slug} href={`/blog/${post.category}/${post.slug}`} className="group block" role="listitem">
                             <article className="bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.06] rounded-2xl sm:rounded-3xl overflow-hidden hover:border-purple-500/30 hover:shadow-glow-purple transition-all duration-500 h-full flex flex-col">
-                                {/* Image - responsive height */}
                                 <div className="h-36 sm:h-44 lg:h-48 bg-gradient-to-br from-purple-900/30 to-pink-900/30 relative overflow-hidden">
                                     <Image
                                         src={post.image || getCategoryImage(post.category)}
@@ -68,21 +87,16 @@ export default function FeaturedPosts() {
                                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-primary to-transparent" />
-
-                                    {/* Category badge */}
                                     <div className="absolute top-3 sm:top-4 left-3 sm:left-4">
                                         <span className="inline-block px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-gradient-to-r from-purple-500/80 to-pink-500/80 backdrop-blur-md text-xs font-bold uppercase tracking-wide text-white">
                                             {post.category.replace(/-/g, ' ')}
                                         </span>
                                     </div>
-
-                                    {/* Arrow on hover */}
                                     <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0 backdrop-blur-sm">
                                         <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                                     </div>
                                 </div>
 
-                                {/* Content */}
                                 <div className="p-4 sm:p-5 lg:p-6 flex flex-col flex-1">
                                     <div className="flex items-center gap-2 text-xs text-text-muted mb-2 sm:mb-3">
                                         <Clock className="w-3 h-3" />
