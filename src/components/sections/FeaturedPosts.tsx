@@ -1,7 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Clock, ArrowUpRight } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
+import { useEffect, useState } from "react";
 
 const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -29,24 +32,42 @@ const getCategoryImage = (category: string) => {
     }
 };
 
-export default async function FeaturedPosts() {
-    // Fetch 3 bài mới nhất từ Supabase
-    const { data: posts } = await supabase
-        .from('posts')
-        .select('id, title, slug, excerpt, featured_image, reading_time, created_at, tags')
-        .eq('is_published', true)
-        .order('created_at', { ascending: false })
-        .limit(3);
+interface DisplayPost {
+    slug: string;
+    title: string;
+    excerpt: string;
+    image: string;
+    readingTime: string;
+    date: string;
+    category: string;
+}
 
-    const displayPosts = (posts || []).map((post: any) => ({
-        slug: post.slug,
-        title: post.title,
-        excerpt: post.excerpt || '',
-        image: post.featured_image,
-        readingTime: post.reading_time || '5 phút',
-        date: post.created_at,
-        category: (post.tags && post.tags[0]) ? post.tags[0].toLowerCase().replace(/\s+/g, '-') : 'kien-thuc',
-    }));
+export default function FeaturedPosts() {
+    const [posts, setPosts] = useState<DisplayPost[]>([]);
+
+    useEffect(() => {
+        async function fetchPosts() {
+            const { data } = await supabase
+                .from('posts')
+                .select('id, title, slug, excerpt, featured_image, reading_time, created_at, tags')
+                .eq('is_published', true)
+                .order('created_at', { ascending: false })
+                .limit(3);
+
+            if (data) {
+                setPosts(data.map((post: any) => ({
+                    slug: post.slug,
+                    title: post.title,
+                    excerpt: post.excerpt || '',
+                    image: post.featured_image || '',
+                    readingTime: post.reading_time || '5 phút',
+                    date: post.created_at,
+                    category: (post.tags && post.tags[0]) ? post.tags[0].toLowerCase().replace(/\s+/g, '-') : 'kien-thuc',
+                })));
+            }
+        }
+        fetchPosts();
+    }, []);
 
     return (
         <section
@@ -54,7 +75,6 @@ export default async function FeaturedPosts() {
             aria-labelledby="featured-heading"
             id="featured-posts"
         >
-            {/* Background glow */}
             <div className="absolute right-0 bottom-0 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-purple-500/10 rounded-full blur-[120px]" aria-hidden="true" />
             <div className="absolute left-0 top-0 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-pink-500/10 rounded-full blur-[120px]" aria-hidden="true" />
 
@@ -75,7 +95,7 @@ export default async function FeaturedPosts() {
                 </header>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6" role="list">
-                    {displayPosts.map((post: any, idx: number) => (
+                    {posts.map((post) => (
                         <Link key={post.slug} href={`/blog/${post.category}/${post.slug}`} className="group block" role="listitem">
                             <article className="bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.06] rounded-2xl sm:rounded-3xl overflow-hidden hover:border-purple-500/30 hover:shadow-glow-purple transition-all duration-500 h-full flex flex-col">
                                 <div className="h-36 sm:h-44 lg:h-48 bg-gradient-to-br from-purple-900/30 to-pink-900/30 relative overflow-hidden">
