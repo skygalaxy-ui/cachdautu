@@ -602,13 +602,10 @@ async function seed() {
     if (authError) { console.log('❌ Auth failed:', authError.message); return; }
     console.log('✅ Logged in\n');
 
-    const { data: { user } } = await supabase.auth.getUser();
-
     let success = 0;
     for (const post of posts) {
         const { error } = await supabase.from('posts').insert({
             ...post,
-            author_id: user.id,
             is_published: true,
             published_at: post.scheduled_at,
         });
