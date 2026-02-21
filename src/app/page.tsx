@@ -19,6 +19,9 @@ import ChatWidget from "@/components/ChatWidget";
 import PartnerLogos from "@/components/sections/PartnerLogos";
 import NewsletterSection from "@/components/sections/NewsletterSection";
 
+// Enable dynamic rendering - bài viết mới hiển thị ngay không cần rebuild
+export const dynamic = 'force-dynamic';
+
 // SEO Metadata for homepage
 export const metadata: Metadata = {
     title: "Cách Đầu Tư - Nền tảng kiến thức đầu tư #1 Việt Nam | Chứng khoán, Crypto, Bất động sản",
