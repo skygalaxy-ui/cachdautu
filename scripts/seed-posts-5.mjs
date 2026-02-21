@@ -607,7 +607,6 @@ async function seed() {
         const { error } = await supabase.from('posts').insert({
             ...post,
             is_published: true,
-            published_at: post.scheduled_at,
         });
         if (error) {
             console.log(`❌ ${post.title.substring(0, 60)}: ${error.message}`);
