@@ -446,7 +446,7 @@ export default async function PostPage({ params }: PostPageProps) {
                             </p>
 
                             {/* Content */}
-                            <div className="prose prose-invert prose-sm sm:prose-lg max-w-none">
+                            <div className="max-w-none">
                                 {renderContent(post.content)}
                             </div>
 
