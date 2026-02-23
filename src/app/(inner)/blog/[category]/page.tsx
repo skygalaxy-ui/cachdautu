@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { BookOpen, Clock, ArrowRight, Sparkles, ArrowUpRight } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
 import Image from "next/image";
+import { publishedFilter } from "@/lib/supabase";
 
 // Enable dynamic rendering
 export const dynamic = 'force-dynamic';
@@ -46,7 +47,7 @@ async function getPostsByCategory(categoryId: string) {
             .from('posts')
             .select('*, categories(name, slug)')
             .eq('category_id', categoryId)
-            .eq('is_published', true)
+            .or(publishedFilter())
             .order('created_at', { ascending: false });
 
         console.log('[CategoryPage] getPostsByCategory:', {

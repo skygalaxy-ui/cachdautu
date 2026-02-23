@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Folder, ChevronRight } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
+import { publishedFilter } from "@/lib/supabase";
 
 const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -23,7 +24,7 @@ async function getCategoriesWithCount() {
                     .from('posts')
                     .select('*', { count: 'exact', head: true })
                     .eq('category_id', cat.id)
-                    .eq('is_published', true);
+                    .or(publishedFilter());
                 return { ...cat, postCount: count || 0 };
             })
         );

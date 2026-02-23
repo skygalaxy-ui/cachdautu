@@ -63,3 +63,9 @@ export async function deleteImage(url: string): Promise<boolean> {
 
     return !error;
 }
+
+// Auto-publish: filter bài đã published HOẶC đã đến giờ scheduled
+// Dùng thay cho .eq('is_published', true) trong mọi query frontend
+export function publishedFilter(): string {
+    return `is_published.eq.true,scheduled_at.lte.${new Date().toISOString()}`;
+}

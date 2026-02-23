@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ArrowRight, Clock, ArrowUpRight } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
+import { publishedFilter } from "@/lib/supabase";
 
 const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -50,7 +51,7 @@ export default function FeaturedPosts() {
             const { data } = await supabase
                 .from('posts')
                 .select('id, title, slug, excerpt, featured_image, reading_time, created_at, tags')
-                .eq('is_published', true)
+                .or(publishedFilter())
                 .order('created_at', { ascending: false })
                 .limit(3);
 

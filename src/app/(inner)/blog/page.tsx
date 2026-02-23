@@ -5,6 +5,7 @@ import { BookOpen, Filter, Clock, ArrowRight, Search, Sparkles, ArrowUpRight } f
 import { createClient } from "@supabase/supabase-js";
 import { Suspense } from "react";
 import { BlogCardSkeleton } from "@/components/Skeleton";
+import { publishedFilter } from "@/lib/supabase";
 
 // Enable dynamic rendering
 export const dynamic = 'force-dynamic';
@@ -56,7 +57,7 @@ async function getPosts(searchQuery?: string, page: number = 1) {
     let query = supabase
         .from('posts')
         .select('*, categories(name, slug)', { count: 'exact' })
-        .eq('is_published', true)
+        .or(publishedFilter())
         .order('created_at', { ascending: false })
         .range(from, to);
 

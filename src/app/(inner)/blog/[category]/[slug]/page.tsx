@@ -4,6 +4,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Calendar, Clock, ArrowLeft, BookOpen, Mail, ChevronRight, ArrowRight, Sparkles, ArrowUpRight, Link as LinkIcon, Info, AlertTriangle, Lightbulb, MessageCircle, Zap, Star, Users } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
+import { publishedFilter } from "@/lib/supabase";
 import ReadingProgress from "@/components/ReadingProgress";
 import SocialShare from "@/components/SocialShare";
 import TableOfContents from "@/components/sidebar/TableOfContents";
@@ -30,7 +31,7 @@ async function getPost(slug: string) {
             .from('posts')
             .select('*, categories(id, name, slug, description)')
             .eq('slug', slug)
-            .eq('is_published', true)
+            .or(publishedFilter())
             .single();
         if (error) return null;
         return data;
@@ -45,7 +46,7 @@ async function getRelatedPosts(categoryId: string, currentSlug: string) {
             .from('posts')
             .select('*, categories(name, slug)')
             .eq('category_id', categoryId)
-            .eq('is_published', true)
+            .or(publishedFilter())
             .neq('slug', currentSlug)
             .limit(3);
         return data || [];
