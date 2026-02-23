@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { TrendingUp, ArrowRight } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
-import { publishedFilter } from "@/lib/supabase";
 
 const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -13,7 +12,7 @@ async function getPopularPosts() {
         const { data } = await supabase
             .from('posts')
             .select('id, title, slug, view_count, categories(slug)')
-            .or(publishedFilter())
+            .eq('is_published', true)
             .order('view_count', { ascending: false })
             .limit(5);
         return data || [];

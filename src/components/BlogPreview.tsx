@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { BookOpen, Clock, ArrowRight } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
-import { publishedFilter } from "@/lib/supabase";
 
 const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -12,7 +11,7 @@ async function getFeaturedPosts() {
     const { data } = await supabase
         .from('posts')
         .select('*, categories(name, slug)')
-        .or(publishedFilter())
+        .eq('is_published', true)
         .order('created_at', { ascending: false })
         .limit(3);
     return data || [];

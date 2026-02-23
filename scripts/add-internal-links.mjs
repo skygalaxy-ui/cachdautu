@@ -1,115 +1,139 @@
 import { createClient } from '@supabase/supabase-js';
-const s = createClient('https://pbxpjmklrkkwatdvacap.supabase.co', 'sb_publishable_difW1C728CGH7Hgr1g9FOg_QdP0NtFD');
-await s.auth.signInWithPassword({ email: 'admin@cachdautu.com', password: 'CachDauTu@2026!' });
+const supabase = createClient('https://pbxpjmklrkkwatdvacap.supabase.co', 'sb_publishable_difW1C728CGH7Hgr1g9FOg_QdP0NtFD');
 
-// Get all posts with categories
-const { data: posts } = await s.from('posts').select('id, slug, title, content, category_id, categories(slug, name)');
-
-// Build category → posts map for finding related posts
-const catPosts = {};
-for (const p of posts || []) {
-    const catSlug = p.categories?.slug || 'uncategorized';
-    if (!catPosts[catSlug]) catPosts[catSlug] = [];
-    catPosts[catSlug].push(p);
-}
-
-// Related post mapping (manually curated for best relevance)
-const relatedMap = {
-    'dau-tu-la-gi-huong-dan-toan-dien': ['nen-dau-tu-gi-nam-2026-so-sanh-cac-kenh', 'top-10-kenh-dau-tu-pho-bien-viet-nam-2026'],
-    'nen-dau-tu-gi-nam-2026-so-sanh-cac-kenh': ['dau-tu-la-gi-huong-dan-toan-dien', 'top-10-kenh-dau-tu-pho-bien-viet-nam-2026'],
-    'top-10-kenh-dau-tu-pho-bien-viet-nam-2026': ['nen-dau-tu-gi-nam-2026-so-sanh-cac-kenh', 'dau-tu-la-gi-huong-dan-toan-dien'],
-    'cach-dau-tu-chung-khoan-nguoi-moi-2026': ['cach-doc-bang-gia-chung-khoan-nguoi-moi', 'phan-tich-ky-thuat-chung-khoan'],
-    'phan-tich-ky-thuat-chung-khoan': ['cach-dau-tu-chung-khoan-nguoi-moi-2026', 'co-phieu-tang-truong-vs-gia-tri'],
-    'chien-luoc-dca-binh-quan-gia': ['lai-kep-la-gi-suc-manh-lai-kep-dau-tu', 'dau-tu-quy-mo-tai-viet-nam-2026'],
-    'lai-kep-la-gi-suc-manh-lai-kep-dau-tu': ['chien-luoc-dca-binh-quan-gia', 'cach-tiet-kiem-tien-hieu-qua-nguoi-tre'],
-    'so-sanh-gui-tiet-kiem-vs-dau-tu-2026': ['lai-suat-ngan-hang-2026-so-sanh', 'quy-tac-50-30-20-quan-ly-tai-chinh-ca-nhan'],
-    'quy-tac-50-30-20-quan-ly-tai-chinh-ca-nhan': ['cach-tiet-kiem-tien-hieu-qua-nguoi-tre', 'fire-movement-nghi-huu-som-tuoi-40'],
-    'top-5-sai-lam-dau-tu-chung-khoan': ['tam-ly-giao-dich-sai-lam-cam-xuc', 'cach-dau-tu-chung-khoan-nguoi-moi-2026'],
-    'dau-tu-bat-dong-san-2026-uu-nhuoc-diem': ['reits-la-gi-dau-tu-bat-dong-san-von-nho', 'nen-dau-tu-gi-nam-2026-so-sanh-cac-kenh'],
-    'bitcoin-la-gi-huong-dan-dau-tu-btc': ['bitcoin-halving-la-gi-tac-dong-gia-btc', 'stablecoin-la-gi-usdt-usdc-vai-tro'],
-    'stablecoin-la-gi-usdt-usdc-vai-tro': ['bitcoin-la-gi-huong-dan-dau-tu-btc', 'forex-vs-crypto-so-sanh-chi-tiet'],
-    'etf-la-gi-huong-dan-dau-tu-quy-etf': ['dau-tu-quy-mo-tai-viet-nam-2026', 'chien-luoc-dca-binh-quan-gia'],
-    'cach-doc-bang-gia-chung-khoan-nguoi-moi': ['cach-dau-tu-chung-khoan-nguoi-moi-2026', 'cac-loai-lenh-chung-khoan-ato-atc-lo-mp'],
-    'thue-dau-tu-viet-nam-2026-huong-dan': ['chi-phi-an-khi-dau-tu-khoan-phi-mat', 'cach-doc-bao-cao-tai-chinh-doanh-nghiep'],
-    'cach-doc-bao-cao-tai-chinh-doanh-nghiep': ['phan-tich-ky-thuat-chung-khoan', 'co-phieu-tang-truong-vs-gia-tri'],
-    'dau-tu-quy-mo-tai-viet-nam-2026': ['etf-la-gi-huong-dan-dau-tu-quy-etf', 'chien-luoc-dca-binh-quan-gia'],
-    'tam-ly-giao-dich-sai-lam-cam-xuc': ['top-5-sai-lam-dau-tu-chung-khoan', 'tai-khoan-demo-luyen-tap-giao-dich'],
-    'reits-la-gi-dau-tu-bat-dong-san-von-nho': ['dau-tu-bat-dong-san-2026-uu-nhuoc-diem', 'nen-dau-tu-gi-nam-2026-so-sanh-cac-kenh'],
-    'lam-phat-la-gi-tac-dong-bao-ve-tai-san': ['vang-vs-usd-kenh-phong-ho-rui-ro', 'so-sanh-gui-tiet-kiem-vs-dau-tu-2026'],
-    'bitcoin-halving-la-gi-tac-dong-gia-btc': ['bitcoin-la-gi-huong-dan-dau-tu-btc', 'stablecoin-la-gi-usdt-usdc-vai-tro'],
-    'cach-tiet-kiem-tien-hieu-qua-nguoi-tre': ['quy-tac-50-30-20-quan-ly-tai-chinh-ca-nhan', 'quy-khan-cap-tai-sao-can-xay-dung'],
-    'dau-tu-esg-xu-huong-ben-vung-2026': ['nen-dau-tu-gi-nam-2026-so-sanh-cac-kenh', 'dau-tu-quy-mo-tai-viet-nam-2026'],
-    'dau-tu-vao-ban-than-kenh-loi-nhuan-cao': ['fire-movement-nghi-huu-som-tuoi-40', 'cach-tiet-kiem-tien-hieu-qua-nguoi-tre'],
-    'fire-movement-nghi-huu-som-tuoi-40': ['quy-tac-50-30-20-quan-ly-tai-chinh-ca-nhan', 'lai-kep-la-gi-suc-manh-lai-kep-dau-tu'],
-    'giao-duc-tai-chinh-cho-con-day-tu-nho': ['quy-tac-50-30-20-quan-ly-tai-chinh-ca-nhan', 'cach-tiet-kiem-tien-hieu-qua-nguoi-tre'],
-    'cach-doc-tin-tuc-tai-chinh-phan-biet': ['cach-doc-bao-cao-tai-chinh-doanh-nghiep', 'tam-ly-giao-dich-sai-lam-cam-xuc'],
-    'dau-tu-trai-phieu-doanh-nghiep-2026': ['so-sanh-gui-tiet-kiem-vs-dau-tu-2026', 'nen-dau-tu-gi-nam-2026-so-sanh-cac-kenh'],
-    'cach-chon-cong-ty-chung-khoan-phu-hop': ['cach-dau-tu-chung-khoan-nguoi-moi-2026', 'tai-khoan-demo-luyen-tap-giao-dich'],
-    'tong-ket-chien-luoc-dau-tu-thang-3-2026': ['nen-dau-tu-gi-nam-2026-so-sanh-cac-kenh', 'kinh-te-vi-mo-anh-huong-dau-tu'],
-    'dau-tu-theo-mua-hieu-ung-january-sell-may': ['phan-tich-ky-thuat-chung-khoan', 'tong-ket-chien-luoc-dau-tu-thang-3-2026'],
-    'p2p-lending-la-gi-co-hoi-rui-ro': ['nen-dau-tu-gi-nam-2026-so-sanh-cac-kenh', 'dau-tu-trai-phieu-doanh-nghiep-2026'],
-    'lai-suat-ngan-hang-2026-so-sanh': ['so-sanh-gui-tiet-kiem-vs-dau-tu-2026', 'lam-phat-la-gi-tac-dong-bao-ve-tai-san'],
-    'co-phieu-tang-truong-vs-gia-tri': ['phan-tich-ky-thuat-chung-khoan', 'cach-doc-bao-cao-tai-chinh-doanh-nghiep'],
-    'cac-loai-lenh-chung-khoan-ato-atc-lo-mp': ['cach-doc-bang-gia-chung-khoan-nguoi-moi', 'cach-dau-tu-chung-khoan-nguoi-moi-2026'],
-    'chi-phi-an-khi-dau-tu-khoan-phi-mat': ['thue-dau-tu-viet-nam-2026-huong-dan', 'cach-chon-cong-ty-chung-khoan-phu-hop'],
-    'tai-khoan-demo-luyen-tap-giao-dich': ['cach-dau-tu-chung-khoan-nguoi-moi-2026', 'tam-ly-giao-dich-sai-lam-cam-xuc'],
-    'forex-vs-crypto-so-sanh-chi-tiet': ['bitcoin-la-gi-huong-dan-dau-tu-btc', 'nen-dau-tu-gi-nam-2026-so-sanh-cac-kenh'],
-    'kinh-te-vi-mo-anh-huong-dau-tu': ['lam-phat-la-gi-tac-dong-bao-ve-tai-san', 'tong-ket-chien-luoc-dau-tu-thang-3-2026'],
-    'vang-vs-usd-kenh-phong-ho-rui-ro': ['lam-phat-la-gi-tac-dong-bao-ve-tai-san', 'nen-dau-tu-gi-nam-2026-so-sanh-cac-kenh'],
-    'quy-khan-cap-tai-sao-can-xay-dung': ['cach-tiet-kiem-tien-hieu-qua-nguoi-tre', 'quy-tac-50-30-20-quan-ly-tai-chinh-ca-nhan'],
-    'bao-hiem-nhan-tho-co-phai-kenh-dau-tu': ['quy-khan-cap-tai-sao-can-xay-dung', 'so-sanh-gui-tiet-kiem-vs-dau-tu-2026'],
+// Map slug -> related slugs with anchor text
+const internalLinks = {
+    'p2p-lending-la-gi-co-hoi-rui-ro': [
+        { text: 'quỹ khẩn cấp', slug: 'quy-khan-cap-tai-sao-can-xay-dung' },
+        { text: 'lãi kép trong đầu tư', slug: 'lai-kep-la-gi-cong-thuc-tinh-lai-kep' },
+        { text: 'phân bổ tài sản theo tuổi', slug: 'phan-bo-tai-san-theo-do-tuoi' },
+    ],
+    'lam-phat-la-gi-tac-dong-bao-ve-tai-san': [
+        { text: 'đầu tư vàng an toàn', slug: 'dau-tu-vang-kenh-tru-an-an-toan-2026' },
+        { text: 'xây dựng danh mục đầu tư đa dạng hóa', slug: 'xay-dung-danh-muc-dau-tu-da-dang-hoa-2026' },
+        { text: 'đầu tư bất động sản', slug: 'dau-tu-bat-dong-san-2026-uu-nhuoc-diem' },
+    ],
+    'bao-hiem-nhan-tho-co-phai-kenh-dau-tu': [
+        { text: 'quỹ mở tại Việt Nam', slug: 'dau-tu-quy-mo-tai-viet-nam-2026' },
+        { text: 'ETF cho người mới', slug: 'etf-la-gi-huong-dan-dau-tu-quy-etf' },
+        { text: 'quỹ khẩn cấp', slug: 'quy-khan-cap-tai-sao-can-xay-dung' },
+    ],
+    'cach-tiet-kiem-tien-hieu-qua-nguoi-tre': [
+        { text: 'quy tắc 50/30/20', slug: 'quy-tac-50-30-20-phuong-phap-quan-ly-tai-chinh' },
+        { text: 'xây dựng quỹ khẩn cấp', slug: 'quy-khan-cap-tai-sao-can-xay-dung' },
+        { text: 'lãi kép khi đầu tư sớm', slug: 'lai-kep-la-gi-cong-thuc-tinh-lai-kep' },
+    ],
+    'lai-suat-ngan-hang-2026-so-sanh': [
+        { text: 'lạm phát và cách phòng hộ', slug: 'lam-phat-la-gi-tac-dong-bao-ve-tai-san' },
+        { text: 'đầu tư ETF thay thế', slug: 'etf-la-gi-huong-dan-dau-tu-quy-etf' },
+        { text: 'so sánh tiết kiệm vs đầu tư', slug: 'so-sanh-gui-tiet-kiem-vs-dau-tu' },
+    ],
+    'dau-tu-esg-xu-huong-ben-vung-2026': [
+        { text: 'cách đọc báo cáo tài chính', slug: 'cach-doc-bao-cao-tai-chinh-doanh-nghiep' },
+        { text: 'cổ phiếu tăng trưởng vs giá trị', slug: 'co-phieu-tang-truong-vs-gia-tri' },
+        { text: 'đầu tư chứng khoán cho người mới', slug: 'cach-dau-tu-chung-khoan-cho-nguoi-moi-2026' },
+    ],
+    'co-phieu-tang-truong-vs-gia-tri': [
+        { text: 'chỉ số P/E định giá cổ phiếu', slug: 'pe-la-gi-dinh-gia-co-phieu' },
+        { text: 'chiến lược DCA bình quân giá', slug: 'chien-luoc-dca-binh-quan-gia' },
+        { text: 'cổ tức và thu nhập thụ động', slug: 'co-tuc-la-gi-thu-nhap-thu-dong' },
+    ],
+    'dau-tu-vao-ban-than-kenh-loi-nhuan-cao': [
+        { text: 'cách tiết kiệm tiền hiệu quả', slug: 'cach-tiet-kiem-tien-hieu-qua-nguoi-tre' },
+        { text: 'phong trào FIRE nghỉ hưu sớm', slug: 'fire-movement-nghi-huu-som-tuoi-40' },
+        { text: 'quy tắc 50/30/20', slug: 'quy-tac-50-30-20-phuong-phap-quan-ly-tai-chinh' },
+    ],
+    'cac-loai-lenh-chung-khoan-ato-atc-lo-mp': [
+        { text: 'cách đọc bảng giá chứng khoán', slug: 'cach-doc-bang-gia-chung-khoan-nguoi-moi' },
+        { text: 'phân tích kỹ thuật chứng khoán', slug: 'phan-tich-ky-thuat-chung-khoan-cho-nguoi-moi-2026' },
+        { text: 'chọn công ty chứng khoán phù hợp', slug: 'cach-chon-cong-ty-chung-khoan-phu-hop' },
+    ],
+    'fire-movement-nghi-huu-som-tuoi-40': [
+        { text: 'phân bổ tài sản theo độ tuổi', slug: 'phan-bo-tai-san-theo-do-tuoi' },
+        { text: 'sức mạnh lãi kép', slug: 'lai-kep-la-gi-cong-thuc-tinh-lai-kep' },
+        { text: 'đầu tư ETF chi phí thấp', slug: 'etf-la-gi-huong-dan-dau-tu-quy-etf' },
+    ],
+    'chi-phi-an-khi-dau-tu-khoan-phi-mat': [
+        { text: 'quỹ mở vs ETF so sánh', slug: 'dau-tu-quy-mo-tai-viet-nam-2026' },
+        { text: 'chọn công ty chứng khoán phí thấp', slug: 'cach-chon-cong-ty-chung-khoan-phu-hop' },
+        { text: 'margin trading và rủi ro', slug: 'margin-trading-la-gi-rui-ro' },
+    ],
+    'cach-doc-tin-tuc-tai-chinh-phan-biet': [
+        { text: 'cách đọc báo cáo tài chính', slug: 'cach-doc-bao-cao-tai-chinh-doanh-nghiep' },
+        { text: 'tâm lý giao dịch và sai lầm cảm xúc', slug: 'tam-ly-giao-dich-sai-lam-cam-xuc' },
+        { text: 'kinh tế vĩ mô ảnh hưởng đầu tư', slug: 'kinh-te-vi-mo-anh-huong-dau-tu' },
+    ],
+    'forex-vs-crypto-so-sanh-chi-tiet': [
+        { text: 'DeFi tài chính phi tập trung', slug: 'defi-la-gi-huong-dan-tham-gia' },
+        { text: 'stablecoin USDT USDC', slug: 'stablecoin-la-gi-usdt-usdc-vai-tro' },
+        { text: 'tài khoản demo luyện tập', slug: 'tai-khoan-demo-luyen-tap-giao-dich' },
+    ],
+    'giao-duc-tai-chinh-cho-con-day-tu-nho': [
+        { text: 'cách tiết kiệm tiền hiệu quả', slug: 'cach-tiet-kiem-tien-hieu-qua-nguoi-tre' },
+        { text: 'lãi kép sức mạnh kỳ diệu', slug: 'lai-kep-la-gi-cong-thuc-tinh-lai-kep' },
+        { text: 'đầu tư vào bản thân', slug: 'dau-tu-vao-ban-than-kenh-loi-nhuan-cao' },
+    ],
+    'kinh-te-vi-mo-anh-huong-dau-tu': [
+        { text: 'lạm phát và tác động', slug: 'lam-phat-la-gi-tac-dong-bao-ve-tai-san' },
+        { text: 'lãi suất ngân hàng 2026', slug: 'lai-suat-ngan-hang-2026-so-sanh' },
+        { text: 'đầu tư theo mùa', slug: 'dau-tu-theo-mua-hieu-ung-january-sell-may' },
+    ],
+    'cach-chon-cong-ty-chung-khoan-phu-hop': [
+        { text: 'các loại lệnh chứng khoán', slug: 'cac-loai-lenh-chung-khoan-ato-atc-lo-mp' },
+        { text: 'cách đọc bảng giá chứng khoán', slug: 'cach-doc-bang-gia-chung-khoan-nguoi-moi' },
+        { text: 'chi phí ẩn khi đầu tư', slug: 'chi-phi-an-khi-dau-tu-khoan-phi-mat' },
+    ],
+    'tai-khoan-demo-luyen-tap-giao-dich': [
+        { text: 'tâm lý giao dịch', slug: 'tam-ly-giao-dich-sai-lam-cam-xuc' },
+        { text: 'forex vs crypto so sánh', slug: 'forex-vs-crypto-so-sanh-chi-tiet' },
+        { text: 'các loại lệnh giao dịch', slug: 'cac-loai-lenh-chung-khoan-ato-atc-lo-mp' },
+    ],
+    'dau-tu-trai-phieu-doanh-nghiep-2026': [
+        { text: 'cách đọc báo cáo tài chính', slug: 'cach-doc-bao-cao-tai-chinh-doanh-nghiep' },
+        { text: 'rủi ro đầu tư crypto', slug: 'rui-ro-dau-tu-crypto-va-cach-phong-tranh-2026' },
+        { text: 'xây dựng danh mục đa dạng hóa', slug: 'xay-dung-danh-muc-dau-tu-da-dang-hoa-2026' },
+    ],
+    'vang-vs-usd-kenh-phong-ho-rui-ro': [
+        { text: 'đầu tư vàng hiệu quả', slug: 'dau-tu-vang-kenh-tru-an-an-toan-2026' },
+        { text: 'xu hướng giá vàng 2026', slug: 'xu-huong-gia-vang-2026-chien-luoc-dau-tu' },
+        { text: 'lạm phát và cách phòng hộ', slug: 'lam-phat-la-gi-tac-dong-bao-ve-tai-san' },
+    ],
+    'dau-tu-theo-mua-hieu-ung-january-sell-may': [
+        { text: 'phân tích kỹ thuật chứng khoán', slug: 'phan-tich-ky-thuat-chung-khoan-cho-nguoi-moi-2026' },
+        { text: 'tâm lý giao dịch cảm xúc', slug: 'tam-ly-giao-dich-sai-lam-cam-xuc' },
+        { text: 'chiến lược DCA bình quân giá', slug: 'chien-luoc-dca-binh-quan-gia' },
+    ],
+    'tong-ket-chien-luoc-dau-tu-thang-3-2026': [
+        { text: 'top 10 kênh đầu tư phổ biến', slug: 'top-10-kenh-dau-tu-pho-bien-viet-nam-2026' },
+        { text: 'Bitcoin Halving và chiến lược', slug: 'bitcoin-halving-la-gi-tac-dong-gia-btc' },
+        { text: 'phân bổ tài sản theo độ tuổi', slug: 'phan-bo-tai-san-theo-do-tuoi' },
+    ],
 };
 
-// Build slug → title+category map
-const slugMap = {};
-for (const p of posts || []) {
-    slugMap[p.slug] = { title: p.title, catSlug: p.categories?.slug || 'kien-thuc-dau-tu' };
-}
+async function addLinks() {
+    console.log('🔗 Thêm internal links SEO cho 21 bài viết...\n');
+    const { error: authError } = await supabase.auth.signInWithPassword({ email: 'admin@cachdautu.com', password: 'CachDauTu@2026!' });
+    if (authError) { console.log('❌ Auth:', authError.message); return; }
 
-console.log('🔧 Adding internal links to posts...\n');
-let updated = 0;
+    let ok = 0;
+    for (const [slug, links] of Object.entries(internalLinks)) {
+        const { data: post } = await supabase.from('posts').select('id, content').eq('slug', slug).single();
+        if (!post) { console.log(`⏭️ Skip ${slug} (not found)`); continue; }
 
-for (const p of posts || []) {
-    if (!p.content) continue;
+        // Build related posts section
+        const linksSection = `\n\n## Bài viết liên quan\n\n${links.map(l => `- [${l.text}](/blog/${l.slug})`).join('\n')}`;
 
-    // Skip if already has "Đọc thêm" or "Xem thêm" section at the end
-    if (p.content.includes('Đọc thêm tại') || p.content.includes('Xem thêm:') || p.content.includes('class="internal-links"')) continue;
-
-    // Get related slugs
-    let relatedSlugs = relatedMap[p.slug];
-
-    // If no manual mapping, pick 1-2 from same category
-    if (!relatedSlugs) {
-        const catSlug = p.categories?.slug || 'uncategorized';
-        const sameCat = (catPosts[catSlug] || []).filter(x => x.slug !== p.slug);
-        relatedSlugs = sameCat.slice(0, 2).map(x => x.slug);
-    }
-
-    // Build links HTML
-    const links = [];
-    for (const rSlug of relatedSlugs) {
-        const info = slugMap[rSlug];
-        if (info) {
-            links.push(`<a href="/blog/${info.catSlug}/${rSlug}">${info.title}</a>`);
+        // Check if already has links section
+        if (post.content && post.content.includes('## Bài viết liên quan')) {
+            console.log(`⏭️ ${slug} (already has links)`);
+            continue;
         }
+
+        const newContent = (post.content || '') + linksSection;
+        const { error } = await supabase.from('posts').update({ content: newContent }).eq('id', post.id);
+        if (error) console.log(`❌ ${slug}: ${error.message}`);
+        else { console.log(`✅ ${slug} (+${links.length} links)`); ok++; }
     }
-
-    if (links.length === 0) continue;
-
-    const linksHtml = `
-<h2>Đọc thêm</h2>
-<p>${links.join(' · ')}</p>
-<p>Khám phá thêm kiến thức đầu tư tại <a href="/">Cách Đầu Tư</a>.</p>`;
-
-    const newContent = p.content.trim() + '\n' + linksHtml.trim();
-
-    const { error } = await s.from('posts').update({ content: newContent }).eq('id', p.id);
-    if (error) {
-        console.log(`❌ ${p.slug}: ${error.message}`);
-    } else {
-        console.log(`✅ ${p.slug} → ${links.length} link(s)`);
-        updated++;
-    }
+    console.log(`\n🎉 Done! ${ok} bài đã thêm internal links.`);
 }
-
-console.log(`\n🎉 Added internal links to ${updated} posts`);
+addLinks();
