@@ -523,7 +523,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
                         {/* Sidebar */}
                         <aside className="lg:col-span-4">
-                            <div className="sticky top-24 sm:top-32 space-y-6 max-h-[calc(100vh-8rem)] overflow-y-auto scrollbar-thin pr-2">
+                            <div className="sticky top-24 sm:top-32 space-y-6">
                                 {/* Table of Contents */}
                                 <TableOfContents content={post.content || ''} />
 
