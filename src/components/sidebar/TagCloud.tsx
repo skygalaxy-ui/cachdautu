@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Hash } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
+import { publishedFilter } from "@/lib/supabase";
 
 const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -12,7 +13,7 @@ async function getTrendingTags() {
         const { data: posts } = await supabase
             .from('posts')
             .select('tags')
-            .eq('is_published', true);
+            .or(publishedFilter());
 
         if (!posts) return [];
 

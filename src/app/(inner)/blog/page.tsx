@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { BookOpen, Filter, Clock, ArrowRight, Search, Sparkles, ArrowUpRight } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
+import { publishedFilter } from "@/lib/supabase";
 import { Suspense } from "react";
 import { BlogCardSkeleton } from "@/components/Skeleton";
 
@@ -56,7 +57,7 @@ async function getPosts(searchQuery?: string, page: number = 1) {
     let query = supabase
         .from('posts')
         .select('*, categories(name, slug)', { count: 'exact' })
-        .eq('is_published', true)
+        .or(publishedFilter())
         .order('created_at', { ascending: false })
         .range(from, to);
 

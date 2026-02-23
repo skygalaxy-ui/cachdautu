@@ -63,3 +63,8 @@ export async function deleteImage(url: string): Promise<boolean> {
 
     return !error;
 }
+
+// Smart filter: show published posts + scheduled posts whose time has arrived
+export function publishedFilter(): string {
+    return `is_published.eq.true,and(scheduled_at.not.is.null,scheduled_at.lte.${new Date().toISOString()})`;
+}
