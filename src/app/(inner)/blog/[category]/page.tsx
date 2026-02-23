@@ -6,8 +6,8 @@ import { createClient } from "@supabase/supabase-js";
 import { publishedFilter } from "@/lib/supabase";
 import Image from "next/image";
 
-// Enable dynamic rendering
-export const dynamic = 'force-dynamic';
+// ISR: cache tĩnh, tự cập nhật mỗi 5 phút
+export const revalidate = 300;
 
 interface CategoryPageProps {
     params: Promise<{ category: string }>;

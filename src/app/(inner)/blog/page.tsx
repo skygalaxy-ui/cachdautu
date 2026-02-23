@@ -7,8 +7,8 @@ import { publishedFilter } from "@/lib/supabase";
 import { Suspense } from "react";
 import { BlogCardSkeleton } from "@/components/Skeleton";
 
-// Enable dynamic rendering
-export const dynamic = 'force-dynamic';
+// ISR: cache tĩnh, tự cập nhật mỗi 5 phút
+export const revalidate = 300;
 
 export const metadata: Metadata = {
     title: "Blog - Cách Đầu Tư | Kiến thức đầu tư toàn diện",

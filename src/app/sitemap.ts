@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { createClient } from "@supabase/supabase-js";
+import { publishedFilter } from "@/lib/supabase";
 
 const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -50,7 +51,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const { data: posts } = await supabase
         .from("posts")
         .select("slug, updated_at, categories(slug)")
-        .eq("is_published", true);
+        .or(publishedFilter());
 
     const postPages: MetadataRoute.Sitemap = (posts || []).map((post: any) => ({
         url: `${baseUrl}/blog/${post.categories?.slug || "uncategorized"}/${post.slug}`,

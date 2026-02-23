@@ -19,8 +19,8 @@ import ChatWidget from "@/components/ChatWidget";
 import PartnerLogos from "@/components/sections/PartnerLogos";
 import NewsletterSection from "@/components/sections/NewsletterSection";
 
-// Enable dynamic rendering - bài viết mới hiển thị ngay không cần rebuild
-export const dynamic = 'force-dynamic';
+// ISR: trang được cache tĩnh, tự cập nhật mỗi 10 phút
+export const revalidate = 600;
 
 // SEO Metadata for homepage
 export const metadata: Metadata = {

@@ -1,7 +1,15 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { ThemeProvider } from "@/context/ThemeContext";
+
+const inter = Inter({
+    subsets: ["latin", "vietnamese"],
+    weight: ["400", "500", "600", "700", "800"],
+    display: "swap",
+    variable: "--font-inter",
+});
 
 export const metadata: Metadata = {
     title: "Cách Đầu Tư - Hiểu thị trường, hiểu rủi ro",
@@ -14,10 +22,10 @@ export const metadata: Metadata = {
         siteName: "Cách Đầu Tư",
         images: [
             {
-                url: "/logo.png",
-                width: 512,
-                height: 512,
-                alt: "Cách Đầu Tư",
+                url: "/og-image.png",
+                width: 1200,
+                height: 630,
+                alt: "Cách Đầu Tư - Nền tảng kiến thức đầu tư #1 Việt Nam",
             },
         ],
         locale: "vi_VN",
@@ -27,11 +35,14 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "Cách Đầu Tư - Hiểu thị trường, hiểu rủi ro",
         description: "Học cách đầu tư thông minh vào chứng khoán, crypto, bất động sản, vàng, forex.",
-        images: ["/logo.png"],
+        images: ["/og-image.png"],
     },
     robots: {
         index: true,
         follow: true,
+    },
+    verification: {
+        google: "HTkNjcYarg_MJ3zS834kt0izCQxogHjyW3ZwlWQ7WEA",
     },
 };
 
@@ -41,21 +52,18 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="vi" className="dark">
+        <html lang="vi" className={`dark ${inter.variable}`}>
             <head>
                 <link rel="icon" href="/favicon.png" type="image/png" />
                 <link rel="apple-touch-icon" href="/logo.png" />
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-                <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
             </head>
-            <body className="font-sans antialiased">
+            <body className={`${inter.className} antialiased`}>
                 <ThemeProvider>
                     {children}
                 </ThemeProvider>
-                {/* Add your GA4 measurement ID here */}
                 <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_ID || ""} />
             </body>
         </html>
     );
 }
+

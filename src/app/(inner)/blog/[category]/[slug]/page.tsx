@@ -13,8 +13,8 @@ import CategoryList from "@/components/sidebar/CategoryList";
 import AuthorCard from "@/components/sidebar/AuthorCard";
 import TagCloud from "@/components/sidebar/TagCloud";
 
-// Enable dynamic rendering
-export const dynamic = 'force-dynamic';
+// ISR: cache tĩnh, tự cập nhật mỗi 5 phút
+export const revalidate = 300;
 
 interface PostPageProps {
     params: Promise<{ category: string; slug: string }>;
@@ -86,6 +86,10 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
             description: post.excerpt,
             images: post.featured_image ? [post.featured_image] : [],
         },
+        alternates: {
+            canonical: url,
+        },
+        keywords: post.tags || [],
     };
 }
 
