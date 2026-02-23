@@ -1,5 +1,17 @@
 import Link from "next/link";
-import { categories } from "@/lib/posts";
+
+const categories = [
+    { slug: "chung-khoan", name: "Chứng khoán", description: "Cổ phiếu, ETF, phân tích kỹ thuật & cơ bản" },
+    { slug: "crypto", name: "Crypto", description: "Bitcoin, Ethereum, DeFi, staking" },
+    { slug: "bat-dong-san", name: "Bất động sản", description: "Mua để cho thuê, REITs, đầu tư đất" },
+    { slug: "vang", name: "Vàng", description: "Vàng vật chất, vàng tài khoản, bạc" },
+    { slug: "forex", name: "Forex", description: "Giao dịch cặp tiền tệ, phân tích thị trường" },
+    { slug: "trai-phieu", name: "Trái phiếu", description: "Trái phiếu chính phủ & doanh nghiệp" },
+    { slug: "quy-dau-tu", name: "Quỹ đầu tư", description: "Quỹ mở, quỹ ETF, quỹ hưu trí" },
+    { slug: "khoi-nghiep", name: "Khởi nghiệp", description: "Angel investing, crowdfunding, ESOP" },
+    { slug: "dau-tu-thay-the", name: "Đầu tư thay thế", description: "Nghệ thuật, NFT, collectibles, rượu vang" },
+    { slug: "tai-chinh-ca-nhan", name: "Tài chính cá nhân", description: "Tiết kiệm, ngân sách, quỹ khẩn cấp" },
+];
 import {
     LineChart,
     Bitcoin,

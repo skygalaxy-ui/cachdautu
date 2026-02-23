@@ -1,6 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
-import { BlogPost } from "@/lib/posts";
+
+interface BlogPost {
+    slug: string;
+    title: string;
+    excerpt: string;
+    category: string;
+    date: string;
+    readingTime: string;
+    tags: string[];
+    featured?: boolean;
+    image?: string;
+}
 
 interface BlogCardProps {
     post: BlogPost;
