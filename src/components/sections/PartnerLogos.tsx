@@ -1,22 +1,23 @@
 'use client';
 
 import React from 'react';
+import { ShieldCheck, BadgeCheck, GraduationCap, Star, Newspaper, Coffee, Trophy, Gem, Zap, BarChart3, Check } from 'lucide-react';
 
 export default function PartnerLogos() {
     const partners = [
-        { name: "VnExpress", icon: "📰" },
-        { name: "CafeF", icon: "☕" },
-        { name: "The Leader", icon: "🏆" },
-        { name: "Forbes VN", icon: "💎" },
-        { name: "Zing News", icon: "⚡" },
-        { name: "Báo Đầu Tư", icon: "📊" },
+        { name: "VnExpress", icon: <Newspaper className="w-5 h-5" /> },
+        { name: "CafeF", icon: <Coffee className="w-5 h-5" /> },
+        { name: "The Leader", icon: <Trophy className="w-5 h-5" /> },
+        { name: "Forbes VN", icon: <Gem className="w-5 h-5" /> },
+        { name: "Zing News", icon: <Zap className="w-5 h-5" /> },
+        { name: "Báo Đầu Tư", icon: <BarChart3 className="w-5 h-5" /> },
     ];
 
     const trustBadges = [
-        { icon: "🔒", text: "Dữ liệu bảo mật", subtext: "SSL 256-bit" },
-        { icon: "✅", text: "Nội dung xác thực", subtext: "Kiểm duyệt chặt chẽ" },
-        { icon: "🎓", text: "Chuyên gia tư vấn", subtext: "10+ năm kinh nghiệm" },
-        { icon: "🌟", text: "Đánh giá 4.9/5", subtext: "Từ 2,500+ người dùng" },
+        { icon: <ShieldCheck className="w-6 h-6 md:w-7 md:h-7 text-emerald-400" />, text: "Dữ liệu bảo mật", subtext: "SSL 256-bit" },
+        { icon: <BadgeCheck className="w-6 h-6 md:w-7 md:h-7 text-blue-400" />, text: "Nội dung xác thực", subtext: "Kiểm duyệt chặt chẽ" },
+        { icon: <GraduationCap className="w-6 h-6 md:w-7 md:h-7 text-purple-400" />, text: "Chuyên gia tư vấn", subtext: "10+ năm kinh nghiệm" },
+        { icon: <Star className="w-6 h-6 md:w-7 md:h-7 text-yellow-400" />, text: "Đánh giá 4.9/5", subtext: "Từ 2,500+ người dùng" },
     ];
 
     return (
@@ -37,7 +38,7 @@ export default function PartnerLogos() {
                             style={{ animationDelay: `${idx * 100}ms` }}
                         >
                             <div className="flex items-center gap-3">
-                                <span className="text-2xl md:text-3xl group-hover:scale-110 transition-transform duration-300">{badge.icon}</span>
+                                <div className="group-hover:scale-110 transition-transform duration-300">{badge.icon}</div>
                                 <div>
                                     <p className="text-white font-semibold text-sm md:text-base">{badge.text}</p>
                                     <p className="text-text-muted text-xs md:text-sm">{badge.subtext}</p>
@@ -74,7 +75,7 @@ export default function PartnerLogos() {
                                 key={idx}
                                 className="flex-shrink-0 flex items-center gap-2 px-6 py-3 bg-white/5 rounded-full border border-white/10 hover:border-purple-500/30 hover:bg-white/10 transition-all duration-300 cursor-default group"
                             >
-                                <span className="text-xl group-hover:scale-110 transition-transform">{partner.icon}</span>
+                                <span className="text-text-secondary group-hover:text-purple-400 transition-colors">{partner.icon}</span>
                                 <span className="text-text-secondary font-semibold text-base md:text-lg group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400 transition-all whitespace-nowrap">
                                     {partner.name}
                                 </span>
@@ -86,12 +87,12 @@ export default function PartnerLogos() {
                 {/* Quick Stats Row */}
                 <div className="mt-12 flex flex-wrap justify-center items-center gap-4 md:gap-8 animate-fadeIn" style={{ animationDelay: '300ms' }}>
                     <div className="flex items-center gap-2 text-text-muted text-sm">
-                        <span className="text-green-400">✓</span>
+                        <Check className="w-4 h-4 text-green-400" />
                         <span>12,500+ nhà đầu tư tin tưởng</span>
                     </div>
                     <div className="hidden md:block w-px h-4 bg-white/20" />
                     <div className="flex items-center gap-2 text-text-muted text-sm">
-                        <span className="text-green-400">✓</span>
+                        <Check className="w-4 h-4 text-green-400" />
                         <span>150+ bài phân tích chuyên sâu</span>
                     </div>
                     <div className="hidden md:block w-px h-4 bg-white/20" />
