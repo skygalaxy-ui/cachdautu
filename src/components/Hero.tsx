@@ -77,7 +77,7 @@ export default function Hero() {
                     <h1 id="hero-heading" className="text-4xl xs:text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 sm:mb-8 leading-tight tracking-tight">
                         <span className="text-white drop-shadow-2xl">Đầu tư </span>
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 bg-[length:200%_auto] animate-gradient-shift">
-                            Thông minh
+                            thông minh
                         </span>
                         <br className="hidden xs:block" />
                         <span className="text-white drop-shadow-2xl"> cùng </span>

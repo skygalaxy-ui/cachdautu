@@ -7,21 +7,21 @@ import AnimatedSection from "@/components/ui/Animations";
 const strategies = [
     {
         icon: <ShieldCheck className="w-6 h-6 sm:w-8 sm:h-8" />,
-        title: "Đầu tư An toàn",
+        title: "Đầu tư an toàn",
         desc: "Chiến lược bảo toàn vốn với rủi ro thấp, phù hợp người mới bắt đầu.",
         color: "from-emerald-500 to-green-500",
         href: "/blog/tai-chinh-ca-nhan"
     },
     {
         icon: <Target className="w-6 h-6 sm:w-8 sm:h-8" />,
-        title: "Dự đoán Thị trường",
+        title: "Dự đoán thị trường",
         desc: "Phân tích kỹ thuật và cơ bản để đón đầu xu hướng thị trường.",
         color: "from-purple-500 to-pink-500",
         href: "/blog/chung-khoan"
     },
     {
         icon: <Zap className="w-6 h-6 sm:w-8 sm:h-8" />,
-        title: "Tăng trưởng Nhanh",
+        title: "Tăng trưởng nhanh",
         desc: "Cơ hội sinh lời cao với các kênh đầu tư năng động.",
         color: "from-orange-500 to-yellow-500",
         href: "/blog/crypto"
@@ -29,10 +29,10 @@ const strategies = [
 ];
 
 const features = [
-    { icon: <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6" />, title: "Phân tích Danh mục", desc: "Công cụ tối ưu hóa và cân bằng danh mục đầu tư." },
-    { icon: <BarChart3 className="w-5 h-5 sm:w-6 sm:h-6" />, title: "Xu hướng Thị trường", desc: "Cập nhật xu hướng và tín hiệu giao dịch hàng ngày." },
-    { icon: <Lightbulb className="w-5 h-5 sm:w-6 sm:h-6" />, title: "Quyết định Thông minh", desc: "Chia sẻ kinh nghiệm từ chuyên gia lâu năm." },
-    { icon: <Zap className="w-5 h-5 sm:w-6 sm:h-6" />, title: "Công cụ Mạnh mẽ", desc: "Máy tính lãi kép và bộ lọc cổ phiếu chuyên nghiệp." },
+    { icon: <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6" />, title: "Phân tích danh mục", desc: "Công cụ tối ưu hóa và cân bằng danh mục đầu tư." },
+    { icon: <BarChart3 className="w-5 h-5 sm:w-6 sm:h-6" />, title: "Xu hướng thị trường", desc: "Cập nhật xu hướng và tín hiệu giao dịch hàng ngày." },
+    { icon: <Lightbulb className="w-5 h-5 sm:w-6 sm:h-6" />, title: "Quyết định thông minh", desc: "Chia sẻ kinh nghiệm từ chuyên gia lâu năm." },
+    { icon: <Zap className="w-5 h-5 sm:w-6 sm:h-6" />, title: "Công cụ mạnh mẽ", desc: "Máy tính lãi kép và bộ lọc cổ phiếu chuyên nghiệp." },
 ];
 
 export default function WhyChooseUs() {
@@ -51,7 +51,7 @@ export default function WhyChooseUs() {
                     <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs sm:text-sm font-medium mb-4 sm:mb-6">
                         Chiến lược
                     </span>
-                    <h2 id="strategies-heading" className="text-xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4 px-2">
+                    <h2 id="strategies-heading" className="text-xl xs:text-3xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4 px-2">
                         Chiến lược cho <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 whitespace-nowrap">mọi khẩu vị rủi ro</span>
                     </h2>
                     <p className="text-text-secondary text-sm sm:text-base lg:text-lg max-w-2xl mx-auto px-2">
