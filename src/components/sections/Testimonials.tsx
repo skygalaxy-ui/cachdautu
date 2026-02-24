@@ -65,7 +65,7 @@ export default function Testimonials() {
                             Cộng đồng <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">nói gì về chúng tôi</span>
                         </h2>
                         <p className="text-text-secondary text-lg max-w-xl mx-auto">
-                            Hơn 12,500 nhà đầu tư đã tin tưởng và đồng hành cùng Cách Đầu Tư.
+                            Hơn 12,500 nhà đầu tư đã tin tưởng và đồng hành cùng <span className="whitespace-nowrap">Cách Đầu Tư</span>.
                         </p>
                     </AnimatedSection>
 
