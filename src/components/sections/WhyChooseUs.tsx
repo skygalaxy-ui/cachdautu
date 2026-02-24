@@ -52,7 +52,7 @@ export default function WhyChooseUs() {
                         Chiến lược
                     </span>
                     <h2 id="strategies-heading" className="text-xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4 px-2">
-                        Chiến lược cho <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Mọi Khẩu vị Rủi ro</span>
+                        Chiến lược cho <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 whitespace-nowrap">mọi khẩu vị rủi ro</span>
                     </h2>
                     <p className="text-text-secondary text-sm sm:text-base lg:text-lg max-w-2xl mx-auto px-2">
                         Dù bạn muốn an toàn hay chấp nhận mạo hiểm, chúng tôi có giải pháp phù hợp.
@@ -97,7 +97,7 @@ export default function WhyChooseUs() {
                         Công cụ
                     </span>
                     <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
-                        Nền tảng <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-orange-400">Tối ưu hóa</span>
+                        Nền tảng <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-orange-400">tối ưu hóa</span>
                     </h2>
                 </AnimatedSection>
 

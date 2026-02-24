@@ -31,7 +31,7 @@ export default function FinanceSection() {
                                 <TrendingUp className="w-4 h-4" /> Tài chính cá nhân
                             </span>
                             <h2 id="finance-heading" className="text-xl sm:text-4xl md:text-5xl font-bold mb-6 text-white leading-tight">
-                                Xây dựng <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-400">Tự do Tài chính</span>
+                                Xây dựng <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-400 whitespace-nowrap">Tự do tài chính</span>
                             </h2>
                             <p className="text-text-secondary text-lg mb-8 max-w-xl">
                                 Không cần thu nhập khủng mới có thể làm giàu. Học cách <strong className="text-white">quản lý chi tiêu</strong>, <strong className="text-white">tiết kiệm thông minh</strong> và <strong className="text-white">đầu tư vào bản thân</strong>.

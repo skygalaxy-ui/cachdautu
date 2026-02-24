@@ -30,7 +30,7 @@ export default function RealEstateSection() {
                                 <Building2 className="w-4 h-4" /> Bất động sản
                             </span>
                             <h2 id="realestate-heading" className="text-xl sm:text-4xl md:text-5xl font-bold mb-6 text-white leading-tight">
-                                Đầu tư vào <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-orange-400">Giá trị Thực</span>
+                                Đầu tư vào <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-orange-400 whitespace-nowrap">giá trị thực</span>
                             </h2>
                             <p className="text-text-secondary text-lg mb-8 max-w-xl">
                                 Tìm kiếm cơ hội sinh lời bền vững từ thị trường <strong className="text-white">bất động sản</strong> và các kênh đầu tư thay thế.

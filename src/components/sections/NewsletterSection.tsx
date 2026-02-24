@@ -21,7 +21,7 @@ export default function NewsletterSection() {
                         <Mail className="w-10 h-10 text-purple-400" />
                     </div>
                     <h2 id="newsletter-heading" className="text-xl sm:text-4xl md:text-5xl font-bold mb-6 text-white">
-                        Đăng ký nhận <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400">Bản tin Đầu tư</span>
+                        Đăng ký nhận <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 whitespace-nowrap">bản tin đầu tư</span>
                     </h2>
                     <p className="text-text-secondary mb-10 text-lg max-w-xl mx-auto">
                         Nhận phân tích thị trường, cơ hội đầu tư và bài học kinh nghiệm trực tiếp vào hộp thư của bạn mỗi tuần.
