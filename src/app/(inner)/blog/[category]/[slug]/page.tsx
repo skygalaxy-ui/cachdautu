@@ -294,14 +294,27 @@ export default async function PostPage({ params }: PostPageProps) {
         return elements;
     }
 
-    // Extract FAQ data from content (look for Q&A patterns)
+    // Extract FAQ data from content
     const faqItems: { question: string; answer: string }[] = [];
     if (post.content) {
+        // Method 1: Explicit FAQ/Câu hỏi section with H3s
         const faqMatch = post.content.match(/##\s*(?:FAQ|Câu hỏi thường gặp)[\s\S]*?(?=##\s|$)/i);
         if (faqMatch) {
             const qaPairs = faqMatch[0].matchAll(/###\s*(.+?)\n([\s\S]*?)(?=###|$)/g);
             for (const match of qaPairs) {
                 faqItems.push({ question: match[1].trim(), answer: match[2].trim() });
+            }
+        }
+        // Method 2: Auto-detect H2 headings that are questions (end with ?)
+        if (faqItems.length === 0) {
+            const questionPattern = /<h2[^>]*>([^<]*\?)<\/h2>\s*<p>([^<]+)<\/p>/gi;
+            const matches = post.content.matchAll(questionPattern);
+            for (const match of matches) {
+                const question = match[1].replace(/&amp;/g, '&').replace(/&quot;/g, '"').trim();
+                const answer = match[2].replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/<[^>]*>/g, '').trim();
+                if (question.length > 10 && answer.length > 30) {
+                    faqItems.push({ question, answer });
+                }
             }
         }
     }
@@ -354,6 +367,17 @@ export default async function PostPage({ params }: PostPageProps) {
         }))
     } : null;
 
+    // Breadcrumb Schema
+    const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Trang chủ", item: "https://cachdautu.com" },
+            { "@type": "ListItem", position: 2, name: post.categories?.name || "Blog", item: `https://cachdautu.com/blog/${post.categories?.slug}` },
+            { "@type": "ListItem", position: 3, name: post.title }
+        ]
+    };
+
     return (
         <>
             <ReadingProgress />
@@ -367,6 +391,10 @@ export default async function PostPage({ params }: PostPageProps) {
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
                 />
             )}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+            />
 
             <div className="pt-24 sm:pt-32 pb-16 bg-primary min-h-screen relative overflow-hidden">
                 {/* Background effects */}
