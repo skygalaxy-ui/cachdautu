@@ -39,7 +39,7 @@ export default function TradingSection() {
                                 <Activity className="w-3 h-3 sm:w-4 sm:h-4" /> Phân tích thị trường
                             </span>
                             <h2 id="trading-heading" className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-white leading-tight">
-                                Làm chủ <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Nhịp đập Thị trường</span>
+                                Làm chủ <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 whitespace-nowrap">Nhịp đập thị trường</span>
                             </h2>
                             <p className="text-text-secondary text-sm sm:text-base lg:text-lg mb-6 sm:mb-8 max-w-xl">
                                 Công cụ, kiến thức và chiến lược giao dịch chuyên sâu dành cho <strong className="text-white">nhà đầu tư</strong> chủ động.
