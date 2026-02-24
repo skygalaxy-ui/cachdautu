@@ -38,7 +38,7 @@ export default function TradingSection() {
                             <span className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs sm:text-sm font-medium mb-4 sm:mb-6">
                                 <Activity className="w-3 h-3 sm:w-4 sm:h-4" /> Phân tích thị trường
                             </span>
-                            <h2 id="trading-heading" className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-white leading-tight">
+                            <h2 id="trading-heading" className="text-2xl xs:text-3xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-white leading-tight">
                                 Làm chủ <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 whitespace-nowrap">Nhịp đập thị trường</span>
                             </h2>
                             <p className="text-text-secondary text-sm sm:text-base lg:text-lg mb-6 sm:mb-8 max-w-xl">
