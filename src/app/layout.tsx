@@ -14,7 +14,7 @@ const inter = Inter({
 export const metadata: Metadata = {
     title: "Cách Đầu Tư - Hiểu thị trường, hiểu rủi ro",
     description: "Học cách đầu tư thông minh vào chứng khoán, crypto, bất động sản, vàng, forex.",
-    metadataBase: new URL("https://cachdautu.com"),
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://cachdautu.com"),
     openGraph: {
         title: "Cách Đầu Tư - Hiểu thị trường, hiểu rủi ro",
         description: "Học cách đầu tư thông minh vào chứng khoán, crypto, bất động sản, vàng, forex.",

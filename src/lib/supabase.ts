@@ -16,7 +16,11 @@ export interface Post {
     tags: string[];
     is_published: boolean;
     reading_time: string;
+    meta_title: string | null;
+    meta_description: string | null;
+    focus_keyword: string | null;
     featured_image: string | null;
+    featured_image_alt: string | null;
     scheduled_at: string | null;
     created_at: string;
     updated_at: string;

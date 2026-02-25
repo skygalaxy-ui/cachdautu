@@ -8,7 +8,7 @@ const supabase = createClient(
 );
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const baseUrl = "https://cachdautu.com";
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://cachdautu.com";
 
     // Static pages
     const staticPages: MetadataRoute.Sitemap = [

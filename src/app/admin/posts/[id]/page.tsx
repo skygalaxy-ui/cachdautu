@@ -39,6 +39,7 @@ export default function EditPostPage() {
         featured_image: "",
         featured_image_alt: "",
         meta_title: "",
+        meta_description: "",
         scheduled_at: "",
         focus_keyword: ""
     });
@@ -81,6 +82,7 @@ export default function EditPostPage() {
                     featured_image: post.featured_image || "",
                     featured_image_alt: post.featured_image_alt || "",
                     meta_title: post.meta_title || "",
+                    meta_description: post.meta_description || "",
                     scheduled_at: post.scheduled_at ? new Date(post.scheduled_at).toISOString().slice(0, 16) : "",
                     focus_keyword: post.focus_keyword || ""
                 });
@@ -183,6 +185,7 @@ export default function EditPostPage() {
             featured_image: form.featured_image || null,
             featured_image_alt: form.featured_image_alt || null,
             meta_title: form.meta_title || null,
+            meta_description: form.meta_description || null,
             scheduled_at: form.scheduled_at ? new Date(form.scheduled_at).toISOString() : null,
             updated_at: new Date().toISOString(),
             focus_keyword: form.focus_keyword || null
@@ -267,10 +270,25 @@ export default function EditPostPage() {
                     </div>
 
                     <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Mô tả ngắn (SEO)</label>
-                        <textarea value={form.excerpt} onChange={(e) => setForm({ ...form, excerpt: e.target.value })} rows={2}
-                            className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 focus:border-emerald-500 focus:outline-none resize-none" />
-                        <p className="text-xs text-gray-400 mt-1">{form.excerpt.length}/160 ký tự</p>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Mô tả ngắn (Hiển thị trên web)</label>
+                        <textarea
+                            value={form.excerpt}
+                            onChange={(e) => setForm({ ...form, excerpt: e.target.value })}
+                            placeholder="Mô tả ngắn gọn thu hút người đọc..."
+                            rows={2}
+                            className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 focus:border-emerald-500 focus:outline-none resize-none"
+                        />
+                    </div>
+                    <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Mô tả SEO (Meta Description — hiển thị trên Google)</label>
+                        <textarea
+                            value={form.meta_description}
+                            onChange={(e) => setForm({ ...form, meta_description: e.target.value })}
+                            placeholder={form.excerpt ? form.excerpt : "Mô tả tối ưu cho Google (nên chứa từ khóa)..."}
+                            rows={2}
+                            className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-100/50 border-emerald-500/30 text-gray-900 placeholder-gray-400 focus:border-emerald-500 focus:outline-none resize-none"
+                        />
+                        <p className="text-xs text-gray-400 mt-1">{form.meta_description.length}/160 ký tự</p>
                     </div>
 
                     {/* Content Editor with Preview */}
@@ -279,7 +297,10 @@ export default function EditPostPage() {
                             <div className="flex items-center justify-between px-4 py-2">
                                 <div className="flex gap-1">
                                     <button
-                                        onClick={() => setEditorTab("write")}
+                                        onClick={() => {
+                                            setEditorTab("write");
+                                            setContentMode("markdown");
+                                        }}
                                         className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all ${editorTab === "write"
                                             ? "bg-gray-900 text-white"
                                             : "text-gray-500 hover:text-gray-700 hover:bg-gray-100"
@@ -289,7 +310,10 @@ export default function EditPostPage() {
                                         Viết
                                     </button>
                                     <button
-                                        onClick={() => setEditorTab("html")}
+                                        onClick={() => {
+                                            setEditorTab("html");
+                                            setContentMode("html");
+                                        }}
                                         className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all ${editorTab === "html"
                                             ? "bg-gray-900 text-white"
                                             : "text-gray-500 hover:text-gray-700 hover:bg-gray-100"
@@ -332,21 +356,44 @@ export default function EditPostPage() {
                             </div>
 
                             {editorTab === "write" && contentMode === "markdown" && (
-                                <div className="flex items-center gap-0.5 px-4 py-1.5 bg-gray-50 border-t border-gray-100 overflow-x-auto">
-                                    {toolbarButtons.map((btn, idx) =>
-                                        btn === null ? (
-                                            <div key={idx} className="w-px h-5 bg-gray-200 mx-1" />
-                                        ) : (
-                                            <button
-                                                key={idx}
-                                                type="button"
-                                                onClick={btn.action}
-                                                className="p-2 rounded-md hover:bg-gray-200 text-gray-500 hover:text-gray-700 transition-colors"
-                                                title={btn.label}
-                                            >
-                                                <btn.icon className="w-4 h-4" />
-                                            </button>
-                                        )
+                                <div className="flex items-center justify-between px-4 py-1.5 bg-gray-50 border-t border-gray-100 overflow-x-auto">
+                                    <div className="flex items-center gap-0.5">
+                                        {toolbarButtons.map((btn, idx) =>
+                                            btn === null ? (
+                                                <div key={idx} className="w-px h-5 bg-gray-200 mx-1" />
+                                            ) : (
+                                                <button
+                                                    key={idx}
+                                                    type="button"
+                                                    onClick={btn.action}
+                                                    className="p-2 rounded-md hover:bg-gray-200 text-gray-500 hover:text-gray-700 transition-colors"
+                                                    title={btn.label}
+                                                >
+                                                    <btn.icon className="w-4 h-4" />
+                                                </button>
+                                            )
+                                        )}
+                                    </div>
+                                    {/* Cleanup HTML tool */}
+                                    {form.content.includes('<') && (
+                                        <button
+                                            onClick={() => {
+                                                if (confirm('Bạn muốn dọn dẹp toàn bộ mã HTML để đưa về văn bản thường?')) {
+                                                    const clean = form.content
+                                                        .replace(/<h2[^>]*>(.*?)<\/h2>/gi, '\n## $1\n')
+                                                        .replace(/<h3[^>]*>(.*?)<\/h3>/gi, '\n### $1\n')
+                                                        .replace(/<p[^>]*>(.*?)<\/p>/gi, '\n$1\n')
+                                                        .replace(/<br\s*\/?>/gi, '\n')
+                                                        .replace(/<[^>]+>/g, '')
+                                                        .replace(/\n\s*\n/g, '\n\n')
+                                                        .trim();
+                                                    setForm(prev => ({ ...prev, content: clean }));
+                                                }
+                                            }}
+                                            className="ml-auto text-[10px] font-bold px-2 py-1 bg-amber-100 text-amber-700 rounded hover:bg-amber-200 transition-colors uppercase tracking-wider"
+                                        >
+                                            Dọn dẹp HTML
+                                        </button>
                                     )}
                                 </div>
                             )}
@@ -489,7 +536,7 @@ export default function EditPostPage() {
                     <SeoPanel
                         title={form.title}
                         slug={form.slug}
-                        excerpt={form.excerpt}
+                        excerpt={form.meta_description || form.excerpt}
                         content={form.content}
                         focusKeyword={form.focus_keyword}
                         featuredImage={form.featured_image}

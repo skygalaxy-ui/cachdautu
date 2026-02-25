@@ -63,7 +63,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
     const url = `https://cachdautu.com/blog/${category}/${slug}`;
 
     const seoTitle = post.meta_title || `${post.title} - Cách Đầu Tư`;
-    const seoDescription = post.excerpt || '';
+    const seoDescription = post.meta_description || post.excerpt || '';
     const imageAlt = post.featured_image_alt || post.title;
 
     return {
@@ -329,7 +329,7 @@ export default async function PostPage({ params }: PostPageProps) {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         headline: post.title,
-        description: post.excerpt,
+        description: post.meta_description || post.excerpt,
         image: post.featured_image,
         datePublished: post.created_at,
         dateModified: post.updated_at || post.created_at,
@@ -340,7 +340,7 @@ export default async function PostPage({ params }: PostPageProps) {
         author: {
             "@type": "Organization",
             name: "Đội ngũ CachDauTu",
-            url: "https://cachdautu.com",
+            url: process.env.NEXT_PUBLIC_SITE_URL || "https://cachdautu.com",
             description: "Nhóm chuyên gia tài chính với hơn 10 năm kinh nghiệm trong lĩnh vực đầu tư"
         },
         publisher: {
@@ -349,7 +349,7 @@ export default async function PostPage({ params }: PostPageProps) {
             url: "https://cachdautu.com",
             logo: {
                 "@type": "ImageObject",
-                url: "https://cachdautu.com/logo.png"
+                url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://cachdautu.com"}/logo.png`
             }
         },
         mainEntityOfPage: {
@@ -377,8 +377,8 @@ export default async function PostPage({ params }: PostPageProps) {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Trang chủ", item: "https://cachdautu.com" },
-            { "@type": "ListItem", position: 2, name: post.categories?.name || "Blog", item: `https://cachdautu.com/blog/${post.categories?.slug}` },
+            { "@type": "ListItem", position: 1, name: "Trang chủ", item: process.env.NEXT_PUBLIC_SITE_URL || "https://cachdautu.com" },
+            { "@type": "ListItem", position: 2, name: post.categories?.name || "Blog", item: `${process.env.NEXT_PUBLIC_SITE_URL || "https://cachdautu.com"}/blog/${post.categories?.slug}` },
             { "@type": "ListItem", position: 3, name: post.title }
         ]
     };
