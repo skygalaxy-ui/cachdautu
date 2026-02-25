@@ -94,7 +94,6 @@ export default function PostsPage() {
     const getPostStatus = (post: Post) => {
         if (post.is_published) return 'published';
         if (post.scheduled_at && new Date(post.scheduled_at) > new Date()) return 'scheduled';
-        if (post.scheduled_at) return 'published'; // scheduled_at in past = auto published
         return 'draft';
     };
 

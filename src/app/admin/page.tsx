@@ -81,13 +81,13 @@ export default function AdminDashboard() {
                     supabase.from('posts').select('*', { count: 'exact', head: true }),
                     supabase.from('categories').select('*', { count: 'exact', head: true }),
                     supabase.from('posts').select('*', { count: 'exact', head: true }).eq('is_published', true),
-                    supabase.from('posts').select('*', { count: 'exact', head: true }).eq('is_published', false),
-                    supabase.from('posts').select('*', { count: 'exact', head: true }).not('scheduled_at', 'is', null),
+                    supabase.from('posts').select('*', { count: 'exact', head: true }).eq('is_published', false).or('scheduled_at.is.null,scheduled_at.lte.' + now.toISOString()),
+                    supabase.from('posts').select('*', { count: 'exact', head: true }).eq('is_published', false).not('scheduled_at', 'is', null).gt('scheduled_at', now.toISOString()),
                     supabase.from('posts').select('*', { count: 'exact', head: true }).gte('created_at', thisMonthStart),
                     supabase.from('posts').select('*', { count: 'exact', head: true }).gte('created_at', lastMonthStart).lte('created_at', lastMonthEnd),
                     supabase.from('posts').select('*').order('created_at', { ascending: false }).limit(5),
-                    supabase.from('posts').select('*').eq('is_published', false).order('created_at', { ascending: false }).limit(5),
-                    supabase.from('posts').select('*').not('scheduled_at', 'is', null).order('scheduled_at', { ascending: true }).limit(5)
+                    supabase.from('posts').select('*').eq('is_published', false).or('scheduled_at.is.null,scheduled_at.lte.' + now.toISOString()).order('created_at', { ascending: false }).limit(5),
+                    supabase.from('posts').select('*').eq('is_published', false).not('scheduled_at', 'is', null).gt('scheduled_at', now.toISOString()).order('scheduled_at', { ascending: true }).limit(5)
                 ]);
 
                 // Count images from storage
@@ -320,8 +320,8 @@ export default function AdminDashboard() {
                                                 {formatTimeAgo(post.created_at)}
                                             </span>
                                             <span className={`px-1.5 py-0.5 rounded text-[10px] font-medium ${post.is_published ? 'bg-emerald-50 text-emerald-600'
-                                                    : (post.scheduled_at && new Date(post.scheduled_at) > new Date()) ? 'bg-blue-50 text-blue-600'
-                                                        : 'bg-amber-50 text-amber-600'
+                                                : (post.scheduled_at && new Date(post.scheduled_at) > new Date()) ? 'bg-blue-50 text-blue-600'
+                                                    : 'bg-amber-50 text-amber-600'
                                                 }`}>
                                                 {post.is_published ? 'Xuất bản'
                                                     : (post.scheduled_at && new Date(post.scheduled_at) > new Date()) ? 'Lên lịch'

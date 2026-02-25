@@ -2,8 +2,7 @@
 
 import { useMemo, useState } from "react";
 import {
-    Search, CheckCircle2, AlertCircle, XCircle, ChevronDown, ChevronUp,
-    Globe, Type, FileText, Image, Link2, Hash, Target
+    Search, CheckCircle2, AlertCircle, XCircle, ChevronDown, ChevronUp, Target
 } from "lucide-react";
 
 interface SeoPanelProps {
@@ -201,7 +200,6 @@ export default function SeoPanel({
     }, [checks]);
 
     const scoreColor = score >= 80 ? "text-emerald-500" : score >= 50 ? "text-amber-500" : "text-red-500";
-    const scoreBg = score >= 80 ? "bg-emerald-500" : score >= 50 ? "bg-amber-500" : "bg-red-500";
     const scoreRingColor = score >= 80 ? "stroke-emerald-500" : score >= 50 ? "stroke-amber-500" : "stroke-red-500";
 
     const StatusIcon = ({ status }: { status: string }) => {
@@ -300,7 +298,7 @@ export default function SeoPanel({
                                     <div className="flex-1 min-w-0">
                                         <p className="text-xs font-medium text-gray-700">{check.label}</p>
                                         <p className={`text-[11px] mt-0.5 ${check.status === 'good' ? 'text-emerald-600' :
-                                                check.status === 'warning' ? 'text-amber-600' : 'text-red-600'
+                                            check.status === 'warning' ? 'text-amber-600' : 'text-red-600'
                                             }`}>{check.message}</p>
                                     </div>
                                 </div>
