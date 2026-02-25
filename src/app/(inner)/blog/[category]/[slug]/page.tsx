@@ -62,13 +62,17 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 
     const url = `https://cachdautu.com/blog/${category}/${slug}`;
 
+    const seoTitle = post.meta_title || `${post.title} - Cách Đầu Tư`;
+    const seoDescription = post.excerpt || '';
+    const imageAlt = post.featured_image_alt || post.title;
+
     return {
-        title: `${post.title} - Cách Đầu Tư`,
-        description: post.excerpt,
+        title: seoTitle,
+        description: seoDescription,
         authors: [{ name: "Cách Đầu Tư" }],
         openGraph: {
-            title: post.title,
-            description: post.excerpt,
+            title: post.meta_title || post.title,
+            description: seoDescription,
             type: "article",
             url,
             siteName: "Cách Đầu Tư",
@@ -76,14 +80,15 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
                 url: post.featured_image,
                 width: 1200,
                 height: 630,
-                alt: post.title
+                alt: imageAlt
             }] : [],
             publishedTime: post.created_at,
+            modifiedTime: post.updated_at || post.created_at,
         },
         twitter: {
             card: "summary_large_image",
-            title: post.title,
-            description: post.excerpt,
+            title: post.meta_title || post.title,
+            description: seoDescription,
             images: post.featured_image ? [post.featured_image] : [],
         },
         alternates: {
@@ -462,7 +467,7 @@ export default async function PostPage({ params }: PostPageProps) {
                                 {post.featured_image ? (
                                     <Image
                                         src={post.featured_image}
-                                        alt={post.title}
+                                        alt={post.featured_image_alt || post.title}
                                         fill
                                         priority
                                         className="object-cover"

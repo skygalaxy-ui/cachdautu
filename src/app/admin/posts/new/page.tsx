@@ -35,6 +35,8 @@ export default function NewPostPage() {
         tags: "",
         reading_time: "5 phút",
         featured_image: "",
+        featured_image_alt: "",
+        meta_title: "",
         scheduled_at: "",
         focus_keyword: ""
     });
@@ -214,6 +216,8 @@ export default function NewPostPage() {
             tags: form.tags.split(',').map(t => t.trim()).filter(Boolean),
             reading_time: form.reading_time,
             featured_image: form.featured_image || null,
+            featured_image_alt: form.featured_image_alt || null,
+            meta_title: form.meta_title || null,
             scheduled_at: form.scheduled_at ? new Date(form.scheduled_at).toISOString() : null,
             is_published: publish && !form.scheduled_at,
         };
@@ -293,9 +297,20 @@ export default function NewPostPage() {
                                 className="flex-1 px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 text-gray-700 text-sm focus:border-emerald-500 focus:outline-none"
                             />
                         </div>
-                    </div>
 
-                    {/* Excerpt */}
+                        <label className="block text-sm font-medium text-gray-700 mt-4 mb-2">
+                            Meta Title (SEO)
+                            <span className="font-normal text-gray-400 ml-1">— để trống sẽ dùng tiêu đề bài</span>
+                        </label>
+                        <input
+                            type="text"
+                            value={form.meta_title}
+                            onChange={(e) => setForm({ ...form, meta_title: e.target.value })}
+                            placeholder={form.title ? `${form.title} - Cách Đầu Tư` : 'Tiêu đề hiển thị trên Google...'}
+                            className="w-full px-4 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-gray-700 text-sm placeholder-gray-400 focus:border-emerald-500 focus:outline-none"
+                        />
+                        <p className="text-xs text-gray-400 mt-1">{(form.meta_title || form.title).length}/60 ký tự</p>
+                    </div>
                     <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
                         <label className="block text-sm font-medium text-gray-700 mb-2">Mô tả ngắn (SEO)</label>
                         <textarea
@@ -454,19 +469,28 @@ export default function NewPostPage() {
                     <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
                         <label className="block text-sm font-medium text-gray-700 mb-3">Ảnh đại diện</label>
                         {form.featured_image ? (
-                            <div className="relative">
-                                <img
-                                    src={form.featured_image}
-                                    alt="Featured"
-                                    className="w-full aspect-video object-cover rounded-lg"
+                            <>
+                                <div className="relative">
+                                    <img
+                                        src={form.featured_image}
+                                        alt={form.featured_image_alt || "Featured"}
+                                        className="w-full aspect-video object-cover rounded-lg"
+                                    />
+                                    <button
+                                        onClick={() => setForm({ ...form, featured_image: "", featured_image_alt: "" })}
+                                        className="absolute top-2 right-2 p-1.5 rounded-full bg-white shadow text-gray-500 hover:text-red-500 transition-colors"
+                                    >
+                                        <X className="w-4 h-4" />
+                                    </button>
+                                </div>
+                                <input
+                                    type="text"
+                                    value={form.featured_image_alt}
+                                    onChange={(e) => setForm({ ...form, featured_image_alt: e.target.value })}
+                                    placeholder="Nhập mô tả ảnh (alt text cho SEO)..."
+                                    className="w-full mt-2 px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 text-gray-700 text-sm focus:border-emerald-500 focus:outline-none placeholder-gray-400"
                                 />
-                                <button
-                                    onClick={() => setForm({ ...form, featured_image: "" })}
-                                    className="absolute top-2 right-2 p-1.5 rounded-full bg-white shadow text-gray-500 hover:text-red-500 transition-colors"
-                                >
-                                    <X className="w-4 h-4" />
-                                </button>
-                            </div>
+                            </>
                         ) : (
                             <div className="space-y-2">
                                 <label className="flex flex-col items-center justify-center w-full aspect-video rounded-lg border-2 border-dashed border-gray-200 hover:border-emerald-400 cursor-pointer transition-colors bg-gray-50">
