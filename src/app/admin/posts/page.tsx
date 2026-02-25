@@ -23,7 +23,7 @@ export default function PostsPage() {
     const [categories, setCategories] = useState<Category[]>([]);
     const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState("");
-    const [filterStatus, setFilterStatus] = useState<"all" | "published" | "draft">("all");
+    const [filterStatus, setFilterStatus] = useState<"all" | "published" | "scheduled" | "draft">("all");
     const [selectedPosts, setSelectedPosts] = useState<string[]>([]);
 
     useEffect(() => {
@@ -52,11 +52,20 @@ export default function PostsPage() {
         fetchData();
     }
 
+    const getPostStatus = (post: Post) => {
+        if (post.is_published) return 'published';
+        if (post.scheduled_at && new Date(post.scheduled_at) > new Date()) return 'scheduled';
+        if (post.scheduled_at) return 'published'; // scheduled_at in past = auto published
+        return 'draft';
+    };
+
     const filteredPosts = posts.filter(post => {
         const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase());
+        const status = getPostStatus(post);
         const matchesFilter = filterStatus === "all" ||
-            (filterStatus === "published" && post.is_published) ||
-            (filterStatus === "draft" && !post.is_published);
+            (filterStatus === "published" && status === 'published') ||
+            (filterStatus === "scheduled" && status === 'scheduled') ||
+            (filterStatus === "draft" && status === 'draft');
         return matchesSearch && matchesFilter;
     });
 
@@ -116,14 +125,15 @@ export default function PostsPage() {
                         {[
                             { key: "all", label: "Tất cả" },
                             { key: "published", label: "Đã xuất bản" },
+                            { key: "scheduled", label: "Lên lịch" },
                             { key: "draft", label: "Nháp" }
                         ].map(filter => (
                             <button
                                 key={filter.key}
                                 onClick={() => setFilterStatus(filter.key as typeof filterStatus)}
                                 className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${filterStatus === filter.key
-                                        ? 'bg-gray-900 text-white'
-                                        : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
+                                    ? 'bg-gray-900 text-white'
+                                    : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
                                     }`}
                             >
                                 {filter.label}
@@ -194,8 +204,8 @@ export default function PostsPage() {
                                         <button
                                             onClick={() => toggleSelectPost(post.id)}
                                             className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${selectedPosts.includes(post.id)
-                                                    ? 'bg-gray-900 border-gray-900'
-                                                    : 'border-gray-300 hover:border-gray-400'
+                                                ? 'bg-gray-900 border-gray-900'
+                                                : 'border-gray-300 hover:border-gray-400'
                                                 }`}
                                         >
                                             {selectedPosts.includes(post.id) && (
@@ -233,16 +243,23 @@ export default function PostsPage() {
 
                                     {/* Status */}
                                     <div className="col-span-2">
-                                        <button
-                                            onClick={() => togglePublish(post)}
-                                            className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${post.is_published
-                                                    ? 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
-                                                    : 'bg-amber-50 text-amber-700 hover:bg-amber-100'
-                                                }`}
-                                        >
-                                            <span className={`w-1.5 h-1.5 rounded-full ${post.is_published ? 'bg-emerald-500' : 'bg-amber-500'}`} />
-                                            {post.is_published ? 'Xuất bản' : 'Nháp'}
-                                        </button>
+                                        {(() => {
+                                            const status = getPostStatus(post);
+                                            const config = status === 'published'
+                                                ? { bg: 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100', dot: 'bg-emerald-500', label: 'Xuất bản' }
+                                                : status === 'scheduled'
+                                                    ? { bg: 'bg-blue-50 text-blue-700 hover:bg-blue-100', dot: 'bg-blue-500', label: 'Lên lịch' }
+                                                    : { bg: 'bg-amber-50 text-amber-700 hover:bg-amber-100', dot: 'bg-amber-500', label: 'Nháp' };
+                                            return (
+                                                <button
+                                                    onClick={() => togglePublish(post)}
+                                                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${config.bg}`}
+                                                >
+                                                    <span className={`w-1.5 h-1.5 rounded-full ${config.dot}`} />
+                                                    {config.label}
+                                                </button>
+                                            );
+                                        })()}
                                     </div>
 
                                     {/* Date */}

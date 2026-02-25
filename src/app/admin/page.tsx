@@ -319,8 +319,13 @@ export default function AdminDashboard() {
                                                 <Clock className="w-3 h-3" />
                                                 {formatTimeAgo(post.created_at)}
                                             </span>
-                                            <span className={`px-1.5 py-0.5 rounded text-[10px] font-medium ${post.is_published ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'}`}>
-                                                {post.is_published ? 'Xuất bản' : 'Nháp'}
+                                            <span className={`px-1.5 py-0.5 rounded text-[10px] font-medium ${post.is_published ? 'bg-emerald-50 text-emerald-600'
+                                                    : (post.scheduled_at && new Date(post.scheduled_at) > new Date()) ? 'bg-blue-50 text-blue-600'
+                                                        : 'bg-amber-50 text-amber-600'
+                                                }`}>
+                                                {post.is_published ? 'Xuất bản'
+                                                    : (post.scheduled_at && new Date(post.scheduled_at) > new Date()) ? 'Lên lịch'
+                                                        : 'Nháp'}
                                             </span>
                                         </div>
                                     </div>
