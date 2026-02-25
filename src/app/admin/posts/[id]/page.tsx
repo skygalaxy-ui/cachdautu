@@ -11,6 +11,7 @@ import {
 import Link from "next/link";
 import MediaLibrary from "@/components/MediaLibrary";
 import MarkdownPreview from "@/components/MarkdownPreview";
+import SeoPanel from "@/components/admin/SeoPanel";
 
 export default function EditPostPage() {
     const params = useParams();
@@ -36,7 +37,8 @@ export default function EditPostPage() {
         is_published: false,
         reading_time: "5 phút",
         featured_image: "",
-        scheduled_at: ""
+        scheduled_at: "",
+        focus_keyword: ""
     });
 
     // Word count & reading time
@@ -75,7 +77,8 @@ export default function EditPostPage() {
                     is_published: post.is_published || false,
                     reading_time: post.reading_time || "5 phút",
                     featured_image: post.featured_image || "",
-                    scheduled_at: post.scheduled_at ? new Date(post.scheduled_at).toISOString().slice(0, 16) : ""
+                    scheduled_at: post.scheduled_at ? new Date(post.scheduled_at).toISOString().slice(0, 16) : "",
+                    focus_keyword: post.focus_keyword || ""
                 });
                 if (post.scheduled_at) setShowSchedule(true);
             }
@@ -175,7 +178,8 @@ export default function EditPostPage() {
             reading_time: form.reading_time,
             featured_image: form.featured_image || null,
             scheduled_at: form.scheduled_at ? new Date(form.scheduled_at).toISOString() : null,
-            updated_at: new Date().toISOString()
+            updated_at: new Date().toISOString(),
+            focus_keyword: form.focus_keyword || null
         }).eq('id', id);
         setSaving(false);
         if (error) alert("Lỗi: " + error.message);
@@ -398,6 +402,27 @@ export default function EditPostPage() {
                             </div>
                         )}
                     </div>
+                    {/* Paste Image URL */}
+                    <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Hoặc dán URL ảnh</label>
+                        <div className="flex gap-2">
+                            <input
+                                type="text"
+                                placeholder="https://images.unsplash.com/..."
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        const input = e.target as HTMLInputElement;
+                                        if (input.value) {
+                                            setForm(prev => ({ ...prev, featured_image: input.value }));
+                                            input.value = '';
+                                        }
+                                    }
+                                }}
+                                className="flex-1 px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 text-gray-700 text-sm focus:border-emerald-500 focus:outline-none placeholder-gray-400"
+                            />
+                        </div>
+                        <p className="text-[10px] text-gray-400 mt-1">Nhấn Enter để áp dụng</p>
+                    </div>
 
                     <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
                         <label className="block text-sm font-medium text-gray-700 mb-3">Chuyên mục</label>
@@ -431,6 +456,17 @@ export default function EditPostPage() {
                             <span className="text-xs text-emerald-500 ml-auto">{wordCount} từ</span>
                         </div>
                     </div>
+
+                    {/* SEO Panel */}
+                    <SeoPanel
+                        title={form.title}
+                        slug={form.slug}
+                        excerpt={form.excerpt}
+                        content={form.content}
+                        focusKeyword={form.focus_keyword}
+                        featuredImage={form.featured_image}
+                        onFocusKeywordChange={(v) => setForm(prev => ({ ...prev, focus_keyword: v }))}
+                    />
 
                     <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
                         <div className="flex items-center justify-between mb-3">

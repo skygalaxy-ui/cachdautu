@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 import MediaLibrary from "@/components/MediaLibrary";
 import MarkdownPreview from "@/components/MarkdownPreview";
+import SeoPanel from "@/components/admin/SeoPanel";
 
 export default function NewPostPage() {
     const router = useRouter();
@@ -34,7 +35,8 @@ export default function NewPostPage() {
         tags: "",
         reading_time: "5 phút",
         featured_image: "",
-        scheduled_at: ""
+        scheduled_at: "",
+        focus_keyword: ""
     });
 
     // Word count & reading time calculation
@@ -494,6 +496,27 @@ export default function NewPostPage() {
                             </div>
                         )}
                     </div>
+                    {/* Paste Image URL */}
+                    <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Hoặc dán URL ảnh</label>
+                        <div className="flex gap-2">
+                            <input
+                                type="text"
+                                placeholder="https://images.unsplash.com/..."
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        const input = e.target as HTMLInputElement;
+                                        if (input.value) {
+                                            setForm(prev => ({ ...prev, featured_image: input.value }));
+                                            input.value = '';
+                                        }
+                                    }
+                                }}
+                                className="flex-1 px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 text-gray-700 text-sm focus:border-emerald-500 focus:outline-none placeholder-gray-400"
+                            />
+                        </div>
+                        <p className="text-[10px] text-gray-400 mt-1">Nhấn Enter để áp dụng</p>
+                    </div>
 
                     {/* Category */}
                     <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
@@ -539,6 +562,17 @@ export default function NewPostPage() {
                             <span className="text-xs text-emerald-500 ml-auto">{wordCount} từ</span>
                         </div>
                     </div>
+
+                    {/* SEO Panel */}
+                    <SeoPanel
+                        title={form.title}
+                        slug={form.slug}
+                        excerpt={form.excerpt}
+                        content={form.content}
+                        focusKeyword={form.focus_keyword}
+                        featuredImage={form.featured_image}
+                        onFocusKeywordChange={(v) => setForm(prev => ({ ...prev, focus_keyword: v }))}
+                    />
 
                     {/* Schedule */}
                     <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
