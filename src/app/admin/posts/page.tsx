@@ -16,7 +16,10 @@ import {
     X,
     Clock,
     Calendar,
-    ChevronDown
+    ChevronDown,
+    Send,
+    FileX,
+    Loader2
 } from "lucide-react";
 
 export default function PostsPage() {
@@ -26,6 +29,7 @@ export default function PostsPage() {
     const [searchQuery, setSearchQuery] = useState("");
     const [filterStatus, setFilterStatus] = useState<"all" | "published" | "scheduled" | "draft">("all");
     const [selectedPosts, setSelectedPosts] = useState<string[]>([]);
+    const [bulkLoading, setBulkLoading] = useState(false);
 
     useEffect(() => {
         fetchData();
@@ -50,6 +54,40 @@ export default function PostsPage() {
     async function deletePost(id: string) {
         if (!confirm('Xóa bài viết này?')) return;
         await supabase.from('posts').delete().eq('id', id);
+        fetchData();
+    }
+
+    async function bulkPublish() {
+        if (!confirm(`Xuất bản ${selectedPosts.length} bài viết?`)) return;
+        setBulkLoading(true);
+        const now = new Date().toISOString();
+        for (const id of selectedPosts) {
+            await supabase.from('posts').update({ is_published: true, scheduled_at: now, updated_at: now }).eq('id', id);
+        }
+        setSelectedPosts([]);
+        setBulkLoading(false);
+        fetchData();
+    }
+
+    async function bulkDraft() {
+        if (!confirm(`Chuyển ${selectedPosts.length} bài về nháp?`)) return;
+        setBulkLoading(true);
+        for (const id of selectedPosts) {
+            await supabase.from('posts').update({ is_published: false, scheduled_at: null, updated_at: new Date().toISOString() }).eq('id', id);
+        }
+        setSelectedPosts([]);
+        setBulkLoading(false);
+        fetchData();
+    }
+
+    async function bulkDelete() {
+        if (!confirm(`⚠️ Xóa vĩnh viễn ${selectedPosts.length} bài viết? Hành động này không thể hoàn tác!`)) return;
+        setBulkLoading(true);
+        for (const id of selectedPosts) {
+            await supabase.from('posts').delete().eq('id', id);
+        }
+        setSelectedPosts([]);
+        setBulkLoading(false);
         fetchData();
     }
 
@@ -321,17 +359,40 @@ export default function PostsPage() {
 
             {/* Bulk Actions */}
             {selectedPosts.length > 0 && (
-                <div className="fixed bottom-6 left-1/2 -translate-x-1/2 lg:left-[calc(50%+130px)] bg-gray-900 text-white px-6 py-3 rounded-xl shadow-xl flex items-center gap-4 z-50">
-                    <span className="text-sm">{selectedPosts.length} bài viết đã chọn</span>
+                <div className="fixed bottom-6 left-1/2 -translate-x-1/2 lg:left-[calc(50%+130px)] bg-gray-900 text-white px-6 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 z-50 border border-gray-700">
+                    {bulkLoading && <Loader2 className="w-4 h-4 animate-spin text-gray-400" />}
+                    <span className="text-sm font-medium">{selectedPosts.length} bài đã chọn</span>
+                    <div className="w-px h-5 bg-gray-700" />
+                    <button
+                        onClick={bulkPublish}
+                        disabled={bulkLoading}
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30 transition-colors disabled:opacity-50"
+                    >
+                        <Send className="w-3.5 h-3.5" />
+                        Xuất bản
+                    </button>
+                    <button
+                        onClick={bulkDraft}
+                        disabled={bulkLoading}
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm bg-amber-500/20 text-amber-400 hover:bg-amber-500/30 transition-colors disabled:opacity-50"
+                    >
+                        <FileX className="w-3.5 h-3.5" />
+                        Về nháp
+                    </button>
+                    <button
+                        onClick={bulkDelete}
+                        disabled={bulkLoading}
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm bg-red-500/20 text-red-400 hover:bg-red-500/30 transition-colors disabled:opacity-50"
+                    >
+                        <Trash2 className="w-3.5 h-3.5" />
+                        Xóa
+                    </button>
                     <div className="w-px h-5 bg-gray-700" />
                     <button
                         onClick={() => setSelectedPosts([])}
-                        className="text-sm text-gray-400 hover:text-white transition-colors"
+                        className="p-1 rounded-lg hover:bg-gray-700 text-gray-400 hover:text-white transition-colors"
                     >
-                        Bỏ chọn
-                    </button>
-                    <button className="text-sm text-red-400 hover:text-red-300 transition-colors">
-                        Xóa
+                        <X className="w-4 h-4" />
                     </button>
                 </div>
             )}

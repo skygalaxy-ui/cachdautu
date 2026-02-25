@@ -17,7 +17,7 @@ import {
     ExternalLink,
     Image as ImageIcon
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase-browser";
 
 const navItems = [
@@ -28,12 +28,39 @@ const navItems = [
     { name: "Cài đặt", href: "/admin/settings", icon: Settings },
 ];
 
+const DAILY_GOAL = 3;
+
 export default function AdminSidebar() {
     const pathname = usePathname();
     const router = useRouter();
     const [isOpen, setIsOpen] = useState(false);
     const [loggingOut, setLoggingOut] = useState(false);
+    const [todayCount, setTodayCount] = useState(0);
+    const [scheduledCount, setScheduledCount] = useState(0);
     const supabase = createClient();
+
+    useEffect(() => {
+        async function fetchStats() {
+            try {
+                const todayStart = new Date();
+                todayStart.setHours(0, 0, 0, 0);
+                const todayISO = todayStart.toISOString();
+
+                const [{ count: today }, { count: scheduled }] = await Promise.all([
+                    supabase.from('posts').select('*', { count: 'exact', head: true })
+                        .eq('is_published', true).gte('updated_at', todayISO),
+                    supabase.from('posts').select('*', { count: 'exact', head: true })
+                        .eq('is_published', false).not('scheduled_at', 'is', null)
+                        .gt('scheduled_at', new Date().toISOString())
+                ]);
+                setTodayCount(today || 0);
+                setScheduledCount(scheduled || 0);
+            } catch { }
+        }
+        fetchStats();
+        const interval = setInterval(fetchStats, 60000);
+        return () => clearInterval(interval);
+    }, [supabase]);
 
     const handleLogout = async () => {
         setLoggingOut(true);
@@ -41,6 +68,8 @@ export default function AdminSidebar() {
         router.push("/admin/login");
         router.refresh();
     };
+
+    const progressPercent = Math.min(100, Math.round((todayCount / DAILY_GOAL) * 100));
 
     return (
         <>
@@ -60,7 +89,7 @@ export default function AdminSidebar() {
                 </div>
                 <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors relative">
                     <Bell className="w-5 h-5 text-gray-600" />
-                    <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full" />
+                    {scheduledCount > 0 && <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-blue-500 rounded-full" />}
                 </button>
             </header>
 
@@ -132,14 +161,22 @@ export default function AdminSidebar() {
                 {/* Quick Stats */}
                 <div className="px-4 py-4 mt-4">
                     <div className="bg-gradient-to-br from-emerald-500/20 to-teal-500/10 rounded-xl p-4 border border-emerald-500/20">
-                        <p className="text-xs text-emerald-400 font-medium mb-1">Bài viết hôm nay</p>
-                        <p className="text-2xl font-bold text-white">0</p>
+                        <div className="flex items-center justify-between mb-1">
+                            <p className="text-xs text-emerald-400 font-medium">Bài viết hôm nay</p>
+                            {scheduledCount > 0 && (
+                                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-blue-500/20 text-blue-400">
+                                    {scheduledCount} lên lịch
+                                </span>
+                            )}
+                        </div>
+                        <p className="text-2xl font-bold text-white">{todayCount}</p>
                         <div className="mt-3 flex items-center gap-2">
                             <div className="flex-1 h-1.5 bg-white/10 rounded-full overflow-hidden">
-                                <div className="w-0 h-full bg-emerald-400 rounded-full" />
+                                <div className={`h-full rounded-full transition-all duration-500 ${progressPercent >= 100 ? 'bg-emerald-400' : 'bg-emerald-400/70'}`} style={{ width: `${progressPercent}%` }} />
                             </div>
-                            <span className="text-[10px] text-gray-400">0%</span>
+                            <span className="text-[10px] text-gray-400">{progressPercent}%</span>
                         </div>
+                        <p className="text-[10px] text-gray-500 mt-1">Mục tiêu: {DAILY_GOAL} bài/ngày</p>
                     </div>
                 </div>
 
