@@ -15,6 +15,7 @@ import {
     Check,
     X,
     Clock,
+    Calendar,
     ChevronDown
 } from "lucide-react";
 
@@ -187,7 +188,7 @@ export default function PostsPage() {
                             <div className="col-span-5 sm:col-span-4">Tiêu đề</div>
                             <div className="col-span-2 hidden sm:block">Chuyên mục</div>
                             <div className="col-span-2">Trạng thái</div>
-                            <div className="col-span-2 hidden sm:block">Ngày tạo</div>
+                            <div className="col-span-2 hidden sm:block">Ngày</div>
                             <div className="col-span-1"></div>
                         </div>
 
@@ -263,9 +264,30 @@ export default function PostsPage() {
                                     </div>
 
                                     {/* Date */}
-                                    <div className="col-span-2 hidden sm:flex items-center gap-1.5 text-gray-500 text-sm">
-                                        <Clock className="w-3.5 h-3.5" />
-                                        {new Date(post.created_at).toLocaleDateString('vi-VN')}
+                                    <div className="col-span-2 hidden sm:flex flex-col justify-center text-sm">
+                                        {(() => {
+                                            const status = getPostStatus(post);
+                                            if (status === 'scheduled' && post.scheduled_at) {
+                                                const d = new Date(post.scheduled_at);
+                                                return (
+                                                    <>
+                                                        <span className="text-blue-600 font-medium flex items-center gap-1">
+                                                            <Calendar className="w-3.5 h-3.5" />
+                                                            {d.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' })}
+                                                        </span>
+                                                        <span className="text-gray-400 text-xs mt-0.5">
+                                                            {d.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}
+                                                        </span>
+                                                    </>
+                                                );
+                                            }
+                                            return (
+                                                <span className="text-gray-500 flex items-center gap-1.5">
+                                                    <Clock className="w-3.5 h-3.5" />
+                                                    {new Date(post.created_at).toLocaleDateString('vi-VN')}
+                                                </span>
+                                            );
+                                        })()}
                                     </div>
 
                                     {/* Actions */}
