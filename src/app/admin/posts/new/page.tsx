@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 import MediaLibrary from "@/core/admin/components/MediaLibrary";
 import MarkdownPreview from "@/core/admin/components/MarkdownPreview";
+import VisualEditor from "@/core/admin/components/VisualEditor";
 import SeoPanel from "@/core/admin/components/SeoPanel";
 
 export default function NewPostPage() {
@@ -343,21 +344,7 @@ export default function NewPostPage() {
                             <div className="flex items-center justify-between px-4 py-2">
                                 <div className="flex gap-1">
                                     <button
-                                        onClick={() => {
-                                            if (editorTab === "html" && form.content.includes('<')) {
-                                                const clean = form.content
-                                                    .replace(/<h2[^>]*>(.*?)<\/h2>/gi, '\n## $1\n')
-                                                    .replace(/<h3[^>]*>(.*?)<\/h3>/gi, '\n### $1\n')
-                                                    .replace(/<p[^>]*>(.*?)<\/p>/gi, '\n$1\n')
-                                                    .replace(/<br\s*\/?>/gi, '\n')
-                                                    .replace(/<[^>]+>/g, '')
-                                                    .replace(/\n\s*\n/g, '\n\n')
-                                                    .trim();
-                                                setForm(prev => ({ ...prev, content: clean }));
-                                            }
-                                            setEditorTab("write");
-                                            setContentMode("markdown");
-                                        }}
+                                        onClick={() => setEditorTab("write")}
                                         className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all ${editorTab === "write"
                                             ? "bg-gray-900 text-white"
                                             : "text-gray-500 hover:text-gray-700 hover:bg-gray-100"
@@ -445,35 +432,34 @@ export default function NewPostPage() {
 
                         {/* Editor Content */}
                         {editorTab === "write" ? (
-                            <textarea
-                                ref={textareaRef}
-                                value={form.content}
-                                onChange={(e) => setForm({ ...form, content: e.target.value })}
-                                placeholder={contentMode === "html"
-                                    ? `Dán nội dung HTML vào đây...
-
-<h2>Tiêu đề</h2>
-<p>Nội dung bài viết...</p>
-<ul>
-  <li>Mục 1</li>
-  <li>Mục 2</li>
-</ul>
-<img src="url" alt="mô tả" />`
-                                    : `Viết nội dung bài viết...
-
-## Heading 2
-### Heading 3
-
-**Bold** và *italic*
-
-- Bullet point
-1. Numbered list
-
-[Link](https://...)
-![Image](https://...)`}
-                                rows={20}
-                                className={`w-full px-6 py-4 text-gray-900 placeholder-gray-400 focus:outline-none resize-none text-sm leading-relaxed ${contentMode === "html" ? "font-mono" : "font-mono"}`}
-                            />
+                            contentMode === "html" ? (
+                                <div className="min-h-[480px]">
+                                    <VisualEditor
+                                        content={form.content}
+                                        onChange={(newContent) => setForm(prev => ({ ...prev, content: newContent }))}
+                                    />
+                                </div>
+                            ) : (
+                                <textarea
+                                    ref={textareaRef}
+                                    value={form.content}
+                                    onChange={(e) => setForm({ ...form, content: e.target.value })}
+                                    placeholder={`Viết nội dung bài viết...
+    
+    ## Heading 2
+    ### Heading 3
+    
+    **Bold** và *italic*
+    
+    - Bullet point
+    1. Numbered list
+    
+    [Link](https://...)
+    ![Image](https://...)`}
+                                    rows={20}
+                                    className="w-full px-6 py-4 text-gray-900 placeholder-gray-400 focus:outline-none resize-none text-sm leading-relaxed font-mono"
+                                />
+                            )
                         ) : editorTab === "html" ? (
                             <div className="relative">
                                 <textarea
