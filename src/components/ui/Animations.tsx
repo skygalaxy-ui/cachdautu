@@ -9,6 +9,9 @@ interface AnimatedSectionProps {
     delay?: number;
 }
 
+// Safelist for Tailwind CSS to detect dynamic classes:
+// animate-fade-in-up animate-fade-in-left animate-fade-in-right animate-scale-in animate-fade-in
+
 export default function AnimatedSection({
     children,
     className = "",
