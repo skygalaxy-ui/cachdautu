@@ -237,8 +237,8 @@ export default function AdminDashboard() {
                 {statCards.map((stat, idx) => (
                     <div
                         key={idx}
-                        className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md hover:border-gray-200 transition-all group cursor-default hover:-translate-y-1"
-                        style={{ animationDelay: `${idx * 100}ms` }}
+                        className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md hover:border-gray-200 transition-all group cursor-default hover:-translate-y-1 animate-fade-in-up opacity-0"
+                        style={{ animationDelay: `${idx * 100}ms`, animationFillMode: 'forwards' }}
                     >
                         <div className="flex items-start justify-between mb-4">
                             <div className={`w-11 h-11 rounded-xl ${stat.bgLight} flex items-center justify-center transition-transform group-hover:scale-110 duration-300`}>

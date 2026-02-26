@@ -210,7 +210,7 @@ export default function EditPostPage() {
     );
 
     return (
-        <div className="pt-12 lg:pt-0 max-w-5xl">
+        <div className="pt-12 lg:pt-0 max-w-5xl animate-fade-in">
             {/* Breadcrumb */}
             <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
                 <Link href="/admin" className="hover:text-gray-700 transition-colors">Admin</Link>
@@ -381,40 +381,43 @@ export default function EditPostPage() {
                             )}
                         </div>
 
-                        {editorTab === "write" ? (
-                            contentMode === "html" ? (
-                                <div className="min-h-[480px]">
-                                    <VisualEditor
-                                        content={form.content}
-                                        onChange={(newContent) => setForm(prev => ({ ...prev, content: newContent }))}
+                        {/* Editor Content */}
+                        <div className="animate-fade-in" key={editorTab}>
+                            {editorTab === "write" ? (
+                                contentMode === "html" ? (
+                                    <div className="min-h-[480px]">
+                                        <VisualEditor
+                                            content={form.content}
+                                            onChange={(newContent) => setForm(prev => ({ ...prev, content: newContent }))}
+                                        />
+                                    </div>
+                                ) : (
+                                    <textarea
+                                        ref={textareaRef}
+                                        value={form.content}
+                                        onChange={(e) => setForm({ ...form, content: e.target.value })}
+                                        rows={20}
+                                        placeholder="Viết nội dung bài viết..."
+                                        className="w-full px-6 py-4 text-gray-900 placeholder-gray-400 focus:outline-none resize-none font-mono text-sm leading-relaxed"
                                     />
+                                )
+                            ) : editorTab === "html" ? (
+                                <div className="relative">
+                                    <textarea
+                                        value={form.content}
+                                        onChange={(e) => setForm({ ...form, content: e.target.value })}
+                                        rows={20}
+                                        className="w-full px-6 py-4 text-gray-900 focus:outline-none resize-none font-mono text-sm leading-relaxed bg-gray-50"
+                                        placeholder="Dán hoặc chỉnh sửa HTML ở đây..."
+                                    />
+                                    <div className="absolute top-2 right-3 px-2 py-1 rounded bg-gray-200 text-[10px] font-mono text-gray-500 uppercase">HTML</div>
                                 </div>
                             ) : (
-                                <textarea
-                                    ref={textareaRef}
-                                    value={form.content}
-                                    onChange={(e) => setForm({ ...form, content: e.target.value })}
-                                    rows={20}
-                                    placeholder="Viết nội dung bài viết..."
-                                    className="w-full px-6 py-4 text-gray-900 placeholder-gray-400 focus:outline-none resize-none font-mono text-sm leading-relaxed"
-                                />
-                            )
-                        ) : editorTab === "html" ? (
-                            <div className="relative">
-                                <textarea
-                                    value={form.content}
-                                    onChange={(e) => setForm({ ...form, content: e.target.value })}
-                                    rows={20}
-                                    className="w-full px-6 py-4 text-gray-900 focus:outline-none resize-none font-mono text-sm leading-relaxed bg-gray-50"
-                                    placeholder="Dán hoặc chỉnh sửa HTML ở đây..."
-                                />
-                                <div className="absolute top-2 right-3 px-2 py-1 rounded bg-gray-200 text-[10px] font-mono text-gray-500 uppercase">HTML</div>
-                            </div>
-                        ) : (
-                            <div className="px-6 py-4 min-h-[480px] max-h-[600px] overflow-y-auto">
-                                <MarkdownPreview content={form.content} />
-                            </div>
-                        )}
+                                <div className="px-6 py-4 min-h-[480px] max-h-[600px] overflow-y-auto">
+                                    <MarkdownPreview content={form.content} />
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
 
