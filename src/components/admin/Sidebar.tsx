@@ -23,6 +23,7 @@ import { createClient } from "@/lib/supabase-browser";
 const navItems = [
     { name: "Tổng quan", href: "/admin", icon: LayoutDashboard },
     { name: "Bài viết", href: "/admin/posts", icon: FileText },
+    { name: "SEO Audit", href: "/admin/seo-audit", icon: Search },
     { name: "Chuyên mục", href: "/admin/categories", icon: FolderOpen },
     { name: "Thư viện ảnh", href: "/admin/media", icon: ImageIcon },
     { name: "Cài đặt", href: "/admin/settings", icon: Settings },
@@ -142,16 +143,16 @@ export default function AdminSidebar() {
                                     key={item.name}
                                     href={item.href}
                                     onClick={() => setIsOpen(false)}
-                                    className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-all group ${isActive
-                                        ? 'bg-gradient-to-r from-emerald-500/20 to-teal-500/10 text-emerald-400 border-l-2 border-emerald-400'
+                                    className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-all group active:scale-95 ${isActive
+                                        ? 'bg-gradient-to-r from-emerald-500/20 to-teal-500/10 text-emerald-400 border-l-2 border-emerald-400 shadow-[inset_0_0_20px_rgba(16,185,129,0.05)]'
                                         : 'text-gray-400 hover:text-white hover:bg-white/5'
                                         }`}
                                 >
                                     <div className="flex items-center gap-3">
-                                        <item.icon className={`w-[18px] h-[18px] ${isActive ? 'text-emerald-400' : 'text-gray-500 group-hover:text-gray-300'}`} />
+                                        <item.icon className={`w-[18px] h-[18px] transition-transform duration-300 group-hover:scale-110 ${isActive ? 'text-emerald-400' : 'text-gray-500 group-hover:text-gray-300'}`} />
                                         {item.name}
                                     </div>
-                                    {isActive && <ChevronRight className="w-4 h-4 text-emerald-400" />}
+                                    {isActive && <ChevronRight className="w-4 h-4 text-emerald-400 animate-fade-in-right" />}
                                 </Link>
                             );
                         })}

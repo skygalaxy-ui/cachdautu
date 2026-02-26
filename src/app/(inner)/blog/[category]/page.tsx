@@ -10,7 +10,7 @@ import Image from "next/image";
 export const revalidate = 300;
 
 interface CategoryPageProps {
-    params: Promise<{ category: string }>;
+    params: { category: string };
 }
 
 const supabase = createClient(
@@ -63,7 +63,7 @@ async function getPostsByCategory(categoryId: string) {
 }
 
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
-    const { category } = await params;
+    const { category } = params;
     const cat = await getCategory(category);
     if (!cat) return { title: "Không tìm thấy" };
 
@@ -74,8 +74,8 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
-    const { category } = await params;
-    const cat = await getCategory(category);
+    const { category: categorySlug } = params;
+    const cat = await getCategory(categorySlug);
     if (!cat) notFound();
 
     const [posts, allCategories] = await Promise.all([
@@ -129,7 +129,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                         <Link
                             key={c.slug}
                             href={`/blog/${c.slug}`}
-                            className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all border ${c.slug === category
+                            className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all border ${c.slug === categorySlug
                                 ? 'bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 text-white border-transparent shadow-glow-purple'
                                 : 'bg-white/[0.03] border-white/[0.06] text-text-secondary hover:text-white hover:bg-purple-500/10 hover:border-purple-500/30'
                                 }`}
@@ -145,7 +145,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                         {posts.map((post: any) => (
                             <Link
                                 key={post.id}
-                                href={`/blog/${post.categories?.slug || category}/${post.slug}`}
+                                href={`/blog/${post.categories?.slug || categorySlug}/${post.slug}`}
                                 className="group bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.06] rounded-3xl overflow-hidden hover:border-purple-500/30 hover:shadow-glow-purple transition-all hover:-translate-y-1"
                             >
                                 <div className="aspect-video bg-gradient-to-br from-purple-900/30 to-pink-900/30 relative overflow-hidden">

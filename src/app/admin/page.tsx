@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { supabase, Post } from "@/lib/supabase";
+import { supabase } from "@/core/supabase";
+import { Post } from "@/core/types";
 import {
     FileText,
     FolderOpen,
@@ -17,7 +18,8 @@ import {
     Image as ImageIcon,
     PenLine,
     BarChart3,
-    Zap
+    Zap,
+    Search
 } from "lucide-react";
 
 interface Stats {
@@ -198,7 +200,7 @@ export default function AdminDashboard() {
         <div className="space-y-6">
             {/* Auto-publish notification */}
             {autoPublished.length > 0 && (
-                <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex items-start gap-3 animate-in slide-in-from-top">
+                <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex items-start gap-3 animate-fade-in-up shadow-sm">
                     <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0 mt-0.5">
                         <Zap className="w-4 h-4 text-emerald-600" />
                     </div>
@@ -206,15 +208,15 @@ export default function AdminDashboard() {
                         <p className="text-sm font-semibold text-emerald-800">🎉 Tự động xuất bản {autoPublished.length} bài viết!</p>
                         <ul className="mt-1 space-y-0.5">
                             {autoPublished.map((title, i) => (
-                                <li key={i} className="text-xs text-emerald-600">• {title}</li>
+                                <li key={i} className="text-xs text-emerald-600 animate-fade-in" style={{ animationDelay: `${i * 100}ms` }}>• {title}</li>
                             ))}
                         </ul>
                     </div>
-                    <button onClick={() => setAutoPublished([])} className="text-emerald-400 hover:text-emerald-600 text-lg leading-none">&times;</button>
+                    <button onClick={() => setAutoPublished([])} className="text-emerald-400 hover:text-emerald-600 text-lg leading-none transition-colors">&times;</button>
                 </div>
             )}
             {/* Header */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 animate-fade-in">
                 <div>
                     <h1 className="text-2xl font-bold text-gray-900">Tổng quan</h1>
                     <p className="text-gray-500 text-sm mt-0.5">
@@ -223,7 +225,7 @@ export default function AdminDashboard() {
                 </div>
                 <Link
                     href="/admin/posts/new"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-gray-900 text-white font-medium text-sm hover:bg-gray-800 transition-all hover:shadow-lg hover:shadow-gray-900/20 w-fit"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-gray-900 text-white font-medium text-sm hover:bg-gray-800 transition-all hover:shadow-lg hover:shadow-gray-900/20 w-fit active:scale-95"
                 >
                     <Plus className="w-4 h-4" />
                     Bài viết mới
@@ -235,10 +237,11 @@ export default function AdminDashboard() {
                 {statCards.map((stat, idx) => (
                     <div
                         key={idx}
-                        className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md hover:border-gray-200 transition-all group"
+                        className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md hover:border-gray-200 transition-all group cursor-default hover:-translate-y-1"
+                        style={{ animationDelay: `${idx * 100}ms` }}
                     >
                         <div className="flex items-start justify-between mb-4">
-                            <div className={`w-11 h-11 rounded-xl ${stat.bgLight} flex items-center justify-center`}>
+                            <div className={`w-11 h-11 rounded-xl ${stat.bgLight} flex items-center justify-center transition-transform group-hover:scale-110 duration-300`}>
                                 <stat.icon className={`w-5 h-5 ${stat.color}`} />
                             </div>
                             <span className={`text-xs font-medium px-2 py-1 rounded-full ${stat.trendUp ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'}`}>
@@ -252,7 +255,7 @@ export default function AdminDashboard() {
                                 stat.value
                             )}
                         </p>
-                        <p className="text-gray-500 text-sm">{stat.label}</p>
+                        <p className="text-gray-500 text-sm group-hover:text-gray-900 transition-colors">{stat.label}</p>
                         <p className="text-xs text-gray-400 mt-1">{stat.sub}</p>
                     </div>
                 ))}
@@ -434,6 +437,15 @@ export default function AdminDashboard() {
                                 <div>
                                     <p className="text-sm font-medium text-gray-900 group-hover:text-sky-600 transition-colors">Thư viện ảnh</p>
                                     <p className="text-xs text-gray-400">{stats.imagesCount} ảnh đã tải</p>
+                                </div>
+                            </Link>
+                            <Link href="/admin/seo-audit" className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors group">
+                                <div className="w-9 h-9 rounded-lg bg-orange-100 flex items-center justify-center">
+                                    <Search className="w-4 h-4 text-orange-600" />
+                                </div>
+                                <div>
+                                    <p className="text-sm font-medium text-gray-900 group-hover:text-orange-600 transition-colors">SEO Audit</p>
+                                    <p className="text-xs text-gray-400">Kiểm tra On-Page toàn tập</p>
                                 </div>
                             </Link>
                             <Link href="/" target="_blank" className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors group">

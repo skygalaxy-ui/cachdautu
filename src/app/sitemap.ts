@@ -1,14 +1,9 @@
 import { MetadataRoute } from "next";
-import { createClient } from "@supabase/supabase-js";
-import { publishedFilter } from "@/lib/supabase";
-
-const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+import { supabase, publishedFilter } from "@/core/supabase";
+import { APP_CONFIG } from "@/core/config";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://cachdautu.com";
+    const baseUrl = APP_CONFIG.site.url;
 
     // Static pages
     const staticPages: MetadataRoute.Sitemap = [

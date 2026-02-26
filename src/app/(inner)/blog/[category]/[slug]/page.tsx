@@ -3,8 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Calendar, Clock, ArrowLeft, BookOpen, Mail, ChevronRight, ArrowRight, Sparkles, ArrowUpRight, Link as LinkIcon, Info, AlertTriangle, Lightbulb, MessageCircle, Zap, Star, Users } from "lucide-react";
-import { createClient } from "@supabase/supabase-js";
-import { publishedFilter } from "@/lib/supabase";
+import { supabase, publishedFilter } from "@/core/supabase";
+import { APP_CONFIG } from "@/core/config";
 import ReadingProgress from "@/components/ReadingProgress";
 import SocialShare from "@/components/SocialShare";
 import TableOfContents from "@/components/sidebar/TableOfContents";
@@ -13,17 +13,12 @@ import CategoryList from "@/components/sidebar/CategoryList";
 import AuthorCard from "@/components/sidebar/AuthorCard";
 import TagCloud from "@/components/sidebar/TagCloud";
 
-// ISR: cache tĩnh, tự cập nhật mỗi 5 phút
-export const revalidate = 300;
+// ISR: cache tĩnh, tự cập nhật mỗi {revalidateTime/60} phút
+export const revalidate = APP_CONFIG.blog.revalidateTime;
 
 interface PostPageProps {
-    params: Promise<{ category: string; slug: string }>;
+    params: { category: string; slug: string };
 }
-
-const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
 
 async function getPost(slug: string) {
     try {
@@ -56,7 +51,7 @@ async function getRelatedPosts(categoryId: string, currentSlug: string) {
 }
 
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
-    const { category, slug } = await params;
+    const { category, slug } = params;
     const post = await getPost(slug);
     if (!post) return { title: "Không tìm thấy bài viết" };
 
@@ -99,7 +94,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 }
 
 export default async function PostPage({ params }: PostPageProps) {
-    const { category, slug } = await params;
+    const { category, slug } = params;
     const post = await getPost(slug);
 
     if (!post) notFound();

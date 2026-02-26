@@ -9,9 +9,9 @@ import {
     Code, Code2, Minus, Hash, ChevronRight, AlignLeft
 } from "lucide-react";
 import Link from "next/link";
-import MediaLibrary from "@/components/MediaLibrary";
-import MarkdownPreview from "@/components/MarkdownPreview";
-import SeoPanel from "@/components/admin/SeoPanel";
+import MediaLibrary from "@/core/admin/components/MediaLibrary";
+import MarkdownPreview from "@/core/admin/components/MarkdownPreview";
+import SeoPanel from "@/core/admin/components/SeoPanel";
 
 export default function EditPostPage() {
     const params = useParams();
@@ -298,6 +298,17 @@ export default function EditPostPage() {
                                 <div className="flex gap-1">
                                     <button
                                         onClick={() => {
+                                            if (editorTab === "html" && form.content.includes('<')) {
+                                                const clean = form.content
+                                                    .replace(/<h2[^>]*>(.*?)<\/h2>/gi, '\n## $1\n')
+                                                    .replace(/<h3[^>]*>(.*?)<\/h3>/gi, '\n### $1\n')
+                                                    .replace(/<p[^>]*>(.*?)<\/p>/gi, '\n$1\n')
+                                                    .replace(/<br\s*\/?>/gi, '\n')
+                                                    .replace(/<[^>]+>/g, '')
+                                                    .replace(/\n\s*\n/g, '\n\n')
+                                                    .trim();
+                                                setForm(prev => ({ ...prev, content: clean }));
+                                            }
                                             setEditorTab("write");
                                             setContentMode("markdown");
                                         }}
@@ -356,44 +367,21 @@ export default function EditPostPage() {
                             </div>
 
                             {editorTab === "write" && contentMode === "markdown" && (
-                                <div className="flex items-center justify-between px-4 py-1.5 bg-gray-50 border-t border-gray-100 overflow-x-auto">
-                                    <div className="flex items-center gap-0.5">
-                                        {toolbarButtons.map((btn, idx) =>
-                                            btn === null ? (
-                                                <div key={idx} className="w-px h-5 bg-gray-200 mx-1" />
-                                            ) : (
-                                                <button
-                                                    key={idx}
-                                                    type="button"
-                                                    onClick={btn.action}
-                                                    className="p-2 rounded-md hover:bg-gray-200 text-gray-500 hover:text-gray-700 transition-colors"
-                                                    title={btn.label}
-                                                >
-                                                    <btn.icon className="w-4 h-4" />
-                                                </button>
-                                            )
-                                        )}
-                                    </div>
-                                    {/* Cleanup HTML tool */}
-                                    {form.content.includes('<') && (
-                                        <button
-                                            onClick={() => {
-                                                if (confirm('Bạn muốn dọn dẹp toàn bộ mã HTML để đưa về văn bản thường?')) {
-                                                    const clean = form.content
-                                                        .replace(/<h2[^>]*>(.*?)<\/h2>/gi, '\n## $1\n')
-                                                        .replace(/<h3[^>]*>(.*?)<\/h3>/gi, '\n### $1\n')
-                                                        .replace(/<p[^>]*>(.*?)<\/p>/gi, '\n$1\n')
-                                                        .replace(/<br\s*\/?>/gi, '\n')
-                                                        .replace(/<[^>]+>/g, '')
-                                                        .replace(/\n\s*\n/g, '\n\n')
-                                                        .trim();
-                                                    setForm(prev => ({ ...prev, content: clean }));
-                                                }
-                                            }}
-                                            className="ml-auto text-[10px] font-bold px-2 py-1 bg-amber-100 text-amber-700 rounded hover:bg-amber-200 transition-colors uppercase tracking-wider"
-                                        >
-                                            Dọn dẹp HTML
-                                        </button>
+                                <div className="flex items-center gap-0.5 px-4 py-1.5 bg-gray-50 border-t border-gray-100 overflow-x-auto">
+                                    {toolbarButtons.map((btn, idx) =>
+                                        btn === null ? (
+                                            <div key={idx} className="w-px h-5 bg-gray-200 mx-1" />
+                                        ) : (
+                                            <button
+                                                key={idx}
+                                                type="button"
+                                                onClick={btn.action}
+                                                className="p-2 rounded-md hover:bg-gray-200 text-gray-500 hover:text-gray-700 transition-colors"
+                                                title={btn.label}
+                                            >
+                                                <btn.icon className="w-4 h-4" />
+                                            </button>
+                                        )
                                     )}
                                 </div>
                             )}
