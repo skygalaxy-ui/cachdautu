@@ -15,7 +15,9 @@ import {
     Bell,
     Search,
     ExternalLink,
-    Image as ImageIcon
+    Image as ImageIcon,
+    Tags,
+    Link2
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase-browser";
@@ -24,7 +26,9 @@ const navItems = [
     { name: "Tổng quan", href: "/admin", icon: LayoutDashboard },
     { name: "Bài viết", href: "/admin/posts", icon: FileText },
     { name: "SEO Audit", href: "/admin/seo-audit", icon: Search },
+    { name: "Broken Links", href: "/admin/broken-links", icon: Link2 },
     { name: "Chuyên mục", href: "/admin/categories", icon: FolderOpen },
+    { name: "Tags", href: "/admin/tags", icon: Tags },
     { name: "Thư viện ảnh", href: "/admin/media", icon: ImageIcon },
     { name: "Cài đặt", href: "/admin/settings", icon: Settings },
 ];
