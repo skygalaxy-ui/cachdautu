@@ -159,6 +159,6 @@ async function main() {
     if (updateErr) { console.log('❌ Lỗi:', updateErr.message); return; }
 
     const newLen = newContent.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/<[^>]+>/g, ' ').split(/\s+/).filter(w => w.length > 0).length;
-    console.log(\`✅ Đã cập nhật! ~\${oldLen} từ → ~\${newLen} từ\`);
+    console.log(`✅ Đã cập nhật! ~${oldLen} từ → ~${newLen} từ`);
 }
 main().catch(console.error);
