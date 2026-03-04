@@ -15,11 +15,16 @@ if (!supabaseUrl || !supabaseKey) {
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+// Đăng nhập admin
+await supabase.auth.signInWithPassword({ email: 'admin@cachdautu.com', password: 'CachDauTu@2026!' });
+
 function stripHtml(html) {
     return (html || '')
         .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
         .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
         .replace(/<[^>]+>/g, ' ')
+        // Also strip markdown links [text](url)
+        .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
         .replace(/&nbsp;/g, ' ')
         .replace(/&amp;/g, '&')
         .replace(/&lt;/g, '<')
@@ -32,30 +37,43 @@ function stripHtml(html) {
 function countWords(text) {
     const clean = stripHtml(text);
     if (!clean) return 0;
-    // Đếm cả tiếng Việt (tách bằng space)
     return clean.split(/\s+/).filter(w => w.length > 0).length;
 }
 
 function countImages(html) {
-    const matches = (html || '').match(/<img[^>]+>/gi);
-    return matches ? matches.length : 0;
+    // HTML images
+    const htmlImgs = ((html || '').match(/<img[^>]+>/gi) || []).length;
+    // Markdown images ![alt](url)
+    const mdImgs = ((html || '').match(/!\[[^\]]*\]\([^)]+\)/g) || []).length;
+    return htmlImgs + mdImgs;
 }
 
 function countInternalLinks(html) {
-    const matches = (html || '').match(/href=["'][^"']*cachdautu\.com[^"']*["']/gi)
-        || (html || '').match(/href=["']\/[^"']*["']/gi);
-    return matches ? matches.length : 0;
+    // HTML internal links
+    const htmlLinks = ((html || '').match(/href=["']\/blog\/[^"']+["']/gi) || []).length;
+    // Markdown internal links [text](/blog/...)
+    const mdLinks = ((html || '').match(/\[[^\]]+\]\(\/blog\/[^)]+\)/g) || []).length;
+    return htmlLinks + mdLinks;
 }
 
 function countExternalLinks(html) {
-    const allLinks = (html || '').match(/href=["'](https?:\/\/[^"']+)["']/gi) || [];
-    return allLinks.filter(l => !l.includes('cachdautu.com')).length;
+    // HTML external links
+    const htmlLinks = (html || '').match(/href=["'](https?:\/\/[^"']+)["']/gi) || [];
+    const htmlExt = htmlLinks.filter(l => !l.includes('cachdautu.com')).length;
+    // Markdown external links [text](https://...)
+    const mdLinks = (html || '').match(/\[[^\]]+\]\(https?:\/\/[^)]+\)/g) || [];
+    const mdExt = mdLinks.filter(l => !l.includes('cachdautu.com')).length;
+    return htmlExt + mdExt;
 }
 
 function countHeadings(html) {
-    const h2 = ((html || '').match(/<h2[^>]*>/gi) || []).length;
-    const h3 = ((html || '').match(/<h3[^>]*>/gi) || []).length;
-    return { h2, h3, total: h2 + h3 };
+    // HTML headings
+    const htmlH2 = ((html || '').match(/<h2[^>]*>/gi) || []).length;
+    const htmlH3 = ((html || '').match(/<h3[^>]*>/gi) || []).length;
+    // Markdown headings
+    const mdH2 = ((html || '').match(/^## /gm) || []).length;
+    const mdH3 = ((html || '').match(/^### /gm) || []).length;
+    return { h2: htmlH2 + mdH2, h3: htmlH3 + mdH3, total: htmlH2 + htmlH3 + mdH2 + mdH3 };
 }
 
 async function main() {

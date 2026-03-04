@@ -5,6 +5,9 @@
 import { createClient } from '@supabase/supabase-js';
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
 
+// Đăng nhập admin để có quyền ghi
+await supabase.auth.signInWithPassword({ email: 'admin@cachdautu.com', password: 'CachDauTu@2026!' });
+
 const EXT = {
     ssc: '<a href="https://www.ssc.gov.vn" target="_blank" rel="noopener noreferrer">Ủy ban Chứng khoán Nhà nước</a>',
     hose: '<a href="https://www.hsx.vn" target="_blank" rel="noopener noreferrer">Sở GDCK TP.HCM (HOSE)</a>',

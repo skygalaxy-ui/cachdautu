@@ -6,6 +6,9 @@
 import { createClient } from '@supabase/supabase-js';
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
 
+// Đăng nhập admin để có quyền ghi
+await supabase.auth.signInWithPassword({ email: 'admin@cachdautu.com', password: 'CachDauTu@2026!' });
+
 // External links uy tín theo chủ đề
 const EXTERNAL_SOURCES = {
     finance: '<p><em>Nguồn tham khảo: <a href="https://www.ssc.gov.vn" target="_blank" rel="noopener noreferrer">Ủy ban Chứng khoán Nhà nước</a>, <a href="https://www.investopedia.com" target="_blank" rel="noopener noreferrer">Investopedia</a></em></p>',
