@@ -1,163 +1,128 @@
 /**
- * Mở rộng từng bài 1: "Cách đánh giá startup trước khi đầu tư" (616 → 1200+ từ)
+ * Mở rộng bài 2/8: "ESOP: Cổ phiếu ưu đãi cho nhân viên" (735 → 1200+ từ)
  */
 import { createClient } from '@supabase/supabase-js';
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
 await supabase.auth.signInWithPassword({ email: 'admin@cachdautu.com', password: 'CachDauTu@2026!' });
 
-const slug = 'danh-gia-startup-truoc-dau-tu';
+const slug = 'esop-co-phieu-nhan-vien';
 
-const newContent = `Đầu tư vào startup có thể mang lại lợi nhuận gấp hàng chục lần — nhưng cũng có thể mất trắng. Theo thống kê, **90% startup thất bại** trong 5 năm đầu tiên. Vì vậy, kỹ năng đánh giá startup trước khi rót vốn là yếu tố sống còn cho nhà đầu tư. Bài viết này cung cấp **framework đánh giá toàn diện** giúp bạn giảm thiểu rủi ro và tăng cơ hội chọn đúng startup tiềm năng.
+const newContent = `ESOP (Employee Stock Ownership Plan) là chương trình cấp **quyền sở hữu cổ phiếu cho nhân viên** — một công cụ mạnh mẽ giúp startup và doanh nghiệp giữ chân nhân tài, đồng thời tạo cơ hội cho nhân viên chia sẻ thành công cùng công ty. Tại Việt Nam, ESOP ngày càng phổ biến trong lĩnh vực công nghệ và fintech.
 
-## Tại sao phải đánh giá startup kỹ lưỡng?
+## ESOP là gì?
 
-Khi đầu tư vào cổ phiếu niêm yết, bạn có thể dựa vào báo cáo tài chính, giá lịch sử, và phân tích kỹ thuật. Nhưng startup thì khác — chúng thường chưa có doanh thu ổn định, chưa có lịch sử giao dịch, và mọi thứ đều dựa trên **tiềm năng tương lai**.
+ESOP cho phép nhân viên **mua hoặc được tặng cổ phiếu công ty** với giá ưu đãi (thường thấp hơn giá thị trường). Khi công ty phát triển và giá cổ phiếu tăng, nhân viên được hưởng lợi trực tiếp.
 
-Nếu bạn hiểu rõ [cách đọc báo cáo tài chính](/blog/chung-khoan/cach-doc-bao-cao-tai-chinh-doanh-nghiep) của doanh nghiệp niêm yết, thì đánh giá startup đòi hỏi thêm nhiều tiêu chí khác như đội ngũ, thị trường, và mô hình kinh doanh.
+Ví dụ: Bạn được cấp ESOP 10,000 cổ phiếu với giá 10,000đ/cp. Sau 4 năm, công ty niêm yết sàn chứng khoán và giá cổ phiếu tăng lên 100,000đ/cp. Giá trị ESOP của bạn: **1 tỷ đồng** (lãi 900 triệu).
 
-## Framework đánh giá startup: 7 tiêu chí quan trọng
+## Các loại ESOP phổ biến
 
-### 1. Đội ngũ sáng lập (Team)
-
-Đây là tiêu chí **quan trọng nhất**. Nhiều nhà đầu tư nổi tiếng như Paul Graham (Y Combinator) khẳng định: *"Đầu tư vào con người, không phải ý tưởng."*
-
-Các yếu tố cần đánh giá:
-
-- **Kinh nghiệm ngành:** Founder có bao nhiêu năm kinh nghiệm trong lĩnh vực startup đang hoạt động?
-- **Bổ sung lẫn nhau:** Đội ngũ có đủ kỹ năng (tech, business, marketing) hay không?
-- **Track record:** Founder đã từng xây dựng/thoái vốn startup nào trước đó?
-- **Cam kết:** Founder có all-in hay chỉ làm part-time?
-- **Khả năng thích ứng:** Startup thường phải pivot — founder có đủ linh hoạt không?
-
-### 2. Quy mô thị trường (Market Size)
-
-Ba cấp độ đánh giá thị trường:
-
-| Cấp độ | Viết tắt | Ý nghĩa | Ví dụ (Fintech VN) |
+| Loại ESOP | Cách hoạt động | Ưu điểm | Nhược điểm |
 |---|---|---|---|
-| **Total Addressable Market** | TAM | Toàn bộ thị trường | 50 triệu người dùng tài chính |
-| **Serviceable Addressable Market** | SAM | Phân khúc phục vụ được | 10 triệu người dùng mobile banking |
-| **Serviceable Obtainable Market** | SOM | Thị phần thực tế nhắm đến | 500,000 người dùng năm đầu |
+| **Stock Option** | Quyền mua CP với giá cố định | Không cần bỏ tiền trước | Có thể hết giá trị nếu giá CP giảm |
+| **RSU (Restricted Stock Unit)** | Cổ phiếu cấp miễn phí, vest theo thời gian | Không cần mua, luôn có giá trị | Thường ít hơn Stock Option |
+| **Phantom Stock** | Thưởng tiền mặt dựa trên giá CP | Đơn giản, không pha loãng | Không sở hữu thực sự |
+| **ESPP (Employee Stock Purchase Plan)** | Mua CP giá ưu đãi (thường giảm 15%) | Lợi nhuận gần như chắc chắn | Cần bỏ tiền mua |
 
-**Quy tắc:** Thị trường TAM tối thiểu **$1 tỷ** mới đủ hấp dẫn cho venture capital. Với [angel investing](/blog/khoi-nghiep/angel-investing-la-gi) ở giai đoạn sớm, thị trường nhỏ hơn cũng chấp nhận được nếu tốc độ tăng trưởng cao.
+## Vesting Schedule — Lịch vest cổ phiếu
 
-### 3. Sản phẩm và Product-Market Fit
+Đa số ESOP không cho bạn sở hữu ngay lập tức. Thay vào đó, cổ phiếu được **vest (mở khóa) theo thời gian**, thường theo lịch:
 
-Đánh giá sản phẩm startup:
+### Lịch vest phổ biến: 4 năm + 1 năm cliff
 
-- **Pain point có thực sự đau không?** Sản phẩm giải quyết vấn đề "nice to have" hay "must have"?
-- **Product-Market Fit (PMF):** Có dấu hiệu PMF chưa? (Retention cao, organic growth, khách hàng tự giới thiệu)
-- **Lợi thế cạnh tranh:** Moat là gì? Technology, network effect, brand, hay chi phí chuyển đổi?
-- **Traction:** Có người dùng thực tế không? Tốc độ tăng trưởng MoM/QoQ?
-
-### 4. Mô hình kinh doanh (Business Model)
-
-| Mô hình | Đặc điểm | Ví dụ |
+| Thời gian | % được vest | Giải thích |
 |---|---|---|
-| **SaaS** | Doanh thu định kỳ, scalable | Slack, Notion |
-| **Marketplace** | Kết nối 2 bên, network effect | Grab, Shopee |
-| **Freemium** | Miễn phí + premium | Spotify, Canva |
-| **Transaction Fee** | Phí giao dịch | Momo, VNPay |
-| **Quảng cáo** | Miễn phí cho user, bán ads | Facebook, Google |
+| Năm 1 (Cliff) | 0% | Chưa được gì nếu nghỉ trước 12 tháng |
+| Sau năm 1 | 25% | Vest một lần lớn sau 1 năm |
+| Năm 2 | 50% | Vest thêm 25% (hàng tháng hoặc quý) |
+| Năm 3 | 75% | Tiếp tục vest |
+| Năm 4 | 100% | Đã vest toàn bộ |
 
-Câu hỏi cần trả lời: **Unit economics có dương không?** Tức là doanh thu trên mỗi khách hàng (LTV) có lớn hơn chi phí thu hút khách hàng (CAC) không?
+**Cliff period** (thường 1 năm) là giai đoạn thử thách — nếu bạn nghỉ việc trước cliff, bạn **không được gì**. Đây là cách công ty đảm bảo nhân viên cam kết lâu dài.
 
-### 5. Tài chính và Burn Rate
+## ESOP tại Việt Nam: Thực trạng 2026
 
-Startup thường chưa có lợi nhuận, nhưng bạn cần hiểu:
+Theo [Ủy ban Chứng khoán Nhà nước](https://www.ssc.gov.vn), số lượng doanh nghiệp phát hành ESOP trên sàn HOSE và HNX tăng đều mỗi năm. Các công ty công nghệ như FPT, VNG, và các startup fintech tích cực sử dụng ESOP để thu hút nhân tài.
 
-- **Burn rate:** Startup đốt bao nhiêu tiền mỗi tháng?
-- **Runway:** Với tiền hiện có, startup sống được bao lâu? (Tối thiểu 12-18 tháng)
-- **Cap table:** Ai đang nắm cổ phần? Founder vẫn giữ kiểm soát?
-- **Định giá:** Có hợp lý so với stage và traction hiện tại?
+### Một số case study nổi bật:
 
-Tham khảo thêm về [quản lý rủi ro trong đầu tư](/blog/kien-thuc-dau-tu/quan-ly-rui-ro-danh-muc-dau-tu-hieu-qua) để hiểu cách phân bổ vốn hợp lý khi đầu tư startup.
+- **FPT:** Chương trình ESOP hàng năm cho nhân viên cấp quản lý, giúp gắn kết lợi ích dài hạn
+- **VNG:** ESOP là yếu tố quan trọng giữ chân kỹ sư công nghệ hàng đầu
+- **Startup fintech:** Nhiều startup như Timo, Momo sử dụng ESOP thay vì trả lương cao ngay từ đầu
 
-### 6. Cạnh tranh và Lợi thế bền vững
+## Cách đánh giá ESOP khi nhận offer
 
-- **Đối thủ trực tiếp:** Ai đang cạnh tranh cùng phân khúc?
-- **Đối thủ gián tiếp:** Khách hàng đang giải quyết vấn đề bằng cách nào?
-- **Barriers to entry:** Rào cản gia nhập ngành cao hay thấp?
-- **Differentiation:** Startup khác biệt ở điểm nào so với đối thủ?
+Khi được offer ESOP, đừng chỉ nhìn vào số lượng cổ phiếu. Hãy đánh giá kỹ:
 
-### 7. Chiến lược thoái vốn (Exit Strategy)
+### 5 câu hỏi phải hỏi:
 
-Trước khi đầu tư, hãy nghĩ đến cách bạn sẽ thu hồi vốn:
+1. **Tỷ lệ sở hữu:** Bao nhiêu % tổng cổ phiếu? (10,000 CP nghe nhiều nhưng nếu tổng là 100 triệu CP thì chỉ 0.01%)
+2. **Định giá hiện tại:** Giá mỗi CP (strike price) là bao nhiêu? Dựa trên định giá nào?
+3. **Vesting schedule:** Bao lâu vest hết? Có cliff không?
+4. **Exit scenario:** Công ty có kế hoạch IPO, M&A hay không? Khi nào?
+5. **Pha loãng:** Qua các vòng gọi vốn sau, tỷ lệ sở hữu có bị pha loãng bao nhiêu?
 
-- **IPO:** Startup niêm yết trên sàn chứng khoán
-- **M&A:** Được mua lại bởi công ty lớn
-- **Secondary sale:** Bán cổ phần cho nhà đầu tư mới ở vòng sau
-- **Buyback:** Founder mua lại cổ phần
+Nếu bạn đang cân nhắc đầu tư vào startup thông qua [angel investing](/blog/khoi-nghiep/angel-investing-la-gi), hiểu về ESOP cũng giúp bạn đánh giá cách startup quản lý nhân sự.
 
-## Bảng chấm điểm đánh giá startup
+## So sánh: ESOP vs. Lương cao vs. Cổ phiếu tự mua
 
-| Tiêu chí | Trọng số | Điểm (1-5) | Ghi chú |
+| Tiêu chí | ESOP | Lương cao | Tự mua cổ phiếu |
 |---|---|---|---|
-| Đội ngũ sáng lập | 30% | | |
-| Quy mô thị trường | 20% | | |
-| Sản phẩm & PMF | 20% | | |
-| Mô hình kinh doanh | 10% | | |
-| Tài chính | 10% | | |
-| Cạnh tranh | 5% | | |
-| Exit strategy | 5% | | |
+| Rủi ro | Trung bình (phụ thuộc công ty) | ⭐ Thấp | Tùy loại |
+| Upside tiềm năng | ⭐⭐⭐⭐⭐ (rất cao) | Thấp | ⭐⭐⭐ |
+| Thanh khoản | Thấp (chờ vest + exit) | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| Thuế | Ưu đãi (tùy quy định) | Thu nhập cá nhân | Thuế chứng khoán |
+| Gắn kết công ty | ⭐⭐⭐⭐⭐ | Thấp | Không |
 
-**Cách tính:** Nhân điểm với trọng số → tổng điểm. Trên 3.5/5 = đáng cân nhắc. Trên 4/5 = rất tiềm năng.
+## Thuế ESOP tại Việt Nam
 
-## 5 Red Flags cần tránh
+Theo quy định hiện hành:
 
-1. **Founder không minh bạch về tài chính** — Từ chối chia sẻ burn rate hoặc cap table
-2. **Không có traction thực tế** — Chỉ có ý tưởng, chưa có người dùng sau 6+ tháng
-3. **Định giá quá cao** — So với stage và thị trường tương tự
-4. **Đội ngũ không ổn định** — Co-founder rời đi, turnover cao
-5. **Thị trường quá nhỏ** — TAM dưới $100 triệu, khó scale
+- **Khi nhận ESOP:** Chưa phải đóng thuế (chỉ là quyền mua)
+- **Khi thực hiện quyền mua (exercise):** Chênh lệch giữa giá thị trường và strike price được tính là thu nhập cá nhân → đóng thuế TNCN
+- **Khi bán cổ phiếu:** Đóng thuế bán chứng khoán (0.1% giá trị giao dịch)
 
-## So sánh đầu tư startup vs. các kênh khác
+Tham khảo thêm: [Thuế đầu tư tại Việt Nam 2026](/blog/kien-thuc-dau-tu/thue-dau-tu-tai-viet-nam-2026)
 
-| Tiêu chí | Startup | [Cổ phiếu](/blog/chung-khoan/dau-tu-chung-khoan-cho-nguoi-moi-2026) | [ETF](/blog/kien-thuc-dau-tu/etf-la-gi-huong-dan-dau-tu-quy-etf) |
-|---|---|---|---|
-| Lợi nhuận tiềm năng | ⭐⭐⭐⭐⭐ (10-100x) | ⭐⭐⭐ (15-30%/năm) | ⭐⭐ (10-15%/năm) |
-| Rủi ro | ⭐⭐⭐⭐⭐ (mất trắng) | ⭐⭐⭐ (biến động) | ⭐⭐ (thấp) |
-| Thanh khoản | ⭐ (rất thấp) | ⭐⭐⭐⭐⭐ (cao) | ⭐⭐⭐⭐⭐ (cao) |
-| Kiến thức cần | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ |
-| Vốn tối thiểu | Cao (50-500 triệu) | Thấp (5-10 triệu) | Thấp (2 triệu) |
+## 5 rủi ro cần biết khi nhận ESOP
+
+1. **Công ty thất bại:** 90% startup thất bại → ESOP mất giá trị hoàn toàn
+2. **Pha loãng:** Qua nhiều vòng gọi vốn, tỷ lệ sở hữu giảm đáng kể
+3. **Không thanh khoản:** Nếu công ty chưa niêm yết, bạn không thể bán ESOP trên thị trường
+4. **Cliff period:** Nghỉ trước cliff = mất toàn bộ
+5. **Lock-up period:** Sau IPO, thường phải chờ thêm 6-12 tháng mới được bán
+
+Hiểu rõ [cách quản lý rủi ro danh mục đầu tư](/blog/kien-thuc-dau-tu/quan-ly-rui-ro-danh-muc-dau-tu-hieu-qua) giúp bạn cân đối ESOP với các khoản đầu tư khác.
 
 ## Câu hỏi thường gặp (FAQ)
 
-### Nên đầu tư bao nhiêu vào startup?
+### ESOP có phải là cổ phiếu thường không?
 
-Tối đa **5-10% tổng danh mục đầu tư**. Đa dạng hóa bằng cách đầu tư vào 5-10 startup thay vì all-in vào 1 startup. Phần lớn danh mục nên dành cho [các kênh an toàn hơn](/blog/kien-thuc-dau-tu/nen-dau-tu-gi-2026-so-sanh-5-kenh).
+Không hoàn toàn. ESOP thường là cổ phiếu ưu đãi hoặc quyền mua cổ phiếu. Sau khi vest và exercise, chúng trở thành cổ phiếu thường.
 
-### Giai đoạn nào nên đầu tư vào startup?
+### Có nên chấp nhận lương thấp hơn để có ESOP?
 
-- **Pre-seed/Seed:** Rủi ro cao nhất, lợi nhuận tiềm năng cao nhất
-- **Series A:** Đã có PMF, rủi ro giảm
-- **Series B+:** Gần break-even, lợi nhuận tiềm năng thấp hơn
+Tùy thuộc vào tiềm năng công ty. Nếu startup có founder mạnh, traction tốt, và thị trường lớn — ESOP có thể đáng giá gấp nhiều lần lương. Tham khảo bài [đánh giá startup trước khi đầu tư](/blog/khoi-nghiep/danh-gia-startup-truoc-dau-tu).
 
-### Làm sao tìm startup để đầu tư?
+### Nếu nghỉ việc, ESOP sẽ ra sao?
 
-Qua các kênh: Accelerator Việt Nam (VIISA, VSV), [crowdfunding](/blog/khoi-nghiep/crowdfunding-goi-von-cong-dong), angel investor network, hoặc giới thiệu trực tiếp.
+Cổ phiếu đã vest thường được giữ lại, nhưng bạn có thể bị yêu cầu exercise (mua) trong vòng 90 ngày. Cổ phiếu chưa vest → mất.
 
 ## Kết luận
 
-Đánh giá startup là nghệ thuật kết hợp với khoa học. Không có công thức hoàn hảo, nhưng framework 7 tiêu chí trên giúp bạn **giảm thiểu rủi ro và tăng xác suất chọn đúng startup tiềm năng**. Hãy nhớ: đa dạng hóa danh mục, chỉ đầu tư số tiền có thể mất, và luôn due diligence kỹ lưỡng trước mọi quyết định.
+ESOP là công cụ tài chính mạnh mẽ cho cả nhân viên và doanh nghiệp. Đối với nhân viên, đây là cơ hội **chia sẻ thành công** cùng công ty và xây dựng tài sản dài hạn. Tuy nhiên, hãy đánh giá kỹ các yếu tố: vesting schedule, định giá, exit strategy, và rủi ro pha loãng trước khi xem ESOP như một phần quan trọng trong danh mục [đầu tư cá nhân](/blog/kien-thuc-dau-tu/nen-dau-tu-gi-2026-so-sanh-5-kenh).
 
 *Nguồn tham khảo: [Ủy ban Chứng khoán Nhà nước](https://www.ssc.gov.vn), [Crunchbase](https://www.crunchbase.com)*`;
 
 async function main() {
-    console.log('📝 Mở rộng: "Cách đánh giá startup trước khi đầu tư"...');
-
+    console.log('📝 Mở rộng: "ESOP: Cổ phiếu ưu đãi cho nhân viên"...');
     const { data: post, error: findErr } = await supabase
         .from('posts').select('id, title, content').eq('slug', slug).single();
-
     if (findErr || !post) { console.log('❌ Không tìm thấy:', findErr?.message); return; }
-
     const oldLen = (post.content || '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/<[^>]+>/g, ' ').split(/\s+/).filter(w => w.length > 0).length;
-
     const { error: updateErr } = await supabase
         .from('posts').update({ content: newContent.trim() }).eq('id', post.id);
-
     if (updateErr) { console.log('❌ Lỗi:', updateErr.message); return; }
-
     const newLen = newContent.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/<[^>]+>/g, ' ').split(/\s+/).filter(w => w.length > 0).length;
     console.log(`✅ Đã cập nhật! ~${oldLen} từ → ~${newLen} từ`);
 }
