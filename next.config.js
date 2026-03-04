@@ -26,6 +26,31 @@ const nextConfig = {
             },
         ],
     },
+    // Redirect crypto/forex content to homepage (Google Ads compliance)
+    async redirects() {
+        return [
+            {
+                source: '/blog/crypto',
+                destination: '/blog',
+                permanent: true,
+            },
+            {
+                source: '/blog/crypto/:slug*',
+                destination: '/blog',
+                permanent: true,
+            },
+            {
+                source: '/blog/forex',
+                destination: '/blog',
+                permanent: true,
+            },
+            {
+                source: '/blog/forex/:slug*',
+                destination: '/blog',
+                permanent: true,
+            },
+        ];
+    },
 };
 
 module.exports = nextConfig;

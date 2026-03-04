@@ -5,11 +5,11 @@ import { ThemeProvider } from "@/context/ThemeContext";
 
 export const metadata: Metadata = {
     title: "Cách Đầu Tư - Hiểu thị trường, hiểu rủi ro",
-    description: "Học cách đầu tư thông minh vào chứng khoán, crypto, bất động sản, vàng, forex.",
+    description: "Học cách đầu tư thông minh vào chứng khoán, bất động sản, vàng, trái phiếu.",
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://cachdautu.com"),
     openGraph: {
         title: "Cách Đầu Tư - Hiểu thị trường, hiểu rủi ro",
-        description: "Học cách đầu tư thông minh vào chứng khoán, crypto, bất động sản, vàng, forex.",
+        description: "Học cách đầu tư thông minh vào chứng khoán, bất động sản, vàng, trái phiếu.",
         url: "https://cachdautu.com",
         siteName: "Cách Đầu Tư",
         images: [
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: "summary_large_image",
         title: "Cách Đầu Tư - Hiểu thị trường, hiểu rủi ro",
-        description: "Học cách đầu tư thông minh vào chứng khoán, crypto, bất động sản, vàng, forex.",
+        description: "Học cách đầu tư thông minh vào chứng khoán, bất động sản, vàng, trái phiếu.",
         images: ["/og-image.png"],
     },
     robots: {
@@ -43,6 +43,30 @@ export default function RootLayout({
 }: {
     children: React.ReactNode;
 }) {
+    const jsonLd = {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Cách Đầu Tư",
+        "url": "https://cachdautu.com",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://cachdautu.com/blog?s={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    };
+
+    const orgJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Cách Đầu Tư",
+        "url": "https://cachdautu.com",
+        "logo": "https://cachdautu.com/logo.png",
+        "sameAs": [
+            "https://www.facebook.com/cachdautu",
+            "https://twitter.com/cachdautu"
+        ]
+    };
+
     return (
         <html lang="vi" className="dark">
             <head>
@@ -51,6 +75,14 @@ export default function RootLayout({
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
                 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+                />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+                />
             </head>
             <body className="antialiased" style={{ fontFamily: "'Inter', system-ui, -apple-system, sans-serif" }}>
                 <ThemeProvider>

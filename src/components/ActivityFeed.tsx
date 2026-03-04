@@ -10,7 +10,7 @@ const names = [
 
 const actions = [
     { icon: UserPlus, text: "vừa đăng ký nhận bản tin", color: "bg-emerald-500/20 text-emerald-400" },
-    { icon: BookOpen, text: "vừa đọc bài về Crypto", color: "bg-accent-blue/20 text-accent-blue" },
+    { icon: BookOpen, text: "vừa đọc bài về Chứng khoán", color: "bg-accent-blue/20 text-accent-blue" },
     { icon: MessageCircle, text: "vừa bình luận bài viết", color: "bg-accent-purple/20 text-accent-purple" },
 ];
 

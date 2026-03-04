@@ -24,9 +24,9 @@ export const revalidate = 600;
 
 // SEO Metadata for homepage
 export const metadata: Metadata = {
-    title: "Cách Đầu Tư - Nền tảng kiến thức đầu tư #1 Việt Nam | Chứng khoán, Crypto, Bất động sản",
-    description: "Học cách đầu tư thông minh vào chứng khoán, crypto, bất động sản, vàng, forex với 150+ bài phân tích chuyên sâu. Tham gia 12,500+ nhà đầu tư tin tưởng.",
-    keywords: ["đầu tư", "chứng khoán", "crypto", "bất động sản", "forex", "vàng", "tài chính cá nhân", "tự do tài chính"],
+    title: "Cách Đầu Tư - Nền tảng kiến thức đầu tư #1 Việt Nam | Chứng khoán, Bất động sản, Vàng",
+    description: "Học cách đầu tư thông minh vào chứng khoán, bất động sản, vàng, trái phiếu với 150+ bài phân tích chuyên sâu. Tham gia 12,500+ nhà đầu tư tin tưởng.",
+    keywords: ["đầu tư", "chứng khoán", "bất động sản", "vàng", "trái phiếu", "tài chính cá nhân", "tự do tài chính"],
     openGraph: {
         title: "Cách Đầu Tư - Nền tảng kiến thức đầu tư #1 Việt Nam",
         description: "Học cách đầu tư thông minh với 150+ bài phân tích chuyên sâu. Tham gia 12,500+ nhà đầu tư.",
@@ -55,7 +55,7 @@ const jsonLd = {
     "@type": "WebSite",
     "name": "Cách Đầu Tư",
     "url": "https://cachdautu.com",
-    "description": "Nền tảng kiến thức đầu tư hàng đầu Việt Nam về chứng khoán, crypto, bất động sản",
+    "description": "Nền tảng kiến thức đầu tư hàng đầu Việt Nam về chứng khoán, bất động sản",
     "potentialAction": {
         "@type": "SearchAction",
         "target": "https://cachdautu.com/blog?q={search_term_string}",

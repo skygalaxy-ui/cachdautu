@@ -75,15 +75,15 @@ const profiles: Record<string, { title: string; icon: any; color: string; gradie
         color: "purple",
         gradient: "from-purple-500 to-pink-500",
         description: "Bạn chấp nhận biến động để đổi lấy tăng trưởng dài hạn. Phù hợp với cổ phiếu tăng trưởng và đa dạng hóa quốc tế.",
-        assets: ["Cổ phiếu midcap", "Crypto BTC/ETH", "Quỹ ETF Mỹ"]
+        assets: ["Cổ phiếu midcap", "Quỹ ETF nội địa", "Quỹ ETF Mỹ"]
     },
     aggressive: {
         title: "Nhà đầu tư Mạo hiểm",
         icon: Zap,
         color: "orange",
         gradient: "from-orange-500 to-yellow-500",
-        description: "Bạn sẵn sàng chấp nhận rủi ro cao để tối đa hóa lợi nhuận. Phù hợp với altcoin, phái sinh và cổ phiếu đầu cơ.",
-        assets: ["Altcoins", "Cổ phiếu penny", "Phái sinh/Margin"]
+        description: "Bạn sẵn sàng chấp nhận rủi ro cao để tối đa hóa lợi nhuận. Phù hợp với cổ phiếu penny, phái sinh và đòn bẩy cao.",
+        assets: ["Cổ phiếu công nghệ", "Cổ phiếu penny", "Phái sinh/Margin"]
     }
 };
 

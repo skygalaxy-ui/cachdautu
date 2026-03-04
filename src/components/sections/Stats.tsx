@@ -53,7 +53,7 @@ export default function Stats() {
                         <span className="text-white">sẵn sàng để bạn khám phá</span>
                     </h2>
                     <p className="text-text-secondary text-sm sm:text-base lg:text-lg max-w-2xl mx-auto px-2">
-                        Từ <strong className="text-white">chứng khoán</strong>, <strong className="text-white">crypto</strong> đến <strong className="text-white">bất động sản</strong> - chúng tôi có tất cả kiến thức bạn cần.
+                        Từ <strong className="text-white">chứng khoán</strong>, <strong className="text-white">trái phiếu</strong> đến <strong className="text-white">bất động sản</strong> - chúng tôi có tất cả kiến thức bạn cần.
                     </p>
                 </AnimatedSection>
 

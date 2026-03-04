@@ -23,14 +23,11 @@ const getCategoryImage = (category: string) => {
         case 'quy-dau-tu':
         case 'trai-phieu':
         case 'tai-chinh-ca-nhan':
-            return '/images/blog/stocks.png'; // High-tech charts concept
-        case 'crypto':
         case 'khoi-nghiep':
-            return '/images/blog/crypto.png'; // Blockchain concept
+            return '/images/blog/stocks.png'; // High-tech charts concept
         case 'bat-dong-san':
             return '/images/blog/real-estate.png'; // Architecture concept
         case 'vang':
-        case 'forex':
         case 'dau-tu-thay-the':
             return '/images/blog/gold.png'; // Gold/Wealth concept
         default:

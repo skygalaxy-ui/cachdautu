@@ -5,10 +5,7 @@ import { TrendingUp, TrendingDown } from "lucide-react";
 
 const marketData = [
     { symbol: "VN-INDEX", price: 1250.45, change: 0.85 },
-    { symbol: "BTC", price: 45230.00, change: 2.15 },
-    { symbol: "ETH", price: 2450.00, change: 1.82 },
     { symbol: "GOLD", price: 2045.50, change: -0.45 },
-    { symbol: "EUR/USD", price: 1.0850, change: 0.12 },
     { symbol: "VCB", price: 92.5, change: 1.23 },
     { symbol: "FPT", price: 118.0, change: -0.67 },
 ];

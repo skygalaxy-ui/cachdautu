@@ -12,7 +12,7 @@ export default function ChatWidget() {
 
     const quickReplies = [
         "Làm sao để bắt đầu?",
-        "Chứng khoán hay Crypto?",
+        "Chứng khoán hay Bất động sản?",
         "Cần bao nhiêu tiền?",
     ];
 

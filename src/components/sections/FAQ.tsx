@@ -16,7 +16,7 @@ const faqs = [
     },
     {
         q: "Thông tin có được cập nhật thường xuyên?",
-        a: "Có, chúng tôi cập nhật nội dung hàng ngày về thị trường chứng khoán, crypto, bất động sản và tài chính cá nhân."
+        a: "Có, chúng tôi cập nhật nội dung hàng ngày về thị trường chứng khoán, trái phiếu, bất động sản và tài chính cá nhân."
     },
     {
         q: "Tôi có thể bắt đầu từ đâu?",

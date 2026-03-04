@@ -582,7 +582,7 @@ export default function NewPostPage() {
                             type="text"
                             value={form.tags}
                             onChange={(e) => setForm({ ...form, tags: e.target.value })}
-                            placeholder="crypto, bitcoin, ..."
+                            placeholder="đầu tư, chứng khoán, tài chính, ..."
                             className="w-full px-4 py-2.5 rounded-lg bg-gray-50 border border-gray-200 text-gray-700 text-sm focus:border-emerald-500 focus:outline-none placeholder-gray-400"
                         />
                         {form.tags && (

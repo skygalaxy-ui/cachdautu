@@ -18,14 +18,11 @@ const getCategoryImage = (category: string) => {
         case 'quy-dau-tu':
         case 'trai-phieu':
         case 'tai-chinh-ca-nhan':
-            return '/images/blog/stocks.png';
-        case 'crypto':
         case 'khoi-nghiep':
-            return '/images/blog/crypto.png';
+            return '/images/blog/stocks.png';
         case 'bat-dong-san':
             return '/images/blog/real-estate.png';
         case 'vang':
-        case 'forex':
         case 'dau-tu-thay-the':
             return '/images/blog/gold.png';
         default:
@@ -50,7 +47,7 @@ export default function FeaturedPosts() {
         async function fetchPosts() {
             const { data } = await supabase
                 .from('posts')
-                .select('id, title, slug, excerpt, featured_image, reading_time, created_at, tags')
+                .select('id, title, slug, excerpt, featured_image, reading_time, created_at, tags, categories(name, slug)')
                 .or(publishedFilter())
                 .order('created_at', { ascending: false })
                 .limit(3);
@@ -63,7 +60,7 @@ export default function FeaturedPosts() {
                     image: post.featured_image || '',
                     readingTime: post.reading_time || '5 phút',
                     date: post.created_at,
-                    category: (post.tags && post.tags[0]) ? post.tags[0].toLowerCase().replace(/\s+/g, '-') : 'kien-thuc',
+                    category: post.categories?.slug || ((post.tags && post.tags[0]) ? post.tags[0].toLowerCase().replace(/\s+/g, '-') : 'kien-thuc'),
                 })));
             }
         }

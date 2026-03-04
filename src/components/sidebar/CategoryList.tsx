@@ -8,6 +8,7 @@ const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
+
 async function getCategoriesWithCount() {
     try {
         const { data: categories } = await supabase

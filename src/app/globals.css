@@ -33,7 +33,6 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
   scroll-behavior: smooth;
-  scroll-snap-type: y proximity;
 }
 
 body {
@@ -58,8 +57,7 @@ body {
 /* Scroll Snap Section */
 .snap-section {
   scroll-snap-align: start;
-  min-height: 100vh;
-  scroll-margin-top: 0;
+  scroll-margin-top: 72px;
 }
 
 /* For touch devices - smoother momentum scrolling */

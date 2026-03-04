@@ -24,7 +24,7 @@ const strategies = [
         title: "Tăng trưởng nhanh",
         desc: "Cơ hội sinh lời cao với các kênh đầu tư năng động.",
         color: "from-orange-500 to-yellow-500",
-        href: "/blog/crypto"
+        href: "/blog/chung-khoan"
     },
 ];
 

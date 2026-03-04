@@ -2,19 +2,16 @@ import Link from "next/link";
 
 const categories = [
     { slug: "chung-khoan", name: "Chứng khoán", description: "Cổ phiếu, ETF, phân tích kỹ thuật & cơ bản" },
-    { slug: "crypto", name: "Crypto", description: "Bitcoin, Ethereum, DeFi, staking" },
     { slug: "bat-dong-san", name: "Bất động sản", description: "Mua để cho thuê, REITs, đầu tư đất" },
     { slug: "vang", name: "Vàng", description: "Vàng vật chất, vàng tài khoản, bạc" },
-    { slug: "forex", name: "Forex", description: "Giao dịch cặp tiền tệ, phân tích thị trường" },
     { slug: "trai-phieu", name: "Trái phiếu", description: "Trái phiếu chính phủ & doanh nghiệp" },
     { slug: "quy-dau-tu", name: "Quỹ đầu tư", description: "Quỹ mở, quỹ ETF, quỹ hưu trí" },
     { slug: "khoi-nghiep", name: "Khởi nghiệp", description: "Angel investing, crowdfunding, ESOP" },
-    { slug: "dau-tu-thay-the", name: "Đầu tư thay thế", description: "Nghệ thuật, NFT, collectibles, rượu vang" },
+    { slug: "dau-tu-thay-the", name: "Đầu tư thay thế", description: "Nghệ thuật, collectibles, rượu vang" },
     { slug: "tai-chinh-ca-nhan", name: "Tài chính cá nhân", description: "Tiết kiệm, ngân sách, quỹ khẩn cấp" },
 ];
 import {
     LineChart,
-    Bitcoin,
     Building2,
     Coins,
     Banknote,
@@ -28,10 +25,8 @@ import {
 // Map slugs to components
 const categoryIcons: Record<string, React.ElementType> = {
     "chung-khoan": LineChart,
-    "crypto": Bitcoin,
     "bat-dong-san": Building2,
     "vang": Coins,
-    "forex": Banknote, // Using Banknote for Forex representation
     "trai-phieu": ScrollText,
     "quy-dau-tu": Briefcase,
     "khoi-nghiep": Rocket,
@@ -42,10 +37,8 @@ const categoryIcons: Record<string, React.ElementType> = {
 // Map slugs to gradient colors for specific glow
 const categoryGradients: Record<string, string> = {
     "chung-khoan": "from-green-400 to-emerald-600",
-    "crypto": "from-orange-400 to-yellow-500",
     "bat-dong-san": "from-blue-400 to-indigo-600",
     "vang": "from-yellow-300 to-yellow-600",
-    "forex": "from-cyan-400 to-blue-500",
     "trai-phieu": "from-gray-400 to-gray-600",
     "quy-dau-tu": "from-purple-400 to-pink-500",
     "khoi-nghiep": "from-red-400 to-orange-500",
@@ -69,7 +62,7 @@ export default function CategoryGrid() {
                         Khám phá <span className="text-transparent bg-clip-text bg-gradient-gold">mọi loại tài sản</span>
                     </h2>
                     <p className="max-w-2xl mx-auto text-text-secondary text-lg">
-                        Từ chứng khoán truyền thống đến crypto, từ bất động sản đến nghệ thuật -
+                        Từ chứng khoán truyền thống đến bất động sản, từ vàng đến quỹ đầu tư -
                         chúng tôi hướng dẫn bạn đầu tư vào bất kỳ loại tài sản nào.
                     </p>
                 </div>

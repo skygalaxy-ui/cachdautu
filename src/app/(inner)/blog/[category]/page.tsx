@@ -9,6 +9,8 @@ import Image from "next/image";
 // ISR: cache tĩnh, tự cập nhật mỗi 5 phút
 export const revalidate = 300;
 
+
+
 interface CategoryPageProps {
     params: { category: string };
 }
@@ -70,6 +72,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
     return {
         title: `${cat.name} - Cách Đầu Tư`,
         description: cat.description || `Khám phá kiến thức đầu tư về ${cat.name.toLowerCase()}`,
+
     };
 }
 

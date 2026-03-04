@@ -4,10 +4,10 @@ import { ArrowRight } from "lucide-react";
 
 const categories = [
     { slug: "chung-khoan", label: "Chứng khoán" },
-    { slug: "crypto", label: "Crypto" },
     { slug: "bat-dong-san", label: "Bất động sản" },
     { slug: "vang", label: "Vàng" },
-    { slug: "forex", label: "Forex" },
+    { slug: "trai-phieu", label: "Trái phiếu" },
+    { slug: "tai-chinh-ca-nhan", label: "Tài chính cá nhân" },
 ];
 
 export default function Footer() {
@@ -114,13 +114,30 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+                {/* Financial Disclaimer - Required for Google Ads */}
+                <div className="pt-8 border-t border-white/5 mb-6">
+                    <div className="bg-orange-500/5 border border-orange-500/10 rounded-xl p-4 sm:p-5">
+                        <p className="text-xs sm:text-sm text-text-muted leading-relaxed text-center">
+                            <strong className="text-orange-400/80">⚠️ Miễn trừ trách nhiệm:</strong>{" "}
+                            Tất cả nội dung trên cachdautu.com chỉ mang tính chất giáo dục và thông tin,{" "}
+                            <strong className="text-text-secondary">KHÔNG</strong> phải là lời khuyên đầu tư.
+                            Mọi quyết định đầu tư đều có rủi ro và do bạn tự chịu trách nhiệm.
+                            Vui lòng tham khảo ý kiến chuyên gia tài chính trước khi đưa ra quyết định.{" "}
+                            <Link href="/mien-tru-trach-nhiem" className="text-orange-400/70 hover:text-orange-400 underline underline-offset-2 transition-colors">
+                                Xem chi tiết →
+                            </Link>
+                        </p>
+                    </div>
+                </div>
+
+                <div className="pt-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-sm text-text-muted">
                         © 2026 Cách Đầu Tư. All rights reserved.
                     </p>
-                    <div className="flex gap-6">
-                        <Link href="/about" className="text-sm text-text-muted hover:text-purple-400 transition-colors">Chính sách bảo mật</Link>
-                        <Link href="/about" className="text-sm text-text-muted hover:text-purple-400 transition-colors">Điều khoản sử dụng</Link>
+                    <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
+                        <Link href="/chinh-sach-bao-mat" className="text-sm text-text-muted hover:text-purple-400 transition-colors">Chính sách bảo mật</Link>
+                        <Link href="/dieu-khoan-su-dung" className="text-sm text-text-muted hover:text-purple-400 transition-colors">Điều khoản sử dụng</Link>
+                        <Link href="/mien-tru-trach-nhiem" className="text-sm text-text-muted hover:text-purple-400 transition-colors">Miễn trừ trách nhiệm</Link>
                     </div>
                 </div>
             </div>

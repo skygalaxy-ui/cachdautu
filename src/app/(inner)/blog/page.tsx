@@ -12,10 +12,10 @@ export const revalidate = 300;
 
 export const metadata: Metadata = {
     title: "Blog - Cách Đầu Tư | Kiến thức đầu tư toàn diện",
-    description: "Khám phá hàng trăm bài viết về chứng khoán, crypto, bất động sản, vàng, forex và nhiều loại đầu tư khác.",
+    description: "Khám phá hàng trăm bài viết về chứng khoán, bất động sản, vàng, trái phiếu và nhiều loại đầu tư khác.",
     openGraph: {
         title: "Blog - Cách Đầu Tư",
-        description: "Khám phá hàng trăm bài viết về chứng khoán, crypto, bất động sản, vàng, forex và nhiều loại đầu tư khác.",
+        description: "Khám phá hàng trăm bài viết về chứng khoán, bất động sản, vàng, trái phiếu và nhiều loại đầu tư khác.",
         type: "website",
     }
 };
@@ -49,6 +49,8 @@ interface BlogPageProps {
 }
 
 const POSTS_PER_PAGE = 12;
+
+
 
 async function getPosts(searchQuery?: string, page: number = 1) {
     const from = (page - 1) * POSTS_PER_PAGE;

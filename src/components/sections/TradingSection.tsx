@@ -1,22 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import { TrendingUp, Bitcoin, DollarSign, Coins, ArrowUpRight, ArrowDownRight, Activity } from "lucide-react";
+import { TrendingUp, Building2, Coins, ArrowUpRight, ArrowDownRight, Activity, ScrollText } from "lucide-react";
 import AnimatedSection from "@/components/ui/Animations";
 
 // Mock Data for Market Tickers
 const marketData = [
     { symbol: "VN-INDEX", price: "1,250.45", change: "+0.85%", up: true },
-    { symbol: "BTC/USD", price: "45,230.00", change: "+2.15%", up: true },
     { symbol: "GOLD", price: "2,045.50", change: "-0.45%", up: false },
-    { symbol: "EUR/USD", price: "1.0850", change: "+0.12%", up: true },
+    { symbol: "VCB", price: "92,500", change: "+1.25%", up: true },
+    { symbol: "VHM", price: "45,800", change: "+0.65%", up: true },
 ];
 
 const tradingCategories = [
     { slug: "chung-khoan", name: "Chứng khoán", icon: <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6" />, desc: "Phân tích kỹ thuật & cơ bản", color: "from-blue-500 to-purple-500" },
-    { slug: "crypto", name: "Crypto", icon: <Bitcoin className="w-5 h-5 sm:w-6 sm:h-6" />, desc: "Blockchain & DeFi", color: "from-orange-500 to-yellow-500" },
-    { slug: "forex", name: "Forex", icon: <DollarSign className="w-5 h-5 sm:w-6 sm:h-6" />, desc: "Thị trường ngoại hối", color: "from-green-500 to-emerald-500" },
+    { slug: "bat-dong-san", name: "Bất động sản", icon: <Building2 className="w-5 h-5 sm:w-6 sm:h-6" />, desc: "Nhà đất & REITs", color: "from-indigo-500 to-blue-500" },
     { slug: "vang", name: "Vàng", icon: <Coins className="w-5 h-5 sm:w-6 sm:h-6" />, desc: "Hàng hóa & Kim loại quý", color: "from-yellow-500 to-orange-500" },
+    { slug: "trai-phieu", name: "Trái phiếu", icon: <ScrollText className="w-5 h-5 sm:w-6 sm:h-6" />, desc: "Lãi suất ổn định", color: "from-green-500 to-emerald-500" },
 ];
 
 export default function TradingSection() {

@@ -21,7 +21,7 @@ const testimonials = [
     {
         name: "Quốc Bảo",
         role: "Doanh nhân",
-        content: "Phân tích crypto rất sâu và thực tế. Giúp tôi tránh được nhiều cạm bẫy trên thị trường.",
+        content: "Phân tích thị trường rất sâu và thực tế. Giúp tôi tránh được nhiều cạm bẫy khi đầu tư.",
         rating: 5,
         avatar: "QB"
     },

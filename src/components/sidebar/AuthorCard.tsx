@@ -10,7 +10,7 @@ interface AuthorCardProps {
 
 export default function AuthorCard({
     name = "Đội ngũ CachDauTu",
-    bio = "Nhóm chuyên gia tài chính & công nghệ với hơn 10 năm kinh nghiệm trong lĩnh vực đầu tư chứng khoán, crypto và quản lý tài sản.",
+    bio = "Nhóm chuyên gia tài chính & công nghệ với hơn 10 năm kinh nghiệm trong lĩnh vực đầu tư chứng khoán, trái phiếu và quản lý tài sản.",
     avatar,
     credentials = [
         "Chứng chỉ CFA Level II",

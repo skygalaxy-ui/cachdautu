@@ -58,8 +58,8 @@ const testimonials = [
 ];
 
 const assetCategories = [
-    "Chứng khoán", "Crypto", "Bất động sản", "Vàng", "Forex",
-    "ETF", "Trái phiếu", "Startup", "Tiết kiệm", "Bảo hiểm"
+    "Chứng khoán", "Bất động sản", "Vàng", "ETF",
+    "Trái phiếu", "Quỹ đầu tư", "Tiết kiệm", "Bảo hiểm"
 ];
 
 export default function AboutPage() {
@@ -137,7 +137,7 @@ export default function AboutPage() {
                                 Phân tích <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">10+ loại tài sản</span>
                             </h2>
                             <p className="text-text-secondary text-sm sm:text-base lg:text-lg max-w-2xl mx-auto">
-                                Từ chứng khoán truyền thống đến crypto, bất động sản đến forex - chúng tôi giúp bạn hiểu sâu về mọi loại đầu tư.
+                                Từ chứng khoán truyền thống đến bất động sản, vàng đến trái phiếu - chúng tôi giúp bạn hiểu sâu về mọi loại đầu tư.
                             </p>
                         </AnimatedSection>
 

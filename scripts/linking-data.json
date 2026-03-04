@@ -1,0 +1,805 @@
+{
+  "categories": [
+    {
+      "id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "name": "Kiến thức đầu tư",
+      "slug": "kien-thuc-dau-tu"
+    },
+    {
+      "id": "96d5c106-653b-470e-90a7-6875e9a490fd",
+      "name": "Chứng khoán",
+      "slug": "chung-khoan"
+    },
+    {
+      "id": "439e89a0-04db-4c18-a91b-92682428e111",
+      "name": "Bất động sản",
+      "slug": "bat-dong-san"
+    },
+    {
+      "id": "b7ced1f1-2dc7-47c7-a3bb-36d66c24cae5",
+      "name": "Crypto",
+      "slug": "crypto"
+    },
+    {
+      "id": "0a381b9b-e2af-4762-85d9-b8ff8c231b31",
+      "name": "Tài chính cá nhân",
+      "slug": "tai-chinh-ca-nhan"
+    },
+    {
+      "id": "ac86a067-5518-42d7-8045-a92a75f4a15f",
+      "name": "Kinh nghiệm",
+      "slug": "kinh-nghiem"
+    },
+    {
+      "id": "49a89c1c-90dc-4d14-9f06-6efc97aec499",
+      "name": "Vàng",
+      "slug": "vang"
+    },
+    {
+      "id": "d0457801-0e3c-402b-9846-2a5926fb64c6",
+      "name": "Forex",
+      "slug": "forex"
+    },
+    {
+      "id": "c4270425-5c6e-43af-aa92-aff4caa6d082",
+      "name": "Khởi nghiệp",
+      "slug": "khoi-nghiep"
+    },
+    {
+      "id": "67a36bba-0fa3-491d-96c0-a69b7efb5845",
+      "name": "Trái phiếu",
+      "slug": "trai-phieu"
+    },
+    {
+      "id": "8cf5a4ca-c2cb-4e27-9bcf-9df51e5041dc",
+      "name": "Quỹ đầu tư",
+      "slug": "quy-dau-tu"
+    },
+    {
+      "id": "8971edd8-a375-460a-beea-441c65acfa1a",
+      "name": "Đầu tư thay thế",
+      "slug": "dau-tu-thay-the"
+    }
+  ],
+  "all_posts_for_linking": [
+    {
+      "title": "10 sai lầm phổ biến nhất khi đầu tư và cách tránh – Bài học đắt giá",
+      "slug": "10-sai-lam-pho-bien-khi-dau-tu-cach-tranh",
+      "category_id": "ac86a067-5518-42d7-8045-a92a75f4a15f",
+      "url": "/blog/kinh-nghiem/10-sai-lam-pho-bien-khi-dau-tu-cach-tranh"
+    },
+    {
+      "title": "10 thuật ngữ chứng khoán cơ bản mà nhà đầu tư mới cần biết",
+      "slug": "10-thuat-ngu-chung-khoan-co-ban-nha-dau-tu-moi",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/10-thuat-ngu-chung-khoan-co-ban-nha-dau-tu-moi"
+    },
+    {
+      "title": "20 tuổi nên đầu tư gì? Lộ trình tài chính cho Gen Z Việt Nam",
+      "slug": "20-tuoi-nen-dau-tu-gi",
+      "category_id": "0a381b9b-e2af-4762-85d9-b8ff8c231b31",
+      "url": "/blog/tai-chinh-ca-nhan/20-tuoi-nen-dau-tu-gi"
+    },
+    {
+      "title": "30 tuổi nên đầu tư gì? Chiến lược xây dựng tài sản giai đoạn vàng",
+      "slug": "30-tuoi-nen-dau-tu-gi",
+      "category_id": "0a381b9b-e2af-4762-85d9-b8ff8c231b31",
+      "url": "/blog/tai-chinh-ca-nhan/30-tuoi-nen-dau-tu-gi"
+    },
+    {
+      "title": "Altcoin là gì? Cơ hội và rủi ro đầu tư Altcoin 2026",
+      "slug": "altcoin-la-gi-co-hoi-rui-ro-dau-tu-2026",
+      "category_id": "b7ced1f1-2dc7-47c7-a3bb-36d66c24cae5",
+      "url": "/blog/crypto/altcoin-la-gi-co-hoi-rui-ro-dau-tu-2026"
+    },
+    {
+      "title": "Angel Investing: Đầu tư vào startup giai đoạn sớm",
+      "slug": "angel-investing-la-gi",
+      "category_id": "c4270425-5c6e-43af-aa92-aff4caa6d082",
+      "url": "/blog/khoi-nghiep/angel-investing-la-gi"
+    },
+    {
+      "title": "Bảo hiểm nhân thọ có phải kênh đầu tư tốt? Sự thật cần biết",
+      "slug": "bao-hiem-nhan-tho-co-phai-kenh-dau-tu",
+      "category_id": "0a381b9b-e2af-4762-85d9-b8ff8c231b31",
+      "url": "/blog/tai-chinh-ca-nhan/bao-hiem-nhan-tho-co-phai-kenh-dau-tu"
+    },
+    {
+      "title": "Bao nhiêu tiền thì nên bắt đầu đầu tư? Câu trả lời có thể khiến bạn bất ngờ",
+      "slug": "bao-nhieu-tien-thi-nen-bat-dau-dau-tu",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/bao-nhieu-tien-thi-nen-bat-dau-dau-tu"
+    },
+    {
+      "title": "Bitcoin Halving là gì? Tác động đến giá BTC và chiến lược đầu tư",
+      "slug": "bitcoin-halving-la-gi-tac-dong-gia-btc",
+      "category_id": "b7ced1f1-2dc7-47c7-a3bb-36d66c24cae5",
+      "url": "/blog/crypto/bitcoin-halving-la-gi-tac-dong-gia-btc"
+    },
+    {
+      "title": "Các loại lệnh chứng khoán ATO, ATC, LO, MP: giải thích đơn giản",
+      "slug": "cac-loai-lenh-chung-khoan-ato-atc-lo-mp",
+      "category_id": "96d5c106-653b-470e-90a7-6875e9a490fd",
+      "url": "/blog/chung-khoan/cac-loai-lenh-chung-khoan-ato-atc-lo-mp"
+    },
+    {
+      "title": "Cách chọn công ty chứng khoán phù hợp: tiêu chí đánh giá 2026",
+      "slug": "cach-chon-cong-ty-chung-khoan-phu-hop",
+      "category_id": "96d5c106-653b-470e-90a7-6875e9a490fd",
+      "url": "/blog/chung-khoan/cach-chon-cong-ty-chung-khoan-phu-hop"
+    },
+    {
+      "title": "Cách đánh giá startup trước khi đầu tư",
+      "slug": "danh-gia-startup-truoc-dau-tu",
+      "category_id": "c4270425-5c6e-43af-aa92-aff4caa6d082",
+      "url": "/blog/khoi-nghiep/danh-gia-startup-truoc-dau-tu"
+    },
+    {
+      "title": "Cách đầu tư chứng khoán cho người mới 2026 – Hướng dẫn chi tiết từ A-Z",
+      "slug": "cach-dau-tu-chung-khoan-nguoi-moi-2026",
+      "category_id": "96d5c106-653b-470e-90a7-6875e9a490fd",
+      "url": "/blog/chung-khoan/cach-dau-tu-chung-khoan-nguoi-moi-2026"
+    },
+    {
+      "title": "Cách đọc bảng giá chứng khoán: hướng dẫn chi tiết cho người mới",
+      "slug": "cach-doc-bang-gia-chung-khoan-nguoi-moi",
+      "category_id": "96d5c106-653b-470e-90a7-6875e9a490fd",
+      "url": "/blog/chung-khoan/cach-doc-bang-gia-chung-khoan-nguoi-moi"
+    },
+    {
+      "title": "Cách đọc bảng giá trái phiếu cho người mới bắt đầu",
+      "slug": "cach-doc-bang-gia-trai-phieu-cho-nguoi-moi",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/cach-doc-bang-gia-trai-phieu-cho-nguoi-moi"
+    },
+    {
+      "title": "Cách đọc báo cáo tài chính doanh nghiệp: kỹ năng cốt lõi cho nhà đầu tư",
+      "slug": "cach-doc-bao-cao-tai-chinh-doanh-nghiep",
+      "category_id": "96d5c106-653b-470e-90a7-6875e9a490fd",
+      "url": "/blog/chung-khoan/cach-doc-bao-cao-tai-chinh-doanh-nghiep"
+    },
+    {
+      "title": "Cách đọc tin tức tài chính: phân biệt thông tin giá trị và nhiễu",
+      "slug": "cach-doc-tin-tuc-tai-chinh-phan-biet",
+      "category_id": "ac86a067-5518-42d7-8045-a92a75f4a15f",
+      "url": "/blog/kinh-nghiem/cach-doc-tin-tuc-tai-chinh-phan-biet"
+    },
+    {
+      "title": "Cách theo dõi NAV và hiệu suất quỹ ETF chính xác nhất",
+      "slug": "cach-theo-doi-nav-hieu-suat-quy-etf",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/cach-theo-doi-nav-hieu-suat-quy-etf"
+    },
+    {
+      "title": "Cách tiết kiệm tiền hiệu quả: 10 mẹo thực tế cho người trẻ",
+      "slug": "cach-tiet-kiem-tien-hieu-qua-nguoi-tre",
+      "category_id": "0a381b9b-e2af-4762-85d9-b8ff8c231b31",
+      "url": "/blog/tai-chinh-ca-nhan/cach-tiet-kiem-tien-hieu-qua-nguoi-tre"
+    },
+    {
+      "title": "Cách tính lãi kép đơn giản: công thức + bảng tính online miễn phí",
+      "slug": "cach-tinh-lai-kep-cong-thuc-bang-tinh-online",
+      "category_id": "0a381b9b-e2af-4762-85d9-b8ff8c231b31",
+      "url": "/blog/tai-chinh-ca-nhan/cach-tinh-lai-kep-cong-thuc-bang-tinh-online"
+    },
+    {
+      "title": "Chi phí ẩn khi đầu tư: những khoản phí bạn không biết đang mất",
+      "slug": "chi-phi-an-khi-dau-tu-khoan-phi-mat",
+      "category_id": "ac86a067-5518-42d7-8045-a92a75f4a15f",
+      "url": "/blog/kinh-nghiem/chi-phi-an-khi-dau-tu-khoan-phi-mat"
+    },
+    {
+      "title": "Chiến lược DCA bình quân giá: cách đầu tư an toàn nhất cho người mới",
+      "slug": "chien-luoc-dca-binh-quan-gia",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/chien-luoc-dca-binh-quan-gia"
+    },
+    {
+      "title": "Chọn sàn Forex uy tín 2026: 5 tiêu chí bắt buộc phải kiểm tra",
+      "slug": "chon-san-forex-uy-tin-2026-5-tieu-chi-bat-buoc",
+      "category_id": "d0457801-0e3c-402b-9846-2a5926fb64c6",
+      "url": "/blog/forex/chon-san-forex-uy-tin-2026-5-tieu-chi-bat-buoc"
+    },
+    {
+      "title": "Chứng khoán phái sinh là gì? Hướng dẫn cơ bản cho người mới",
+      "slug": "chung-khoan-phai-sinh-la-gi-huong-dan-co-ban",
+      "category_id": "96d5c106-653b-470e-90a7-6875e9a490fd",
+      "url": "/blog/chung-khoan/chung-khoan-phai-sinh-la-gi-huong-dan-co-ban"
+    },
+    {
+      "title": "Có 10 triệu nên đầu tư gì? 5 lựa chọn thực tế cho người mới",
+      "slug": "co-10-trieu-nen-dau-tu-gi",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/co-10-trieu-nen-dau-tu-gi"
+    },
+    {
+      "title": "Có 100 triệu nên đầu tư gì 2026? 4 chiến lược theo độ tuổi",
+      "slug": "co-100-trieu-nen-dau-tu-gi",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/co-100-trieu-nen-dau-tu-gi"
+    },
+    {
+      "title": "Có 50 triệu nên đầu tư gì? Chiến lược phân bổ tối ưu 2026",
+      "slug": "co-50-trieu-nen-dau-tu-gi",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/co-50-trieu-nen-dau-tu-gi"
+    },
+    {
+      "title": "Cổ phiếu nào nên mua 2026? Phân tích 5 nhóm ngành tiềm năng",
+      "slug": "co-phieu-nao-nen-mua-2026-phan-tich-nganh",
+      "category_id": "96d5c106-653b-470e-90a7-6875e9a490fd",
+      "url": "/blog/chung-khoan/co-phieu-nao-nen-mua-2026-phan-tich-nganh"
+    },
+    {
+      "title": "Cổ phiếu tăng trưởng vs cổ phiếu giá trị: nên chọn loại nào?",
+      "slug": "co-phieu-tang-truong-vs-gia-tri",
+      "category_id": "96d5c106-653b-470e-90a7-6875e9a490fd",
+      "url": "/blog/chung-khoan/co-phieu-tang-truong-vs-gia-tri"
+    },
+    {
+      "title": "Coupon Rate vs YTM vs Current Yield: phân biệt 3 loại lợi suất trái phiếu",
+      "slug": "coupon-rate-vs-ytm-vs-current-yield",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/coupon-rate-vs-ytm-vs-current-yield"
+    },
+    {
+      "title": "Crowdfunding: Gọi vốn cộng đồng",
+      "slug": "crowdfunding-goi-von-cong-dong",
+      "category_id": "c4270425-5c6e-43af-aa92-aff4caa6d082",
+      "url": "/blog/khoi-nghiep/crowdfunding-goi-von-cong-dong"
+    },
+    {
+      "title": "Đầu tư bất động sản 2026 – Ưu nhược điểm và cách bắt đầu cho người mới",
+      "slug": "dau-tu-bat-dong-san-2026-uu-nhuoc-diem",
+      "category_id": "439e89a0-04db-4c18-a91b-92682428e111",
+      "url": "/blog/bat-dong-san/dau-tu-bat-dong-san-2026-uu-nhuoc-diem"
+    },
+    {
+      "title": "Đầu tư Bitcoin Crypto cho người mới 2026: hướng dẫn chi tiết",
+      "slug": "dau-tu-bitcoin-crypto-cho-nguoi-moi",
+      "category_id": "b7ced1f1-2dc7-47c7-a3bb-36d66c24cae5",
+      "url": "/blog/crypto/dau-tu-bitcoin-crypto-cho-nguoi-moi"
+    },
+    {
+      "title": "Đầu tư chủ động vs bị động: chiến lược nào phù hợp với bạn?",
+      "slug": "dau-tu-chu-dong-vs-bi-dong-chien-luoc",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/dau-tu-chu-dong-vs-bi-dong-chien-luoc"
+    },
+    {
+      "title": "Đầu tư chứng khoán cho người mới bắt đầu 2026: hướng dẫn từ A-Z",
+      "slug": "dau-tu-chung-khoan-cho-nguoi-moi",
+      "category_id": "96d5c106-653b-470e-90a7-6875e9a490fd",
+      "url": "/blog/chung-khoan/dau-tu-chung-khoan-cho-nguoi-moi"
+    },
+    {
+      "title": "Đầu tư cổ phiếu cổ tức: xây dựng thu nhập thụ động bền vững",
+      "slug": "dau-tu-co-phieu-co-tuc-thu-nhap-thu-dong",
+      "category_id": "96d5c106-653b-470e-90a7-6875e9a490fd",
+      "url": "/blog/chung-khoan/dau-tu-co-phieu-co-tuc-thu-nhap-thu-dong"
+    },
+    {
+      "title": "Đầu tư ESG là gì? Xu hướng đầu tư bền vững 2026",
+      "slug": "dau-tu-esg-xu-huong-ben-vung-2026",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/dau-tu-esg-xu-huong-ben-vung-2026"
+    },
+    {
+      "title": "Đầu tư là gì? Hướng dẫn toàn diện cho người mới bắt đầu 2026",
+      "slug": "dau-tu-la-gi-huong-dan-toan-dien",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/dau-tu-la-gi-huong-dan-toan-dien"
+    },
+    {
+      "title": "Đầu tư theo mùa: hiệu ứng January, Sell in May và Halloween",
+      "slug": "dau-tu-theo-mua-hieu-ung-january-sell-may",
+      "category_id": "96d5c106-653b-470e-90a7-6875e9a490fd",
+      "url": "/blog/chung-khoan/dau-tu-theo-mua-hieu-ung-january-sell-may"
+    },
+    {
+      "title": "Đầu tư theo xu hướng AI và công nghệ 2026: cơ hội mới",
+      "slug": "dau-tu-xu-huong-ai-cong-nghe-2026",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/dau-tu-xu-huong-ai-cong-nghe-2026"
+    },
+    {
+      "title": "Đầu tư trái phiếu doanh nghiệp 2026: cơ hội và cảnh báo",
+      "slug": "dau-tu-trai-phieu-doanh-nghiep-2026",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/dau-tu-trai-phieu-doanh-nghiep-2026"
+    },
+    {
+      "title": "Đầu tư vàng cho người mới 2026: SJC, nhẫn trơn hay vàng tài khoản?",
+      "slug": "dau-tu-vang-cho-nguoi-moi-2026-sjc-nhan-tron-vang-tai-khoan",
+      "category_id": "49a89c1c-90dc-4d14-9f06-6efc97aec499",
+      "url": "/blog/vang/dau-tu-vang-cho-nguoi-moi-2026-sjc-nhan-tron-vang-tai-khoan"
+    },
+    {
+      "title": "Đầu tư vàng kênh trú ẩn an toàn 2026: hướng dẫn mua vàng hiệu quả",
+      "slug": "dau-tu-vang-kenh-tru-an-an-toan",
+      "category_id": "49a89c1c-90dc-4d14-9f06-6efc97aec499",
+      "url": "/blog/vang/dau-tu-vang-kenh-tru-an-an-toan"
+    },
+    {
+      "title": "Đầu tư vào bản thân: kênh đầu tư lợi nhuận cao nhất",
+      "slug": "dau-tu-vao-ban-than-kenh-loi-nhuan-cao",
+      "category_id": "0a381b9b-e2af-4762-85d9-b8ff8c231b31",
+      "url": "/blog/tai-chinh-ca-nhan/dau-tu-vao-ban-than-kenh-loi-nhuan-cao"
+    },
+    {
+      "title": "Đầu tư vào quỹ mở tại Việt Nam: so sánh và lựa chọn 2026",
+      "slug": "dau-tu-quy-mo-tai-viet-nam-2026",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/dau-tu-quy-mo-tai-viet-nam-2026"
+    },
+    {
+      "title": "Đầu tư vào thị trường quốc tế từ Việt Nam: hướng dẫn 2026",
+      "slug": "dau-tu-thi-truong-quoc-te-tu-viet-nam-2026",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/dau-tu-thi-truong-quoc-te-tu-viet-nam-2026"
+    },
+    {
+      "title": "DCA là gì? Chiến lược trung bình giá cho nhà đầu tư thông minh",
+      "slug": "dca-la-gi-chien-luoc-trung-binh-gia",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/dca-la-gi-chien-luoc-trung-binh-gia"
+    },
+    {
+      "title": "DeFi là gì? Hướng dẫn tài chính phi tập trung cho người mới 2026",
+      "slug": "defi-la-gi-tai-chinh-phi-tap-trung-2026",
+      "category_id": "b7ced1f1-2dc7-47c7-a3bb-36d66c24cae5",
+      "url": "/blog/crypto/defi-la-gi-tai-chinh-phi-tap-trung-2026"
+    },
+    {
+      "title": "Diamond ETF: đầu tư cổ phiếu chất lượng cao của khối ngoại",
+      "slug": "diamond-etf-co-phieu-chat-luong-cao-khoi-ngoai",
+      "category_id": "96d5c106-653b-470e-90a7-6875e9a490fd",
+      "url": "/blog/chung-khoan/diamond-etf-co-phieu-chat-luong-cao-khoi-ngoai"
+    },
+    {
+      "title": "Duration trái phiếu là gì? Hiểu rủi ro lãi suất trong 5 phút",
+      "slug": "duration-trai-phieu-la-gi-rui-ro-lai-suat",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/duration-trai-phieu-la-gi-rui-ro-lai-suat"
+    },
+    {
+      "title": "ESOP: Cổ phiếu ưu đãi cho nhân viên",
+      "slug": "esop-co-phieu-nhan-vien",
+      "category_id": "c4270425-5c6e-43af-aa92-aff4caa6d082",
+      "url": "/blog/khoi-nghiep/esop-co-phieu-nhan-vien"
+    },
+    {
+      "title": "ETF là gì? Hướng dẫn đầu tư quỹ ETF cho người mới 2026",
+      "slug": "etf-la-gi-huong-dan-dau-tu-quy-etf",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/etf-la-gi-huong-dan-dau-tu-quy-etf"
+    },
+    {
+      "title": "ETF quốc tế: có nên đầu tư S&P 500 từ Việt Nam không?",
+      "slug": "etf-quoc-te-co-nen-dau-tu-sp500-tu-viet-nam",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/etf-quoc-te-co-nen-dau-tu-sp500-tu-viet-nam"
+    },
+    {
+      "title": "ETF vs cổ phiếu vs quỹ mở: người mới nên chọn gì?",
+      "slug": "etf-vs-co-phieu-vs-quy-mo-nguoi-moi-nen-chon",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/etf-vs-co-phieu-vs-quy-mo-nguoi-moi-nen-chon"
+    },
+    {
+      "title": "FIRE Movement: cách nghỉ hưu sớm ở tuổi 40 tại Việt Nam",
+      "slug": "fire-movement-nghi-huu-som-tuoi-40",
+      "category_id": "0a381b9b-e2af-4762-85d9-b8ff8c231b31",
+      "url": "/blog/tai-chinh-ca-nhan/fire-movement-nghi-huu-som-tuoi-40"
+    },
+    {
+      "title": "Forex là gì? Hướng dẫn giao dịch ngoại hối cho người mới 2026",
+      "slug": "forex-la-gi-huong-dan-giao-dich-ngoai-hoi-cho-nguoi-moi",
+      "category_id": "d0457801-0e3c-402b-9846-2a5926fb64c6",
+      "url": "/blog/forex/forex-la-gi-huong-dan-giao-dich-ngoai-hoi-cho-nguoi-moi"
+    },
+    {
+      "title": "Forex vs Crypto: so sánh chi tiết cho nhà đầu tư mới",
+      "slug": "forex-vs-crypto-so-sanh-chi-tiet",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/forex-vs-crypto-so-sanh-chi-tiet"
+    },
+    {
+      "title": "Giá vàng tăng hay giảm 2026? Phân tích 5 yếu tố quyết định",
+      "slug": "gia-vang-tang-hay-giam-2026-phan-tich-5-yeu-to",
+      "category_id": "49a89c1c-90dc-4d14-9f06-6efc97aec499",
+      "url": "/blog/vang/gia-vang-tang-hay-giam-2026-phan-tich-5-yeu-to"
+    },
+    {
+      "title": "Giáo dục tài chính cho con: dạy con về tiền từ nhỏ",
+      "slug": "giao-duc-tai-chinh-cho-con-day-tu-nho",
+      "category_id": "0a381b9b-e2af-4762-85d9-b8ff8c231b31",
+      "url": "/blog/tai-chinh-ca-nhan/giao-duc-tai-chinh-cho-con-day-tu-nho"
+    },
+    {
+      "title": "Hướng dẫn đầu tư ETF cho người mới 2026: bắt đầu từ 1 triệu đồng",
+      "slug": "huong-dan-dau-tu-etf-cho-nguoi-moi-2026",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/huong-dan-dau-tu-etf-cho-nguoi-moi-2026"
+    },
+    {
+      "title": "Hướng dẫn mở tài khoản chứng khoán online 2026 nhanh nhất",
+      "slug": "huong-dan-mo-tai-khoan-chung-khoan-online-2026",
+      "category_id": "96d5c106-653b-470e-90a7-6875e9a490fd",
+      "url": "/blog/chung-khoan/huong-dan-mo-tai-khoan-chung-khoan-online-2026"
+    },
+    {
+      "title": "Kinh nghiệm đầu tư từ Warren Buffett: 10 nguyên tắc vàng bất biến",
+      "slug": "kinh-nghiem-dau-tu-warren-buffett-10-nguyen-tac",
+      "category_id": "ac86a067-5518-42d7-8045-a92a75f4a15f",
+      "url": "/blog/kinh-nghiem/kinh-nghiem-dau-tu-warren-buffett-10-nguyen-tac"
+    },
+    {
+      "title": "Kinh tế vĩ mô ảnh hưởng đầu tư như thế nào? GDP, CPI, PMI",
+      "slug": "kinh-te-vi-mo-anh-huong-dau-tu",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/kinh-te-vi-mo-anh-huong-dau-tu"
+    },
+    {
+      "title": "Lãi kép là gì? Sức mạnh kỳ diệu của lãi kép trong đầu tư",
+      "slug": "lai-kep-la-gi-suc-manh-lai-kep-dau-tu",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/lai-kep-la-gi-suc-manh-lai-kep-dau-tu"
+    },
+    {
+      "title": "Lãi kép là gì? Sức mạnh tăng trưởng theo cấp số nhân ai cũng cần biết",
+      "slug": "lai-kep-la-gi-suc-manh-tang-truong-cap-so-nhan",
+      "category_id": "0a381b9b-e2af-4762-85d9-b8ff8c231b31",
+      "url": "/blog/tai-chinh-ca-nhan/lai-kep-la-gi-suc-manh-tang-truong-cap-so-nhan"
+    },
+    {
+      "title": "Lãi suất ngân hàng 2026: so sánh và cách gửi tiền tối ưu",
+      "slug": "lai-suat-ngan-hang-2026-so-sanh",
+      "category_id": "0a381b9b-e2af-4762-85d9-b8ff8c231b31",
+      "url": "/blog/tai-chinh-ca-nhan/lai-suat-ngan-hang-2026-so-sanh"
+    },
+    {
+      "title": "Lạm phát là gì? Tác động và cách bảo vệ tài sản 2026",
+      "slug": "lam-phat-la-gi-tac-dong-bao-ve-tai-san",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/lam-phat-la-gi-tac-dong-bao-ve-tai-san"
+    },
+    {
+      "title": "Margin là gì? Đòn bẩy chứng khoán – cơ hội hay bẫy tài chính?",
+      "slug": "margin-la-gi-don-bay-chung-khoan",
+      "category_id": "96d5c106-653b-470e-90a7-6875e9a490fd",
+      "url": "/blog/chung-khoan/margin-la-gi-don-bay-chung-khoan"
+    },
+    {
+      "title": "Mở tài khoản chứng khoán online 2026: so sánh 5 công ty tốt nhất",
+      "slug": "mo-tai-khoan-chung-khoan-online-2026-so-sanh",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/mo-tai-khoan-chung-khoan-online-2026-so-sanh"
+    },
+    {
+      "title": "Mua nhà hay thuê nhà 2026: phân tích chi tiết giúp bạn quyết định",
+      "slug": "mua-nha-hay-thue-nha-2026-phan-tich-chi-tiet",
+      "category_id": "439e89a0-04db-4c18-a91b-92682428e111",
+      "url": "/blog/bat-dong-san/mua-nha-hay-thue-nha-2026-phan-tich-chi-tiet"
+    },
+    {
+      "title": "Mua vàng ở đâu rẻ nhất? So sánh giá tiệm vàng, ngân hàng và online",
+      "slug": "mua-vang-o-dau-re-nhat-so-sanh-gia-2026",
+      "category_id": "49a89c1c-90dc-4d14-9f06-6efc97aec499",
+      "url": "/blog/vang/mua-vang-o-dau-re-nhat-so-sanh-gia-2026"
+    },
+    {
+      "title": "Nên đầu tư gì năm 2026? So sánh 5 kênh đầu tư phổ biến nhất",
+      "slug": "nen-dau-tu-gi-nam-2026-so-sanh-cac-kenh",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/nen-dau-tu-gi-nam-2026-so-sanh-cac-kenh"
+    },
+    {
+      "title": "P2P Lending là gì? Cơ hội và rủi ro khi cho vay ngang hàng",
+      "slug": "p2p-lending-la-gi-co-hoi-rui-ro",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/p2p-lending-la-gi-co-hoi-rui-ro"
+    },
+    {
+      "title": "Phân bổ tài sản cho người mới: quy tắc 60/30/10 dễ áp dụng",
+      "slug": "phan-bo-tai-san-cho-nguoi-moi-quy-tac-60-30-10",
+      "category_id": "0a381b9b-e2af-4762-85d9-b8ff8c231b31",
+      "url": "/blog/tai-chinh-ca-nhan/phan-bo-tai-san-cho-nguoi-moi-quy-tac-60-30-10"
+    },
+    {
+      "title": "Phân bổ tài sản theo độ tuổi: quy tắc vàng cho nhà đầu tư",
+      "slug": "phan-bo-tai-san-theo-do-tuoi-quy-tac",
+      "category_id": "0a381b9b-e2af-4762-85d9-b8ff8c231b31",
+      "url": "/blog/tai-chinh-ca-nhan/phan-bo-tai-san-theo-do-tuoi-quy-tac"
+    },
+    {
+      "title": "Phân tích kỹ thuật chứng khoán cho người mới 2026: hướng dẫn đầy đủ",
+      "slug": "phan-tich-ky-thuat-chung-khoan",
+      "category_id": "96d5c106-653b-470e-90a7-6875e9a490fd",
+      "url": "/blog/chung-khoan/phan-tich-ky-thuat-chung-khoan"
+    },
+    {
+      "title": "Phân tích kỹ thuật Forex cơ bản: 5 mô hình nến mọi trader cần biết",
+      "slug": "phan-tich-ky-thuat-forex-5-mo-hinh-nen-co-ban",
+      "category_id": "d0457801-0e3c-402b-9846-2a5926fb64c6",
+      "url": "/blog/forex/phan-tich-ky-thuat-forex-5-mo-hinh-nen-co-ban"
+    },
+    {
+      "title": "Quản lý rủi ro danh mục đầu tư: bảo vệ tài sản hiệu quả",
+      "slug": "quan-ly-rui-ro-danh-muc-dau-tu-hieu-qua",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/quan-ly-rui-ro-danh-muc-dau-tu-hieu-qua"
+    },
+    {
+      "title": "Quản lý vốn Forex: quy tắc 2% giúp bạn sống sót trên thị trường",
+      "slug": "quan-ly-von-forex-quy-tac-2-phan-tram",
+      "category_id": "d0457801-0e3c-402b-9846-2a5926fb64c6",
+      "url": "/blog/forex/quan-ly-von-forex-quy-tac-2-phan-tram"
+    },
+    {
+      "title": "Quỹ khẩn cấp: tại sao cần xây dựng và cách tích lũy hiệu quả",
+      "slug": "quy-khan-cap-tai-sao-can-xay-dung",
+      "category_id": "0a381b9b-e2af-4762-85d9-b8ff8c231b31",
+      "url": "/blog/tai-chinh-ca-nhan/quy-khan-cap-tai-sao-can-xay-dung"
+    },
+    {
+      "title": "Quy tắc 50/30/20 – Phương pháp quản lý tài chính cá nhân đơn giản nhất",
+      "slug": "quy-tac-50-30-20-quan-ly-tai-chinh-ca-nhan",
+      "category_id": "0a381b9b-e2af-4762-85d9-b8ff8c231b31",
+      "url": "/blog/tai-chinh-ca-nhan/quy-tac-50-30-20-quan-ly-tai-chinh-ca-nhan"
+    },
+    {
+      "title": "REITs là gì? Cách đầu tư bất động sản không cần vốn lớn",
+      "slug": "reits-la-gi-dau-tu-bat-dong-san-von-nho",
+      "category_id": "439e89a0-04db-4c18-a91b-92682428e111",
+      "url": "/blog/bat-dong-san/reits-la-gi-dau-tu-bat-dong-san-von-nho"
+    },
+    {
+      "title": "Rủi ro đầu tư Crypto và cách phòng tránh 2026: hướng dẫn chi tiết",
+      "slug": "rui-ro-dau-tu-crypto-cach-phong-tranh",
+      "category_id": "b7ced1f1-2dc7-47c7-a3bb-36d66c24cae5",
+      "url": "/blog/crypto/rui-ro-dau-tu-crypto-cach-phong-tranh"
+    },
+    {
+      "title": "Rủi ro khi đầu tư vào startup",
+      "slug": "rui-ro-dau-tu-startup",
+      "category_id": "c4270425-5c6e-43af-aa92-aff4caa6d082",
+      "url": "/blog/khoi-nghiep/rui-ro-dau-tu-startup"
+    },
+    {
+      "title": "Rủi ro lãi suất khi đầu tư trái phiếu: 4 cách phòng tránh hiệu quả",
+      "slug": "rui-ro-lai-suat-dau-tu-trai-phieu-cach-phong-tranh",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/rui-ro-lai-suat-dau-tu-trai-phieu-cach-phong-tranh"
+    },
+    {
+      "title": "So sánh gửi tiết kiệm vs đầu tư – Nên chọn gì năm 2026?",
+      "slug": "so-sanh-gui-tiet-kiem-vs-dau-tu-2026",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/so-sanh-gui-tiet-kiem-vs-dau-tu-2026"
+    },
+    {
+      "title": "So sánh kênh đầu tư phổ biến 2026: chứng khoán, vàng, Crypto, BĐS",
+      "slug": "so-sanh-kenh-dau-tu-pho-bien",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/so-sanh-kenh-dau-tu-pho-bien"
+    },
+    {
+      "title": "So sánh phí quản lý các quỹ ETF Việt Nam 2026: quỹ nào rẻ nhất?",
+      "slug": "so-sanh-phi-quan-ly-cac-quy-etf-viet-nam-2026",
+      "category_id": "96d5c106-653b-470e-90a7-6875e9a490fd",
+      "url": "/blog/chung-khoan/so-sanh-phi-quan-ly-cac-quy-etf-viet-nam-2026"
+    },
+    {
+      "title": "Stablecoin là gì? USDT, USDC và vai trò trong đầu tư Crypto",
+      "slug": "stablecoin-la-gi-usdt-usdc-vai-tro",
+      "category_id": "b7ced1f1-2dc7-47c7-a3bb-36d66c24cae5",
+      "url": "/blog/crypto/stablecoin-la-gi-usdt-usdc-vai-tro"
+    },
+    {
+      "title": "Tài khoản demo: cách luyện tập giao dịch không tốn tiền thật",
+      "slug": "tai-khoan-demo-luyen-tap-giao-dich",
+      "category_id": "96d5c106-653b-470e-90a7-6875e9a490fd",
+      "url": "/blog/chung-khoan/tai-khoan-demo-luyen-tap-giao-dich"
+    },
+    {
+      "title": "Tâm lý đám đông trong đầu tư: nhận diện và tránh bẫy",
+      "slug": "tam-ly-dam-dong-trong-dau-tu-tranh-bay",
+      "category_id": "ac86a067-5518-42d7-8045-a92a75f4a15f",
+      "url": "/blog/kinh-nghiem/tam-ly-dam-dong-trong-dau-tu-tranh-bay"
+    },
+    {
+      "title": "Tâm lý giao dịch: 7 sai lầm cảm xúc khiến nhà đầu tư thua lỗ",
+      "slug": "tam-ly-giao-dich-sai-lam-cam-xuc",
+      "category_id": "ac86a067-5518-42d7-8045-a92a75f4a15f",
+      "url": "/blog/kinh-nghiem/tam-ly-giao-dich-sai-lam-cam-xuc"
+    },
+    {
+      "title": "Thói quen tài chính tốt cần rèn luyện",
+      "slug": "thoi-quen-tai-chinh",
+      "category_id": "0a381b9b-e2af-4762-85d9-b8ff8c231b31",
+      "url": "/blog/tai-chinh-ca-nhan/thoi-quen-tai-chinh"
+    },
+    {
+      "title": "Thuế đầu tư tại Việt Nam 2026: hướng dẫn đầy đủ cho nhà đầu tư",
+      "slug": "thue-dau-tu-viet-nam-2026-huong-dan",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/thue-dau-tu-viet-nam-2026-huong-dan"
+    },
+    {
+      "title": "Tổng kết chiến lược đầu tư tháng 3/2026: cơ hội và rủi ro",
+      "slug": "tong-ket-chien-luoc-dau-tu-thang-3-2026",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/tong-ket-chien-luoc-dau-tu-thang-3-2026"
+    },
+    {
+      "title": "Top 10 app đầu tư chứng khoán tốt nhất 2026 cho người Việt",
+      "slug": "top-app-dau-tu-chung-khoan-tot-nhat-2026",
+      "category_id": "96d5c106-653b-470e-90a7-6875e9a490fd",
+      "url": "/blog/chung-khoan/top-app-dau-tu-chung-khoan-tot-nhat-2026"
+    },
+    {
+      "title": "Top 10 kênh đầu tư phổ biến Việt Nam 2026: xếp hạng và so sánh",
+      "slug": "top-10-kenh-dau-tu-pho-bien-viet-nam-2026",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/top-10-kenh-dau-tu-pho-bien-viet-nam-2026"
+    },
+    {
+      "title": "Top 5 quỹ ETF tốt nhất Việt Nam 2026: so sánh chi tiết phí, lợi suất và cách mua",
+      "slug": "top-5-quy-etf-tot-nhat-viet-nam-2026",
+      "category_id": "96d5c106-653b-470e-90a7-6875e9a490fd",
+      "url": "/blog/chung-khoan/top-5-quy-etf-tot-nhat-viet-nam-2026"
+    },
+    {
+      "title": "Top 5 sai lầm phổ biến nhất khi đầu tư chứng khoán – Bạn đang mắc phải?",
+      "slug": "top-5-sai-lam-dau-tu-chung-khoan",
+      "category_id": "96d5c106-653b-470e-90a7-6875e9a490fd",
+      "url": "/blog/chung-khoan/top-5-sai-lam-dau-tu-chung-khoan"
+    },
+    {
+      "title": "Trái phiếu chính phủ vs doanh nghiệp: nên chọn loại nào?",
+      "slug": "trai-phieu-chinh-phu-vs-doanh-nghiep-nen-chon-loai-nao",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/trai-phieu-chinh-phu-vs-doanh-nghiep-nen-chon-loai-nao"
+    },
+    {
+      "title": "Trái phiếu là gì? Hướng dẫn cho người mới",
+      "slug": "trai-phieu-la-gi-huong-dan",
+      "category_id": "67a36bba-0fa3-491d-96c0-a69b7efb5845",
+      "url": "/blog/trai-phieu/trai-phieu-la-gi-huong-dan"
+    },
+    {
+      "title": "Vàng vs bất động sản vs chứng khoán: kênh nào sinh lời nhất 10 năm qua?",
+      "slug": "vang-vs-bat-dong-san-vs-chung-khoan-kenh-nao-sinh-loi-nhat",
+      "category_id": "49a89c1c-90dc-4d14-9f06-6efc97aec499",
+      "url": "/blog/vang/vang-vs-bat-dong-san-vs-chung-khoan-kenh-nao-sinh-loi-nhat"
+    },
+    {
+      "title": "Vàng vs USD: kênh nào phòng hộ rủi ro tốt hơn?",
+      "slug": "vang-vs-usd-kenh-phong-ho-rui-ro",
+      "category_id": "49a89c1c-90dc-4d14-9f06-6efc97aec499",
+      "url": "/blog/vang/vang-vs-usd-kenh-phong-ho-rui-ro"
+    },
+    {
+      "title": "VN30 ETF là gì? Đánh giá chi tiết quỹ ETF lớn nhất Việt Nam 2026",
+      "slug": "vn30-etf-danh-gia-chi-tiet-2026",
+      "category_id": "96d5c106-653b-470e-90a7-6875e9a490fd",
+      "url": "/blog/chung-khoan/vn30-etf-danh-gia-chi-tiet-2026"
+    },
+    {
+      "title": "VN30 gồm những mã nào? Danh sách cập nhật 2026 và cách đầu tư",
+      "slug": "vn30-gom-nhung-ma-nao-danh-sach-2026",
+      "category_id": "96d5c106-653b-470e-90a7-6875e9a490fd",
+      "url": "/blog/chung-khoan/vn30-gom-nhung-ma-nao-danh-sach-2026"
+    },
+    {
+      "title": "VNFIN Lead ETF: cơ hội đầu tư ngành tài chính ngân hàng 2026",
+      "slug": "vnfin-lead-etf-co-hoi-dau-tu-nganh-tai-chinh",
+      "category_id": "96d5c106-653b-470e-90a7-6875e9a490fd",
+      "url": "/blog/chung-khoan/vnfin-lead-etf-co-hoi-dau-tu-nganh-tai-chinh"
+    },
+    {
+      "title": "Xây dựng danh mục đầu tư đa dạng hóa 2026: nguyên tắc và mẫu thực tế",
+      "slug": "xay-dung-danh-muc-dau-tu-da-dang-hoa",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/xay-dung-danh-muc-dau-tu-da-dang-hoa"
+    },
+    {
+      "title": "Xếp hạng tín nhiệm trái phiếu: hiểu rating từ AAA đến D",
+      "slug": "xep-hang-tin-nhiem-trai-phieu-rating-aaa-den-d",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/xep-hang-tin-nhiem-trai-phieu-rating-aaa-den-d"
+    },
+    {
+      "title": "Xu hướng giá vàng 2026 và chiến lược đầu tư vàng hiệu quả",
+      "slug": "xu-huong-gia-vang-chien-luoc-dau-tu",
+      "category_id": "49a89c1c-90dc-4d14-9f06-6efc97aec499",
+      "url": "/blog/vang/xu-huong-gia-vang-chien-luoc-dau-tu"
+    },
+    {
+      "title": "YTM là gì? Cách tính Yield to Maturity trái phiếu chính xác nhất",
+      "slug": "ytm-la-gi-cach-tinh-yield-to-maturity",
+      "category_id": "31d10229-9735-4f69-a368-08ea7f0550a1",
+      "url": "/blog/kien-thuc-dau-tu/ytm-la-gi-cach-tinh-yield-to-maturity"
+    }
+  ],
+  "placeholder_posts": [
+    {
+      "id": "40056e16-110a-4e8c-8b6b-2bea7865d438",
+      "title": "Rủi ro khi đầu tư vào startup",
+      "slug": "rui-ro-dau-tu-startup",
+      "category_id": "c4270425-5c6e-43af-aa92-aff4caa6d082",
+      "category": "Khởi nghiệp",
+      "content": "Hầu hết startup thất bại, nên đầu tư startup cần đa dạng hóa và chấp nhận mất vốn. Bài viết phân tích các rủi ro chính.",
+      "excerpt": "Những rủi ro thường gặp và cách giảm thiểu.",
+      "featured_image": null,
+      "focus_keyword": null
+    },
+    {
+      "id": "abf9bc08-e42d-46ca-9261-b6b3c71f339e",
+      "title": "Trái phiếu là gì? Hướng dẫn cho người mới",
+      "slug": "trai-phieu-la-gi-huong-dan",
+      "category_id": "67a36bba-0fa3-491d-96c0-a69b7efb5845",
+      "category": "Trái phiếu",
+      "content": "Trái phiếu là công cụ nợ cho phép nhà đầu tư cho vay tiền và nhận lãi định kỳ. Đây là kênh đầu tư an toàn hơn cổ phiếu.",
+      "excerpt": "Tìm hiểu về trái phiếu và cách đầu tư.",
+      "featured_image": null,
+      "focus_keyword": null
+    },
+    {
+      "id": "2c33faa3-7404-4cb4-9062-796189d5e895",
+      "title": "Thói quen tài chính tốt cần rèn luyện",
+      "slug": "thoi-quen-tai-chinh",
+      "category_id": "0a381b9b-e2af-4762-85d9-b8ff8c231b31",
+      "category": "Tài chính cá nhân",
+      "content": "Theo dõi chi tiêu, tự động hóa tiết kiệm, tránh nợ xấu là những thói quen quan trọng giúp xây dựng nền tảng tài chính vững chắc.",
+      "excerpt": "Những thói quen giúp cải thiện sức khỏe tài chính.",
+      "featured_image": null,
+      "focus_keyword": null
+    },
+    {
+      "id": "74624155-6854-443d-82d2-ee4609a48f5f",
+      "title": "Cách đánh giá startup trước khi đầu tư",
+      "slug": "danh-gia-startup-truoc-dau-tu",
+      "category_id": "c4270425-5c6e-43af-aa92-aff4caa6d082",
+      "category": "Khởi nghiệp",
+      "content": "Đầu tư startup rủi ro cao nhưng có thể sinh lời lớn. Bài viết hướng dẫn đánh giá team, sản phẩm, thị trường và mô hình kinh doanh.",
+      "excerpt": "Các tiêu chí đánh giá tiềm năng startup.",
+      "featured_image": null,
+      "focus_keyword": null
+    },
+    {
+      "id": "c6d6ac38-166c-41fc-93dd-c7118d9e526f",
+      "title": "Angel Investing: Đầu tư vào startup giai đoạn sớm",
+      "slug": "angel-investing-la-gi",
+      "category_id": "c4270425-5c6e-43af-aa92-aff4caa6d082",
+      "category": "Khởi nghiệp",
+      "content": "Angel investor là những người đầu tư vốn vào startup ở giai đoạn sớm. Bài viết giới thiệu cách tiếp cận và đánh giá cơ hội đầu tư startup.",
+      "excerpt": "Tìm hiểu về đầu tư thiên thần và cơ hội.",
+      "featured_image": null,
+      "focus_keyword": null
+    },
+    {
+      "id": "4e1c2530-491a-4474-b2bf-661a81717cb4",
+      "title": "Crowdfunding: Gọi vốn cộng đồng",
+      "slug": "crowdfunding-goi-von-cong-dong",
+      "category_id": "c4270425-5c6e-43af-aa92-aff4caa6d082",
+      "category": "Khởi nghiệp",
+      "content": "Crowdfunding cho phép nhiều người đầu tư số tiền nhỏ vào dự án hoặc startup. Bài viết giới thiệu các nền tảng và cách đánh giá dự án.",
+      "excerpt": "Các nền tảng crowdfunding và cơ hội đầu tư.",
+      "featured_image": null,
+      "focus_keyword": null
+    },
+    {
+      "id": "96767a6f-316a-4c13-9e0b-dd0d9ceaae1f",
+      "title": "ESOP: Cổ phiếu ưu đãi cho nhân viên",
+      "slug": "esop-co-phieu-nhan-vien",
+      "category_id": "c4270425-5c6e-43af-aa92-aff4caa6d082",
+      "category": "Khởi nghiệp",
+      "content": "ESOP là chương trình cho nhân viên mua cổ phiếu công ty với giá ưu đãi. Đây là cơ hội làm giàu nếu công ty phát triển tốt.",
+      "excerpt": "Hiểu về Employee Stock Option Plan.",
+      "featured_image": null,
+      "focus_keyword": null
+    }
+  ]
+}
