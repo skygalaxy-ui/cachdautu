@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
+import SafeImage from "@/components/SafeImage";
 import { notFound } from "next/navigation";
 import { Calendar, Clock, ArrowLeft, BookOpen, Mail, ChevronRight, ArrowRight, Sparkles, ArrowUpRight, Link as LinkIcon, Info, AlertTriangle, Lightbulb, MessageCircle, Zap, Star, Users } from "lucide-react";
 import { supabase, publishedFilter } from "@/core/supabase";
@@ -77,8 +77,8 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
                 height: 630,
                 alt: imageAlt
             }] : [],
-            publishedTime: post.created_at,
-            modifiedTime: post.updated_at || post.created_at,
+            publishedTime: post.scheduled_at || post.created_at,
+            modifiedTime: post.updated_at || post.scheduled_at || post.created_at,
         },
         twitter: {
             card: "summary_large_image",
@@ -326,8 +326,8 @@ export default async function PostPage({ params }: PostPageProps) {
         headline: post.title,
         description: post.meta_description || post.excerpt,
         image: post.featured_image,
-        datePublished: post.created_at,
-        dateModified: post.updated_at || post.created_at,
+        datePublished: post.scheduled_at || post.created_at,
+        dateModified: post.updated_at || post.scheduled_at || post.created_at,
         wordCount: post.content?.split(/\s+/).length || 0,
         articleSection: post.categories?.name || "Đầu tư",
         keywords: post.tags?.join(", ") || "",
@@ -444,8 +444,8 @@ export default async function PostPage({ params }: PostPageProps) {
                                 <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-xs sm:text-sm text-text-muted">
                                     <span className="flex items-center gap-1.5">
                                         <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                                        <time dateTime={post.created_at}>
-                                            {new Date(post.created_at).toLocaleDateString('vi-VN', {
+                                        <time dateTime={post.scheduled_at || post.created_at}>
+                                            {new Date(post.scheduled_at || post.created_at).toLocaleDateString('vi-VN', {
                                                 year: 'numeric', month: 'short', day: 'numeric'
                                             })}
                                         </time>
@@ -460,11 +460,12 @@ export default async function PostPage({ params }: PostPageProps) {
                             {/* Featured Image */}
                             <div className="w-full aspect-video rounded-3xl mb-8 sm:mb-10 bg-gradient-to-br from-purple-900/30 to-pink-900/30 flex items-center justify-center border border-white/[0.06] overflow-hidden relative">
                                 {post.featured_image ? (
-                                    <Image
+                                    <SafeImage
                                         src={post.featured_image}
                                         alt={post.featured_image_alt || post.title}
                                         fill
                                         priority
+                                        categorySlug={post.categories?.slug}
                                         className="object-cover"
                                         sizes="(max-width: 768px) 100vw, 800px"
                                     />
@@ -608,10 +609,11 @@ export default async function PostPage({ params }: PostPageProps) {
                                     >
                                         <div className="aspect-video bg-gradient-to-br from-purple-900/30 to-pink-900/30 relative overflow-hidden">
                                             {p.featured_image ? (
-                                                <Image
+                                                <SafeImage
                                                     src={p.featured_image}
                                                     alt={p.title}
                                                     fill
+                                                    categorySlug={p.categories?.slug}
                                                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                                                     sizes="(max-width: 768px) 100vw, 400px"
                                                 />

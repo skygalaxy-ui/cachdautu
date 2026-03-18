@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { BookOpen, Clock, ArrowRight, Sparkles, ArrowUpRight } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
 import { publishedFilter } from "@/lib/supabase";
-import Image from "next/image";
+import SafeImage from "@/components/SafeImage";
 
 // ISR: cache tĩnh, tự cập nhật mỗi 5 phút
 export const revalidate = 300;
@@ -50,7 +50,7 @@ async function getPostsByCategory(categoryId: string) {
             .select('*, categories(name, slug)')
             .eq('category_id', categoryId)
             .or(publishedFilter())
-            .order('created_at', { ascending: false });
+            .order('scheduled_at', { ascending: false, nullsFirst: false });
 
         console.log('[CategoryPage] getPostsByCategory:', {
             categoryId,
@@ -153,10 +153,11 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                             >
                                 <div className="aspect-video bg-gradient-to-br from-purple-900/30 to-pink-900/30 relative overflow-hidden">
                                     {post.featured_image ? (
-                                        <Image
+                                        <SafeImage
                                             src={post.featured_image}
                                             alt={post.title}
                                             fill
+                                            categorySlug={post.categories?.slug}
                                             className="object-cover group-hover:scale-105 transition-transform duration-500"
                                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                         />

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import SafeImage from "@/components/SafeImage";
 import { ArrowRight, Clock, ArrowUpRight } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
 import { publishedFilter } from "@/lib/supabase";
@@ -47,9 +47,9 @@ export default function FeaturedPosts() {
         async function fetchPosts() {
             const { data } = await supabase
                 .from('posts')
-                .select('id, title, slug, excerpt, featured_image, reading_time, created_at, tags, categories(name, slug)')
+                .select('id, title, slug, excerpt, featured_image, reading_time, created_at, scheduled_at, tags, categories(name, slug)')
                 .or(publishedFilter())
-                .order('created_at', { ascending: false })
+                .order('scheduled_at', { ascending: false, nullsFirst: false })
                 .limit(3);
 
             if (data) {
@@ -59,7 +59,7 @@ export default function FeaturedPosts() {
                     excerpt: post.excerpt || '',
                     image: post.featured_image || '',
                     readingTime: post.reading_time || '5 phút',
-                    date: post.created_at,
+                    date: post.scheduled_at || post.created_at,
                     category: post.categories?.slug || ((post.tags && post.tags[0]) ? post.tags[0].toLowerCase().replace(/\s+/g, '-') : 'kien-thuc'),
                 })));
             }
@@ -97,10 +97,11 @@ export default function FeaturedPosts() {
                         <Link key={post.slug} href={`/blog/${post.category}/${post.slug}`} className="group block" role="listitem">
                             <article className="bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.06] rounded-2xl sm:rounded-3xl overflow-hidden hover:border-purple-500/30 hover:shadow-glow-purple transition-all duration-500 h-full flex flex-col">
                                 <div className="h-36 sm:h-44 lg:h-48 bg-gradient-to-br from-purple-900/30 to-pink-900/30 relative overflow-hidden">
-                                    <Image
+                                    <SafeImage
                                         src={post.image || getCategoryImage(post.category)}
                                         alt={post.title}
                                         fill
+                                        categorySlug={post.category}
                                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                     />

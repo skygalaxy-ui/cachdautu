@@ -13,7 +13,7 @@ async function getFeaturedPosts() {
         .from('posts')
         .select('*, categories(name, slug)')
         .or(publishedFilter())
-        .order('created_at', { ascending: false })
+        .order('scheduled_at', { ascending: false, nullsFirst: false })
         .limit(3);
     return data || [];
 }
