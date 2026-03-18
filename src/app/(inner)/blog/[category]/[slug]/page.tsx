@@ -35,6 +35,22 @@ async function getPost(slug: string) {
     }
 }
 
+async function getArticleSettings() {
+    try {
+        const { data } = await supabase
+            .from('site_settings')
+            .select('key, value');
+        if (!data) return null;
+        const settings: Record<string, string> = {};
+        data.forEach((row: { key: string; value: string }) => {
+            settings[row.key] = row.value;
+        });
+        return settings;
+    } catch {
+        return null;
+    }
+}
+
 async function getRelatedPosts(categoryId: string, currentSlug: string) {
     try {
         const { data } = await supabase
@@ -99,8 +115,23 @@ export default async function PostPage({ params }: PostPageProps) {
 
     if (!post) notFound();
 
-    const relatedPosts = post.category_id ? await getRelatedPosts(post.category_id, slug) : [];
+    const [relatedPosts, articleSettings] = await Promise.all([
+        post.category_id ? getRelatedPosts(post.category_id, slug) : [],
+        getArticleSettings(),
+    ]);
     const postUrl = `https://cachdautu.com/blog/${category}/${slug}`;
+
+    // Build CSS custom properties from article settings
+    const articleStyle: Record<string, string> = {};
+    if (articleSettings) {
+        if (articleSettings.article_heading_font) articleStyle['--article-heading-font'] = articleSettings.article_heading_font + ', sans-serif';
+        if (articleSettings.article_heading_weight) articleStyle['--article-heading-weight'] = articleSettings.article_heading_weight;
+        if (articleSettings.article_body_font) articleStyle['--article-body-font'] = articleSettings.article_body_font + ', sans-serif';
+        if (articleSettings.article_body_weight) articleStyle['--article-body-weight'] = articleSettings.article_body_weight;
+        if (articleSettings.article_h2_size) articleStyle['--article-h2-size'] = articleSettings.article_h2_size + 'rem';
+        if (articleSettings.article_h3_size) articleStyle['--article-h3-size'] = articleSettings.article_h3_size + 'rem';
+        if (articleSettings.article_body_size) articleStyle['--article-body-size'] = articleSettings.article_body_size + 'rem';
+    }
 
     // Detect if content is HTML or Markdown and render accordingly
     function renderContent(content: string) {
@@ -125,6 +156,7 @@ export default async function PostPage({ params }: PostPageProps) {
             return (
                 <div
                     className="article-html-content"
+                    style={articleStyle as React.CSSProperties}
                     dangerouslySetInnerHTML={{ __html: contentWithIds }}
                 />
             );

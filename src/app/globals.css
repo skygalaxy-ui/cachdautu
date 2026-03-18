@@ -436,12 +436,15 @@ body {
 .article-html-content {
   color: #E6F1FF;
   line-height: 1.8;
-  font-size: 1rem;
+  font-size: var(--article-body-size, 1rem);
+  font-family: var(--article-body-font, 'Inter', sans-serif);
+  font-weight: var(--article-body-weight, 400);
 }
 
 .article-html-content h2 {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: var(--article-h2-size, 1.5rem);
+  font-weight: var(--article-heading-weight, 700);
+  font-family: var(--article-heading-font, 'Inter', sans-serif);
   color: #E6F1FF;
   margin-top: 2.5rem;
   margin-bottom: 1.25rem;
@@ -472,8 +475,9 @@ body {
 }
 
 .article-html-content h3 {
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: var(--article-h3-size, 1.25rem);
+  font-weight: var(--article-heading-weight, 700);
+  font-family: var(--article-heading-font, 'Inter', sans-serif);
   color: #E6F1FF;
   margin-top: 2rem;
   margin-bottom: 1rem;
