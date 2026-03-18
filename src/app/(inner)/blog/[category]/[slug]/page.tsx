@@ -297,17 +297,32 @@ export default async function PostPage({ params }: PostPageProps) {
     // Extract FAQ data from content
     const faqItems: { question: string; answer: string }[] = [];
     if (post.content) {
-        // Method 1: Explicit FAQ/Câu hỏi section with H3s
-        const faqMatch = post.content.match(/##\s*(?:FAQ|Câu hỏi thường gặp)[\s\S]*?(?=##\s|$)/i);
-        if (faqMatch) {
-            const qaPairs = faqMatch[0].matchAll(/###\s*(.+?)\n([\s\S]*?)(?=###|$)/g);
+        // Method 1: HTML FAQ section — <h2>Câu hỏi thường gặp</h2> followed by <h3>Q</h3><p>A</p> pairs
+        const htmlFaqMatch = post.content.match(/<h2[^>]*>(?:FAQ|Câu hỏi thường gặp[^<]*)<\/h2>([\s\S]*?)(?=<h2[^>]*>(?!.*thường gặp)|$)/i);
+        if (htmlFaqMatch) {
+            const faqSection = htmlFaqMatch[1];
+            const qaPairs = faqSection.matchAll(/<h3[^>]*>([\s\S]*?)<\/h3>\s*<p>([\s\S]*?)<\/p>/gi);
             for (const match of qaPairs) {
-                faqItems.push({ question: match[1].trim(), answer: match[2].trim() });
+                const question = match[1].replace(/<[^>]*>/g, '').replace(/&amp;/g, '&').replace(/&quot;/g, '"').trim();
+                const answer = match[1] && match[2] ? match[2].replace(/<[^>]*>/g, '').replace(/&amp;/g, '&').replace(/&quot;/g, '"').trim() : '';
+                if (question.length > 5 && answer.length > 20) {
+                    faqItems.push({ question, answer });
+                }
             }
         }
-        // Method 2: Auto-detect H2 headings that are questions (end with ?)
+        // Method 2: Markdown FAQ section with ### headings
         if (faqItems.length === 0) {
-            const questionPattern = /<h2[^>]*>([^<]*\?)<\/h2>\s*<p>([^<]+)<\/p>/gi;
+            const mdFaqMatch = post.content.match(/##\s*(?:FAQ|Câu hỏi thường gặp)[\s\S]*?(?=##\s|$)/i);
+            if (mdFaqMatch) {
+                const qaPairs = mdFaqMatch[0].matchAll(/###\s*(.+?)\n([\s\S]*?)(?=###|$)/g);
+                for (const match of qaPairs) {
+                    faqItems.push({ question: match[1].trim(), answer: match[2].trim() });
+                }
+            }
+        }
+        // Method 3: Auto-detect H3 headings that are questions (end with ?) anywhere in content
+        if (faqItems.length === 0) {
+            const questionPattern = /<h3[^>]*>([^<]*\?)<\/h3>\s*<p>([\s\S]*?)<\/p>/gi;
             const matches = post.content.matchAll(questionPattern);
             for (const match of matches) {
                 const question = match[1].replace(/&amp;/g, '&').replace(/&quot;/g, '"').trim();
