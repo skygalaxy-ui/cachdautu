@@ -59,12 +59,18 @@ export default function SettingsPage() {
     // Load settings from Supabase
     useEffect(() => {
         async function loadSettings() {
-            const { data } = await supabase.from("site_settings").select("*");
-            if (data && data.length > 0) {
+            // Try RPC first, fallback to direct table
+            let rows: { key: string; value: string }[] = [];
+            const { data: rpcData } = await supabase.rpc("get_site_settings");
+            if (rpcData && rpcData.length > 0) {
+                rows = rpcData;
+            } else {
+                const { data } = await supabase.from("site_settings").select("*");
+                if (data) rows = data;
+            }
+            if (rows.length > 0) {
                 const mapped: Record<string, string> = {};
-                data.forEach((row: { key: string; value: string }) => {
-                    mapped[row.key] = row.value;
-                });
+                rows.forEach((row) => { mapped[row.key] = row.value; });
                 setArticleSettings(prev => ({ ...prev, ...mapped }));
             }
         }
@@ -74,18 +80,18 @@ export default function SettingsPage() {
     async function handleSave() {
         setSaving(true);
 
-        // Save article settings to Supabase
-        const updates = Object.entries(articleSettings).map(([key, value]) => ({
-            key,
-            value,
-            updated_at: new Date().toISOString(),
-        }));
+        // Save each setting via RPC function
+        let hasError = false;
+        for (const [key, value] of Object.entries(articleSettings)) {
+            const { error } = await supabase.rpc("upsert_site_setting", { p_key: key, p_value: value });
+            if (error) {
+                console.error("Save error:", error);
+                hasError = true;
+            }
+        }
 
-        const { error } = await supabase.from("site_settings").upsert(updates, { onConflict: "key" });
-
-        if (error) {
-            console.error("Save error:", error);
-            alert("Lỗi lưu: " + error.message);
+        if (hasError) {
+            alert("Có lỗi khi lưu, vui lòng thử lại");
         }
 
         setSaving(false);

@@ -37,15 +37,25 @@ async function getPost(slug: string) {
 
 async function getArticleSettings() {
     try {
-        const { data } = await supabase
-            .from('site_settings')
-            .select('key, value');
-        if (!data) return null;
-        const settings: Record<string, string> = {};
-        data.forEach((row: { key: string; value: string }) => {
-            settings[row.key] = row.value;
-        });
-        return settings;
+        // Try RPC function first (works even when table not in schema cache)
+        const { data: rpcData } = await supabase.rpc('get_site_settings');
+        if (rpcData && rpcData.length > 0) {
+            const settings: Record<string, string> = {};
+            rpcData.forEach((row: { key: string; value: string }) => {
+                settings[row.key] = row.value;
+            });
+            return settings;
+        }
+        // Fallback: try direct table access
+        const { data } = await supabase.from('site_settings').select('key, value');
+        if (data && data.length > 0) {
+            const settings: Record<string, string> = {};
+            data.forEach((row: { key: string; value: string }) => {
+                settings[row.key] = row.value;
+            });
+            return settings;
+        }
+        return null;
     } catch {
         return null;
     }
