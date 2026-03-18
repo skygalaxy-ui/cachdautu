@@ -66,8 +66,8 @@ export default function AboutPage() {
     return (
         <SmoothScrollContainer>
             {/* Hero Section */}
-            <div className="snap-section">
-                <section className="min-h-screen py-16 sm:py-24 relative overflow-hidden flex items-center">
+            <div>
+                <section className="py-16 sm:py-24 relative overflow-hidden">
                     {/* Background effects */}
                     <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-pink-500/5" />
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-purple-500/10 rounded-full blur-[120px] pointer-events-none" />
@@ -125,8 +125,8 @@ export default function AboutPage() {
             </div>
 
             {/* Asset Categories */}
-            <div className="snap-section">
-                <section className="min-h-screen py-16 sm:py-24 relative flex items-center">
+            <div>
+                <section className="py-16 sm:py-24 relative">
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/5 to-transparent" />
                     <div className="container mx-auto px-4 relative z-10">
                         <AnimatedSection className="text-center mb-12" animation="fade-in-up">
@@ -157,8 +157,8 @@ export default function AboutPage() {
             </div>
 
             {/* Values Section */}
-            <div className="snap-section">
-                <section className="min-h-screen py-16 sm:py-24 flex items-center">
+            <div>
+                <section className="py-16 sm:py-24">
                     <div className="container mx-auto px-4">
                         <AnimatedSection className="text-center mb-12" animation="fade-in-up">
                             <span className="inline-block px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs sm:text-sm font-medium mb-6">
@@ -192,8 +192,8 @@ export default function AboutPage() {
             </div>
 
             {/* Why Choose Us + Testimonials */}
-            <div className="snap-section">
-                <section className="min-h-screen py-16 sm:py-24 relative flex items-center">
+            <div>
+                <section className="py-16 sm:py-24 relative">
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-pink-500/5 to-transparent" />
                     <div className="container mx-auto px-4 relative z-10">
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -246,8 +246,8 @@ export default function AboutPage() {
             </div>
 
             {/* Disclaimer + CTA */}
-            <div className="snap-section">
-                <section className="min-h-screen py-16 sm:py-24 relative flex items-center">
+            <div>
+                <section className="py-16 sm:py-24 relative">
                     <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-pink-500/5 to-orange-500/5" />
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
 
