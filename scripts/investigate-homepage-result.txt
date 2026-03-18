@@ -1,0 +1,94 @@
+﻿=== 15 BAI MOI NHAT TRONG DB (da publish) ===
+
+1. [3/3/2026] "─Éß╗ông h├ánh c├╣ng khoß║ún ─æß║ºu t╞░ cß╗ºa bß║ín trong mß╗Öt thß╗ï tr╞░ß╗¥ng ─æß║ºy biß║┐n ─æß╗Öng"
+   created_at: 2026-03-03T09:36:03.677+00:00
+   scheduled_at: 2026-03-03T09:36:03.677+00:00
+   slug: dong-hanh-cung-khoan-dau-tu-cua-ban-trong-mot-thi-truong-day-bien-dong
+
+2. [3/3/2026] "Top c├íc quß╗╣ ─æß║ºu t╞░ (Quß╗╣ mß╗ƒ) tß╗æt nhß║Ñt Viß╗çt Nam 2026"
+   created_at: 2026-03-03T08:20:35.146+00:00
+   scheduled_at: 2026-03-16T08:00:00+00:00
+   slug: quy-dau-tu-tot-nhat-viet-nam-2026
+
+3. [3/3/2026] "Sß╗¡ dß╗Ñng t├ái khoß║ún giao dß╗ïch demo: Luyß╗çn tß║¡p tr╞░ß╗¢c khi ─æß║ºu t╞░ thß║¡t"
+   created_at: 2026-03-03T08:20:34.838+00:00
+   scheduled_at: 2026-03-15T08:00:00+00:00
+   slug: tai-khoan-giao-dich-demo-viet-nam-2026
+
+4. [3/3/2026] "C├íc b╞░ß╗¢c mß╗ƒ t├ái khoß║ún chß╗⌐ng kho├ín Viß╗çt Nam 2026 nhanh nhß║Ñt"
+   created_at: 2026-03-03T08:20:33.756+00:00
+   scheduled_at: 2026-03-14T08:00:00+00:00
+   slug: cac-buoc-mo-tai-khoan-chung-khoan-viet-nam-2026
+
+5. [3/3/2026] "C├ích ─æß║ºu t╞░ v├áng sinh lß╗¥i an to├án tß║íi Viß╗çt Nam 2026"
+   created_at: 2026-03-03T08:19:00.478+00:00
+   scheduled_at: 2026-03-13T08:00:00+00:00
+   slug: cach-dau-tu-vang-o-viet-nam-2026
+
+6. [3/3/2026] "H╞░ß╗¢ng dß║½n ─æß║ºu t╞░ chß╗⌐ng kho├ín cho ng╞░ß╗¥i mß╗¢i bß║»t ─æß║ºu 2026"
+   created_at: 2026-03-03T08:19:00.14+00:00
+   scheduled_at: 2026-03-12T08:00:00+00:00
+   slug: huong-dan-dau-tu-chung-khoan-cho-nguoi-moi-viet-nam-2026
+
+7. [3/3/2026] "Top 10 c├íc k├¬nh ─æß║ºu t╞░ tß╗æt nhß║Ñt Viß╗çt Nam 2026"
+   created_at: 2026-03-03T08:18:59.853+00:00
+   scheduled_at: 2026-03-11T08:00:00+00:00
+   slug: top-10-cac-kenh-dau-tu-tot-nhat-viet-nam-2026
+
+8. [26/2/2026] "Th├│i quen t├ái ch├¡nh tß╗æt cß║ºn r├¿n luyß╗çn"
+   created_at: 2026-02-26T02:18:46.800598+00:00
+   slug: thoi-quen-tai-chinh
+
+9. [26/2/2026] "Tr├íi phiß║┐u l├á g├¼? H╞░ß╗¢ng dß║½n cho ng╞░ß╗¥i mß╗¢i"
+   created_at: 2026-02-26T02:18:46.634219+00:00
+   slug: trai-phieu-la-gi-huong-dan
+
+10. [26/2/2026] "Rß╗ºi ro khi ─æß║ºu t╞░ v├áo startup"
+   created_at: 2026-02-26T02:18:46.431668+00:00
+   slug: rui-ro-dau-tu-startup
+
+11. [26/2/2026] "ESOP: Cß╗ò phiß║┐u ╞░u ─æ├úi cho nh├ón vi├¬n"
+   created_at: 2026-02-26T02:18:46.227797+00:00
+   slug: esop-co-phieu-nhan-vien
+
+12. [26/2/2026] "Crowdfunding: Gß╗ìi vß╗æn cß╗Öng ─æß╗ông"
+   created_at: 2026-02-26T02:18:46.042564+00:00
+   slug: crowdfunding-goi-von-cong-dong
+
+13. [26/2/2026] "Angel Investing: ─Éß║ºu t╞░ v├áo startup giai ─æoß║ín sß╗¢m"
+   created_at: 2026-02-26T02:18:45.7567+00:00
+   slug: angel-investing-la-gi
+
+14. [26/2/2026] "C├ích ─æ├ính gi├í startup tr╞░ß╗¢c khi ─æß║ºu t╞░"
+   created_at: 2026-02-26T02:18:45.421856+00:00
+   slug: danh-gia-startup-truoc-dau-tu
+
+15. [24/2/2026] "Chß╗⌐ng kho├ín ph├íi sinh l├á g├¼? H╞░ß╗¢ng dß║½n c╞í bß║ún cho ng╞░ß╗¥i mß╗¢i"
+   created_at: 2026-02-24T06:48:57.46+00:00
+   scheduled_at: 2026-03-11T00:00:00+00:00
+   slug: chung-khoan-phai-sinh-la-gi-huong-dan-co-ban
+
+=== 3 BAI TREN TRANG CHU (tu screenshot) ===
+1. "Dong hanh cung khoan dau tu cua ban trong mot thi truong..." - 3/3/2026
+2. "Top cac quy dau tu (Quy mo) tot nhat Viet Nam 2026" - 3/3/2026
+3. "Su dung tai khoan giao dich demo: Luyen tap truoc khi dau..." - 3/3/2026
+
+=== TIM BAI "Dong hanh" TRONG DB ===
+  "─Éß╗ông h├ánh c├╣ng khoß║ún ─æß║ºu t╞░ cß╗ºa bß║ín trong mß╗Öt thß╗ï tr╞░ß╗¥ng ─æß║ºy biß║┐n ─æß╗Öng"
+   slug: dong-hanh-cung-khoan-dau-tu-cua-ban-trong-mot-thi-truong-day-bien-dong
+   created_at: 2026-03-03T09:36:03.677+00:00
+   published: true
+
+=== KIEM TRA SORT ORDER ===
+Trang chu nen hien bai moi nhat theo created_at hoac scheduled_at
+Bai moi nhat DB: "─Éß╗ông h├ánh c├╣ng khoß║ún ─æß║ºu t╞░ cß╗ºa bß║ín trong mß╗Öt thß╗ï tr╞░ß╗¥ng ─æß║ºy biß║┐n ─æß╗Öng" - 2026-03-03T09:36:03.677+00:00
+Trang chu hien: bai ngay 3/3/2026 - CACH 14 NGAY!
+
+=== BAI CREATED NGAY 3/3/2026 ===
+  "─Éß╗ông h├ánh c├╣ng khoß║ún ─æß║ºu t╞░ cß╗ºa bß║ín trong mß╗Öt thß╗ï tr╞░ß╗¥ng ─æß║ºy biß║┐n ─æß╗Öng" - 2026-03-03T09:36:03.677+00:00
+  "Top c├íc quß╗╣ ─æß║ºu t╞░ (Quß╗╣ mß╗ƒ) tß╗æt nhß║Ñt Viß╗çt Nam 2026" - 2026-03-03T08:20:35.146+00:00
+  "Sß╗¡ dß╗Ñng t├ái khoß║ún giao dß╗ïch demo: Luyß╗çn tß║¡p tr╞░ß╗¢c khi ─æß║ºu t╞░ thß║¡t" - 2026-03-03T08:20:34.838+00:00
+  "C├íc b╞░ß╗¢c mß╗ƒ t├ái khoß║ún chß╗⌐ng kho├ín Viß╗çt Nam 2026 nhanh nhß║Ñt" - 2026-03-03T08:20:33.756+00:00
+  "C├ích ─æß║ºu t╞░ v├áng sinh lß╗¥i an to├án tß║íi Viß╗çt Nam 2026" - 2026-03-03T08:19:00.478+00:00
+  "H╞░ß╗¢ng dß║½n ─æß║ºu t╞░ chß╗⌐ng kho├ín cho ng╞░ß╗¥i mß╗¢i bß║»t ─æß║ºu 2026" - 2026-03-03T08:19:00.14+00:00
+  "Top 10 c├íc k├¬nh ─æß║ºu t╞░ tß╗æt nhß║Ñt Viß╗çt Nam 2026" - 2026-03-03T08:18:59.853+00:00
