@@ -40,7 +40,7 @@ export async function uploadImage(file: File): Promise<string | null> {
  * Xóa ảnh từ Storage
  */
 export async function deleteImage(url: string): Promise<boolean> {
-    const path = url.split('/images/')[1];
+    const path = url.split('/image/')[1];
     if (!path) return false;
 
     const { error } = await supabase.storage
@@ -51,9 +51,10 @@ export async function deleteImage(url: string): Promise<boolean> {
 }
 
 /**
- * Bộ lọc thông minh cho bài viết đã xuất bản
+ * Bộ lọc cho bài viết đã xuất bản
+ * Chỉ hiện bài có is_published = true (đã được cron publish)
+ * Bài scheduled nhưng chưa publish sẽ KHÔNG hiện trên site
  */
 export function publishedFilter(): string {
-    const now = new Date().toISOString();
-    return `is_published.eq.true,and(scheduled_at.not.is.null,scheduled_at.lte.${now})`;
+    return `is_published.eq.true`;
 }
