@@ -12,6 +12,7 @@ import PopularPosts from "@/components/sidebar/PopularPosts";
 import CategoryList from "@/components/sidebar/CategoryList";
 import AuthorCard from "@/components/sidebar/AuthorCard";
 import TagCloud from "@/components/sidebar/TagCloud";
+import NewsletterForm from "@/components/NewsletterForm";
 
 // ISR: cache tĩnh, tự cập nhật mỗi {revalidateTime/60} phút
 export const revalidate = APP_CONFIG.blog.revalidateTime;
@@ -268,9 +269,11 @@ export default async function PostPage({ params }: PostPageProps) {
             else if (line.startsWith('[INFO]')) {
                 const text = line.replace('[INFO]', '').trim();
                 elements.push(
-                    <div key={idx} className="my-6 p-4 rounded-xl bg-blue-500/10 border border-blue-500/20 flex gap-3">
-                        <Info className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" />
-                        <p className="text-text-secondary text-sm">{text}</p>
+                    <div key={idx} className="my-8 p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-500/20 flex gap-4 items-start shadow-[0_0_30px_rgba(59,130,246,0.05)]">
+                        <div className="p-2.5 rounded-xl bg-blue-500/20 text-blue-400 flex-shrink-0">
+                            <Info className="w-5 h-5 sm:w-6 sm:h-6" />
+                        </div>
+                        <p className="text-blue-50 text-base sm:text-[17px] leading-relaxed pt-1.5">{text}</p>
                     </div>
                 );
             }
@@ -278,9 +281,11 @@ export default async function PostPage({ params }: PostPageProps) {
             else if (line.startsWith('[WARNING]')) {
                 const text = line.replace('[WARNING]', '').trim();
                 elements.push(
-                    <div key={idx} className="my-6 p-4 rounded-xl bg-orange-500/10 border border-orange-500/20 flex gap-3">
-                        <AlertTriangle className="w-5 h-5 text-orange-400 flex-shrink-0 mt-0.5" />
-                        <p className="text-text-secondary text-sm">{text}</p>
+                    <div key={idx} className="my-8 p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-orange-500/10 to-red-500/10 border border-orange-500/20 flex gap-4 items-start shadow-[0_0_30px_rgba(249,115,22,0.05)]">
+                        <div className="p-2.5 rounded-xl bg-orange-500/20 text-orange-400 flex-shrink-0">
+                            <AlertTriangle className="w-5 h-5 sm:w-6 sm:h-6" />
+                        </div>
+                        <p className="text-orange-50 text-base sm:text-[17px] leading-relaxed pt-1.5">{text}</p>
                     </div>
                 );
             }
@@ -288,17 +293,19 @@ export default async function PostPage({ params }: PostPageProps) {
             else if (line.startsWith('[TIP]')) {
                 const text = line.replace('[TIP]', '').trim();
                 elements.push(
-                    <div key={idx} className="my-6 p-4 rounded-xl bg-green-500/10 border border-green-500/20 flex gap-3">
-                        <Lightbulb className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                        <p className="text-text-secondary text-sm">{text}</p>
+                    <div key={idx} className="my-8 p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-green-500/10 to-emerald-500/10 border border-green-500/20 flex gap-4 items-start shadow-[0_0_30px_rgba(34,197,94,0.05)]">
+                        <div className="p-2.5 rounded-xl bg-green-500/20 text-green-400 flex-shrink-0">
+                            <Lightbulb className="w-5 h-5 sm:w-6 sm:h-6" />
+                        </div>
+                        <p className="text-green-50 text-base sm:text-[17px] leading-relaxed pt-1.5">{text}</p>
                     </div>
                 );
             }
             // Unordered list item
             else if (line.startsWith('- ')) {
                 elements.push(
-                    <li key={idx} className="flex items-start gap-2 text-text-secondary mb-2 ml-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-purple-400/50 mt-2 flex-shrink-0" />
+                    <li key={idx} className="flex items-start gap-3 text-text-secondary mb-3 ml-2 sm:ml-4 text-base sm:text-[17px] leading-[1.8]">
+                        <span className="w-1.5 h-1.5 rounded-full bg-purple-400/50 mt-2.5 flex-shrink-0" />
                         <span>{line.replace('- ', '')}</span>
                     </li>
                 );
@@ -308,8 +315,8 @@ export default async function PostPage({ params }: PostPageProps) {
                 const match = line.match(/^(\d+)\.\s(.*)$/);
                 if (match) {
                     elements.push(
-                        <li key={idx} className="flex items-start gap-3 text-text-secondary mb-2 ml-2">
-                            <span className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center text-xs font-bold text-purple-400 flex-shrink-0">
+                        <li key={idx} className="flex items-start gap-4 text-text-secondary mb-3 ml-2 sm:ml-4 text-base sm:text-[17px] leading-[1.8]">
+                            <span className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center text-xs sm:text-sm font-bold text-purple-400 flex-shrink-0 mt-0.5">
                                 {match[1]}
                             </span>
                             <span className="pt-0.5">{match[2]}</span>
@@ -320,7 +327,7 @@ export default async function PostPage({ params }: PostPageProps) {
             // Regular paragraph
             else if (line.trim()) {
                 elements.push(
-                    <p key={idx} className="text-text-secondary leading-relaxed mb-4 text-sm sm:text-base">
+                    <p key={idx} className="text-text-secondary leading-relaxed sm:leading-[1.85] mb-5 sm:mb-6 text-base sm:text-[17px]">
                         {line}
                     </p>
                 );
@@ -424,6 +431,37 @@ export default async function PostPage({ params }: PostPageProps) {
         }))
     } : null;
 
+    // HowTo Schema — auto-detect step-based content
+    const howToSteps: { name: string; text: string }[] = [];
+    if (post.content) {
+        // Detect "Bước 1:", "Bước 2:" patterns in content
+        const stepMatches = post.content.matchAll(/<(?:strong|b)>Bước\s*(\d+)[^<]*<\/(?:strong|b)>\s*([^<]+)/gi);
+        for (const m of stepMatches) {
+            howToSteps.push({ name: `Bước ${m[1]}`, text: m[2].replace(/\.$/, '').trim() });
+        }
+        // Also detect H3 with step numbers: "Bước 1: ..."
+        if (howToSteps.length === 0) {
+            const h3Steps = post.content.matchAll(/<h3[^>]*>(?:Bước\s*\d+[:\s]*)([^<]+)<\/h3>\s*<p>([\s\S]*?)<\/p>/gi);
+            for (const m of h3Steps) {
+                howToSteps.push({ name: m[1].trim(), text: m[2].replace(/<[^>]+>/g, '').substring(0, 200).trim() });
+            }
+        }
+    }
+
+    const howToSchema = howToSteps.length >= 3 ? {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        name: post.title,
+        description: post.meta_description || post.excerpt,
+        image: post.featured_image,
+        step: howToSteps.map((step, i) => ({
+            "@type": "HowToStep",
+            position: i + 1,
+            name: step.name,
+            text: step.text
+        }))
+    } : null;
+
     // Breadcrumb Schema
     const breadcrumbSchema = {
         "@context": "https://schema.org",
@@ -448,9 +486,38 @@ export default async function PostPage({ params }: PostPageProps) {
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
                 />
             )}
+            {howToSchema && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+                />
+            )}
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+            />
+
+            {/* Đề xuất #10: Scroll depth tracking */}
+            <script
+                dangerouslySetInnerHTML={{ __html: `
+                    (function(){
+                        if(typeof window==='undefined')return;
+                        var tracked={};
+                        function getScrollPercent(){
+                            var h=document.documentElement,b=document.body;
+                            return Math.round((h.scrollTop||b.scrollTop)/((h.scrollHeight||b.scrollHeight)-h.clientHeight)*100);
+                        }
+                        window.addEventListener('scroll',function(){
+                            var p=getScrollPercent();
+                            [25,50,75,100].forEach(function(m){
+                                if(p>=m&&!tracked[m]){
+                                    tracked[m]=true;
+                                    if(window.gtag)window.gtag('event','scroll_depth',{percent:m,page_title:document.title});
+                                }
+                            });
+                        });
+                    })();
+                `}}
             />
 
             <div className="pt-24 sm:pt-32 pb-16 bg-primary min-h-screen relative overflow-hidden">
@@ -532,9 +599,14 @@ export default async function PostPage({ params }: PostPageProps) {
                             </div>
 
                             {/* Excerpt */}
-                            <p className="text-base sm:text-xl text-white leading-relaxed mb-6 sm:mb-8 font-medium">
+                            <p className="text-[17px] sm:text-[20px] leading-relaxed sm:leading-[1.8] text-white mb-8 sm:mb-10 font-medium">
                                 {post.excerpt}
                             </p>
+
+                            {/* Mobile TOC (Hidden on Desktop) */}
+                            <div className="block lg:hidden mb-10 pb-10 border-b border-white/5">
+                                <TableOfContents content={post.content || ''} />
+                            </div>
 
                             {/* Content */}
                             <div className="max-w-none">
@@ -577,16 +649,7 @@ export default async function PostPage({ params }: PostPageProps) {
                                         Nhận phân tích đầu tư <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">miễn phí</span> mỗi tuần
                                     </h3>
                                     <p className="text-sm text-text-muted mb-5">Đăng ký newsletter để nhận bài viết mới, phân tích thị trường và cơ hội đầu tư trực tiếp vào email.</p>
-                                    <form className="flex flex-col sm:flex-row gap-3">
-                                        <input
-                                            type="email"
-                                            placeholder="Email của bạn"
-                                            className="flex-1 px-4 py-3 rounded-xl text-sm bg-white/[0.05] border border-white/[0.1] text-white focus:border-purple-500 focus:outline-none transition-colors placeholder-text-muted"
-                                        />
-                                        <button type="submit" className="px-6 py-3 rounded-xl bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 text-white font-bold text-sm hover:shadow-glow-purple transition-all whitespace-nowrap">
-                                            Đăng ký ngay ✨
-                                        </button>
-                                    </form>
+                                    <NewsletterForm variant="inline" />
                                     <div className="flex items-center gap-4 mt-4 text-xs text-text-muted">
                                         <span className="flex items-center gap-1"><Users className="w-3 h-3" /> 5,000+ độc giả</span>
                                         <span className="flex items-center gap-1"><Star className="w-3 h-3 text-yellow-400" /> Miễn phí 100%</span>
@@ -608,10 +671,12 @@ export default async function PostPage({ params }: PostPageProps) {
                         </article>
 
                         {/* Sidebar */}
-                        <aside className="lg:col-span-4">
-                            <div className="sticky top-24 sm:top-32 space-y-6">
-                                {/* Table of Contents */}
-                                <TableOfContents content={post.content || ''} />
+                        <aside className="lg:col-span-4 mt-12 lg:mt-0 pb-12">
+                            <div className="sticky top-24 sm:top-32 space-y-8 max-h-[calc(100vh-6rem)] overflow-y-auto pb-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                                {/* Table of Contents (Hidden on Mobile, shown on Desktop) */}
+                                <div className="hidden lg:block">
+                                    <TableOfContents content={post.content || ''} />
+                                </div>
 
                                 {/* Author Card */}
                                 <AuthorCard />
@@ -629,14 +694,7 @@ export default async function PostPage({ params }: PostPageProps) {
                                             <p className="text-xs text-text-muted">Bài viết mới mỗi tuần</p>
                                         </div>
                                     </div>
-                                    <input
-                                        type="email"
-                                        placeholder="Email của bạn"
-                                        className="w-full px-4 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm bg-white/[0.03] border border-white/[0.06] text-white mb-3 focus:border-purple-500 focus:outline-none transition-colors placeholder-text-muted"
-                                    />
-                                    <button className="w-full py-2.5 sm:py-3 rounded-xl bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 text-white font-bold text-xs sm:text-sm hover:shadow-glow-purple transition-all">
-                                        Đăng ký
-                                    </button>
+                                    <NewsletterForm variant="sidebar" />
                                 </div>
 
                                 {/* Popular Posts */}
@@ -653,11 +711,11 @@ export default async function PostPage({ params }: PostPageProps) {
 
                     {/* Related Posts */}
                     {relatedPosts.length > 0 && (
-                        <section className="mt-12 sm:mt-16 pt-12 sm:pt-16 border-t border-white/5">
-                            <h2 className="text-xl sm:text-2xl font-bold text-white mb-6 sm:mb-8">
+                        <section className="mt-16 sm:mt-24 pt-12 sm:pt-16 border-t border-white/10 relative z-20">
+                            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8 sm:mb-10">
                                 Bài viết <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">liên quan</span>
                             </h2>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                                 {relatedPosts.map((p: any) => (
                                     <Link
                                         key={p.id}

@@ -156,6 +156,77 @@ export default function AboutPage() {
                 </section>
             </div>
 
+            {/* Author / Founder Profile */}
+            <div>
+                <section className="py-16 sm:py-24 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-transparent to-pink-500/5" aria-hidden="true" />
+                    
+                    <div className="container mx-auto px-4 relative z-10">
+                        <AnimatedSection className="max-w-5xl mx-auto" animation="fade-in-up">
+                            <div className="bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.06] rounded-3xl p-6 sm:p-10 lg:p-12 hover:border-purple-500/20 transition-all">
+                                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                                    
+                                    {/* Avatar Column */}
+                                    <div className="lg:col-span-4 flex justify-center lg:justify-end">
+                                        <div className="relative w-48 h-48 sm:w-64 sm:h-64 rounded-2xl overflow-hidden border border-white/10 shadow-2xl group">
+                                            {/* Glow behind image */}
+                                            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/40 to-pink-500/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
+                                            <div className="absolute inset-0 bg-gradient-to-br from-purple-900 to-primary flex items-center justify-center">
+                                                <span className="text-6xl text-white/20 font-bold">HĐ</span>
+                                            </div>
+                                            {/* Uncomment and add valid image path when ready 
+                                            <Image 
+                                                src="/images/founder.jpg" 
+                                                alt="Hải Đăng - Nhà sáng lập" 
+                                                fill 
+                                                className="object-cover relative z-10 grayscale hover:grayscale-0 transition-all duration-500"
+                                            /> 
+                                            */}
+                                        </div>
+                                    </div>
+                                    
+                                    {/* Bio Column */}
+                                    <div className="lg:col-span-8">
+                                        <span className="inline-block px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs sm:text-sm font-bold tracking-wider uppercase mb-4">
+                                            Nhà sáng lập & tác giả chính
+                                        </span>
+                                        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">
+                                            Hải Đăng
+                                        </h2>
+                                        <p className="text-purple-400 font-medium mb-6">Chuyên gia hoạch định tài chính & quản trị rủi ro</p>
+                                        
+                                        <div className="space-y-4 text-text-secondary text-base sm:text-lg leading-relaxed mb-8">
+                                            <p>
+                                                Với hơn 7 năm trực tiếp tham gia thị trường tài chính và quản lý danh mục đầu tư, tôi hiểu rõ những cạm bẫy mà 90% nhà đầu tư F0 thường mắc phải: Hội chứng FOMO, thiếu chiến lược chốt lời, và không biết điểm dừng.
+                                            </p>
+                                            <p>
+                                                <strong className="text-white">Cách Đầu Tư</strong> ra đời không phải để phím hàng hay hứa hẹn lợi nhuận X2, X3. Nó được xây dựng với mục tiêu duy nhất: <strong className="text-white">Bảo vệ nguồn vốn của bạn trước khi nghĩ đến lợi nhuận.</strong>
+                                            </p>
+                                        </div>
+                                        
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div className="flex items-center gap-3">
+                                                <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-purple-400">
+                                                    <Shield className="w-5 h-5" />
+                                                </div>
+                                                <span className="text-sm font-medium text-white">Bảo vệ vốn 100%</span>
+                                            </div>
+                                            <div className="flex items-center gap-3">
+                                                <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-pink-400">
+                                                    <Target className="w-5 h-5" />
+                                                </div>
+                                                <span className="text-sm font-medium text-white">Không fomo, không hứa hẹn</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </AnimatedSection>
+                    </div>
+                </section>
+            </div>
+
             {/* Values Section */}
             <div>
                 <section className="py-16 sm:py-24">

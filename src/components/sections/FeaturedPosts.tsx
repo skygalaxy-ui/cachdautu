@@ -3,14 +3,9 @@
 import Link from "next/link";
 import SafeImage from "@/components/SafeImage";
 import { ArrowRight, Clock, ArrowUpRight } from "lucide-react";
-import { createClient } from "@supabase/supabase-js";
-import { publishedFilter } from "@/lib/supabase";
+import { supabase, publishedFilter } from "@/core/supabase";
+import { Post } from "@/core/types";
 import { useEffect, useState } from "react";
-
-const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
 
 const getCategoryImage = (category: string) => {
     switch (category) {

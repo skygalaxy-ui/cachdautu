@@ -17,10 +17,14 @@ import {
     Clock,
     Calendar,
     ChevronDown,
+    ChevronLeft,
+    ChevronRight,
     Send,
     FileX,
     Loader2
 } from "lucide-react";
+
+const PAGE_SIZE = 50;
 
 export default function PostsPage() {
     const [posts, setPosts] = useState<Post[]>([]);
@@ -30,6 +34,8 @@ export default function PostsPage() {
     const [filterStatus, setFilterStatus] = useState<"all" | "published" | "scheduled" | "draft">("all");
     const [selectedPosts, setSelectedPosts] = useState<string[]>([]);
     const [bulkLoading, setBulkLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalCount, setTotalCount] = useState(0);
 
     useEffect(() => {
         fetchData();
@@ -38,10 +44,14 @@ export default function PostsPage() {
     async function fetchData() {
         setLoading(true);
         const [postsRes, catsRes] = await Promise.all([
-            supabase.from('posts').select('*').order('created_at', { ascending: false }),
+            supabase.from('posts')
+                .select('id, title, slug, category_id, featured_image, is_published, scheduled_at, created_at, updated_at, excerpt, meta_title, tags, reading_time, focus_keyword')
+                .order('created_at', { ascending: false })
+                .limit(2000),
             supabase.from('categories').select('*')
         ]);
-        setPosts(postsRes.data || []);
+        setPosts((postsRes.data || []) as unknown as Post[]);
+        setTotalCount(postsRes.data?.length || 0);
         setCategories(catsRes.data || []);
         setLoading(false);
     }
@@ -97,7 +107,7 @@ export default function PostsPage() {
         return 'draft';
     };
 
-    const filteredPosts = posts.filter(post => {
+    const allFilteredPosts = posts.filter(post => {
         const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase());
         const status = getPostStatus(post);
         const matchesFilter = filterStatus === "all" ||
@@ -106,6 +116,12 @@ export default function PostsPage() {
             (filterStatus === "draft" && status === 'draft');
         return matchesSearch && matchesFilter;
     });
+
+    const totalPages = Math.ceil(allFilteredPosts.length / PAGE_SIZE);
+    const filteredPosts = allFilteredPosts.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+
+    // Reset page when filter/search changes
+    useEffect(() => { setCurrentPage(1); }, [searchQuery, filterStatus]);
 
     const getCategoryName = (categoryId: string) => {
         const cat = categories.find(c => c.id === categoryId);
@@ -126,13 +142,20 @@ export default function PostsPage() {
         }
     };
 
+    const statusCounts = {
+        all: posts.length,
+        published: posts.filter(p => getPostStatus(p) === 'published').length,
+        scheduled: posts.filter(p => getPostStatus(p) === 'scheduled').length,
+        draft: posts.filter(p => getPostStatus(p) === 'draft').length,
+    };
+
     return (
         <div className="space-y-6">
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                     <h1 className="text-2xl font-bold text-gray-900">Bài viết</h1>
-                    <p className="text-gray-500 text-sm mt-0.5">{posts.length} bài viết</p>
+                    <p className="text-gray-500 text-sm mt-0.5">{posts.length} bài viết · Trang {currentPage}/{totalPages || 1}</p>
                 </div>
                 <Link
                     href="/admin/posts/new"
@@ -174,7 +197,7 @@ export default function PostsPage() {
                                     : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
                                     }`}
                             >
-                                {filter.label}
+                                {filter.label} ({statusCounts[filter.key as keyof typeof statusCounts]})
                             </button>
                         ))}
                     </div>
@@ -352,6 +375,50 @@ export default function PostsPage() {
                                 </div>
                             ))}
                         </div>
+                        {/* Pagination */}
+                        {totalPages > 1 && (
+                            <div className="flex items-center justify-between px-5 py-4 border-t border-gray-100 bg-gray-50/50">
+                                <p className="text-sm text-gray-500">
+                                    Hiển thị {(currentPage - 1) * PAGE_SIZE + 1}-{Math.min(currentPage * PAGE_SIZE, allFilteredPosts.length)} / {allFilteredPosts.length} bài
+                                </p>
+                                <div className="flex items-center gap-1">
+                                    <button
+                                        onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                                        disabled={currentPage === 1}
+                                        className="p-2 rounded-lg hover:bg-gray-200 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                                    >
+                                        <ChevronLeft className="w-4 h-4" />
+                                    </button>
+                                    {Array.from({ length: Math.min(totalPages, 7) }, (_, i) => {
+                                        let page: number;
+                                        if (totalPages <= 7) page = i + 1;
+                                        else if (currentPage <= 4) page = i + 1;
+                                        else if (currentPage >= totalPages - 3) page = totalPages - 6 + i;
+                                        else page = currentPage - 3 + i;
+                                        return (
+                                            <button
+                                                key={page}
+                                                onClick={() => setCurrentPage(page)}
+                                                className={`w-9 h-9 rounded-lg text-sm font-medium transition-colors ${
+                                                    currentPage === page
+                                                        ? 'bg-gray-900 text-white'
+                                                        : 'hover:bg-gray-200 text-gray-600'
+                                                }`}
+                                            >
+                                                {page}
+                                            </button>
+                                        );
+                                    })}
+                                    <button
+                                        onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                                        disabled={currentPage === totalPages}
+                                        className="p-2 rounded-lg hover:bg-gray-200 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                                    >
+                                        <ChevronRight className="w-4 h-4" />
+                                    </button>
+                                </div>
+                            </div>
+                        )}
                     </>
                 )}
             </div>

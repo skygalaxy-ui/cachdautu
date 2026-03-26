@@ -1,15 +1,10 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { BookOpen, Users, TrendingUp, Award, Zap, Shield, Target, BarChart3 } from "lucide-react";
 import AnimatedSection from "@/components/ui/Animations";
 import Link from "next/link";
-
-const stats = [
-    { icon: <Users className="w-6 h-6 sm:w-8 sm:h-8" />, value: "12,500+", label: "Nhà đầu tư", desc: "đang học hỏi" },
-    { icon: <BookOpen className="w-6 h-6 sm:w-8 sm:h-8" />, value: "150+", label: "Bài phân tích", desc: "chuyên sâu" },
-    { icon: <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8" />, value: "10+", label: "Lớp tài sản", desc: "đa dạng hóa" },
-    { icon: <Award className="w-6 h-6 sm:w-8 sm:h-8" />, value: "5+", label: "Năm kinh nghiệm", desc: "trên thị trường" },
-];
+import { supabase, publishedFilter } from "@/core/supabase";
 
 const features = [
     {
@@ -35,6 +30,29 @@ const features = [
 ];
 
 export default function Stats() {
+    const [postCount, setPostCount] = useState<number>(150); // Fallback to 150
+
+    useEffect(() => {
+        async function fetchPostCount() {
+            const { count } = await supabase
+                .from('posts')
+                .select('*', { count: 'exact', head: true })
+                .or(publishedFilter());
+                
+            if (count && count > 150) {
+                setPostCount(count);
+            }
+        }
+        fetchPostCount();
+    }, []);
+
+    const stats = [
+        { icon: <Users className="w-6 h-6 sm:w-8 sm:h-8" />, value: "12,500+", label: "Nhà đầu tư", desc: "đang học hỏi" },
+        { icon: <BookOpen className="w-6 h-6 sm:w-8 sm:h-8" />, value: `${postCount}+`, label: "Bài phân tích", desc: "chuyên sâu" },
+        { icon: <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8" />, value: "10+", label: "Lớp tài sản", desc: "đa dạng hóa" },
+        { icon: <Award className="w-6 h-6 sm:w-8 sm:h-8" />, value: "5+", label: "Năm kinh nghiệm", desc: "trên thị trường" },
+    ];
+
     return (
         <section
             className="py-16 sm:py-24 bg-primary relative overflow-hidden"

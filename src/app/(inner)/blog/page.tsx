@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import SafeImage from "@/components/SafeImage";
-import { BookOpen, Filter, Clock, ArrowRight, Search, Sparkles, ArrowUpRight } from "lucide-react";
+import { BookOpen, Filter, Clock, ArrowRight, Search, Sparkles, ArrowUpRight, Home, ChevronRight } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
 import { publishedFilter } from "@/lib/supabase";
 import { Suspense } from "react";
@@ -16,8 +16,12 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Blog - Cách Đầu Tư",
         description: "Khám phá hàng trăm bài viết về chứng khoán, bất động sản, vàng, trái phiếu và nhiều loại đầu tư khác.",
+        url: "https://cachdautu.com/blog",
         type: "website",
-    }
+    },
+    alternates: {
+        canonical: "https://cachdautu.com/blog",
+    },
 };
 
 const supabase = createClient(
@@ -95,6 +99,33 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             <div className="absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-pink-500/10 rounded-full blur-[100px] pointer-events-none" />
 
             <div className="container mx-auto px-4 relative z-10">
+                {/* Breadcrumb - SEO */}
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "BreadcrumbList",
+                            "itemListElement": [
+                                { "@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "https://cachdautu.com" },
+                                { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://cachdautu.com/blog" }
+                            ]
+                        })
+                    }}
+                />
+                <nav aria-label="Breadcrumb" className="mb-6">
+                    <ol className="flex items-center gap-2 text-sm text-text-muted">
+                        <li>
+                            <Link href="/" className="hover:text-purple-400 transition-colors flex items-center gap-1">
+                                <Home className="w-4 h-4" />
+                                Trang chủ
+                            </Link>
+                        </li>
+                        <ChevronRight className="w-3 h-3" />
+                        <li className="text-white font-medium">Blog</li>
+                    </ol>
+                </nav>
+
                 {/* Header */}
                 <div className="text-center mb-8 sm:mb-12">
                     <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 font-bold uppercase tracking-wider text-xs mb-6">

@@ -4,6 +4,14 @@ import { Mail, MessageCircle, Clock, HelpCircle, Send, User, Sparkles } from "lu
 export const metadata: Metadata = {
     title: "Liên hệ - Cách Đầu Tư",
     description: "Liên hệ với đội ngũ Cách Đầu Tư để được hỗ trợ và giải đáp thắc mắc về đầu tư.",
+    openGraph: {
+        title: "Liên hệ - Cách Đầu Tư",
+        description: "Liên hệ với đội ngũ Cách Đầu Tư để được hỗ trợ và giải đáp thắc mắc về đầu tư.",
+        url: "https://cachdautu.com/contact",
+    },
+    alternates: {
+        canonical: "https://cachdautu.com/contact",
+    },
 };
 
 const contactInfo = [

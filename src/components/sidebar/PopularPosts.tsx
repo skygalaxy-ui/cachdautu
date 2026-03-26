@@ -1,12 +1,7 @@
 import Link from "next/link";
 import { TrendingUp, ArrowRight } from "lucide-react";
-import { createClient } from "@supabase/supabase-js";
-import { publishedFilter } from "@/lib/supabase";
-
-const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+import { supabase, publishedFilter } from "@/core/supabase";
+import { Post } from "@/core/types";
 
 async function getPopularPosts() {
     try {
@@ -16,7 +11,7 @@ async function getPopularPosts() {
             .or(publishedFilter())
             .order('view_count', { ascending: false })
             .limit(5);
-        return data || [];
+        return (data as any[]) || [];
     } catch {
         return [];
     }

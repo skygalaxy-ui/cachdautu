@@ -1,26 +1,19 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { BookOpen, Clock, ArrowRight, Sparkles, ArrowUpRight } from "lucide-react";
-import { createClient } from "@supabase/supabase-js";
-import { publishedFilter } from "@/lib/supabase";
+import { BookOpen, Clock, ArrowRight, ArrowUpRight } from "lucide-react";
+import { supabase, publishedFilter } from "@/core/supabase";
+import { Post, Category } from "@/core/types";
 import SafeImage from "@/components/SafeImage";
 
 // ISR: cache tĩnh, tự cập nhật mỗi 5 phút
 export const revalidate = 300;
 
-
-
 interface CategoryPageProps {
     params: { category: string };
 }
 
-const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
-
-async function getCategory(slug: string) {
+async function getCategory(slug: string): Promise<Category | null> {
     try {
         const { data, error } = await supabase
             .from('categories')
@@ -28,21 +21,24 @@ async function getCategory(slug: string) {
             .eq('slug', slug)
             .single();
         if (error) return null;
-        return data;
+        return data as Category;
     } catch {
         return null;
     }
 }
 
-async function getCategories() {
+async function getCategories(): Promise<Category[]> {
     try {
         const { data } = await supabase.from('categories').select('*').order('name');
-        return data || [];
+        return (data as Category[]) || [];
     } catch {
         return [];
     }
 }
 
+/**
+ * Fetch posts by category ID with published filter
+ */
 async function getPostsByCategory(categoryId: string) {
     try {
         const { data, error } = await supabase
@@ -52,14 +48,13 @@ async function getPostsByCategory(categoryId: string) {
             .or(publishedFilter())
             .order('scheduled_at', { ascending: false, nullsFirst: false });
 
-        console.log('[CategoryPage] getPostsByCategory:', {
-            categoryId,
-            count: data?.length || 0,
-            error: error?.message || null
-        });
+        if (error) {
+            console.error('[CategoryPage] getPostsByCategory error:', error.message);
+        }
 
-        return data || [];
-    } catch {
+        return (data as any[]) || [];
+    } catch (err) {
+        console.error('[CategoryPage] Catch Exception:', err);
         return [];
     }
 }
@@ -128,7 +123,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                     >
                         Tất cả
                     </Link>
-                    {allCategories.map((c: any) => (
+                    {allCategories.map((c: Category) => (
                         <Link
                             key={c.slug}
                             href={`/blog/${c.slug}`}

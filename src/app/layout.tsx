@@ -2,6 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { Inter } from "next/font/google";
+
+const inter = Inter({
+    subsets: ["vietnamese", "latin"],
+    display: "swap",
+    variable: "--font-inter",
+});
 
 export const metadata: Metadata = {
     title: "Cách Đầu Tư - Hiểu thị trường, hiểu rủi ro",
@@ -50,7 +57,7 @@ export default function RootLayout({
         "url": "https://cachdautu.com",
         "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://cachdautu.com/blog?s={search_term_string}",
+            "target": "https://cachdautu.com/blog?q={search_term_string}",
             "query-input": "required name=search_term_string"
         }
     };
@@ -68,13 +75,10 @@ export default function RootLayout({
     };
 
     return (
-        <html lang="vi" className="dark">
+        <html lang="vi" className={`dark ${inter.variable}`}>
             <head>
                 <link rel="icon" href="/favicon.png" type="image/png" />
                 <link rel="apple-touch-icon" href="/logo.png" />
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-                <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&family=Noto+Sans:wght@300;400;500;600;700;800;900&family=Mulish:wght@300;400;500;600;700;800;900&family=Lexend:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700;800&family=Lora:wght@400;500;600;700&family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet" />
                 <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -84,7 +88,7 @@ export default function RootLayout({
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
                 />
             </head>
-            <body className="antialiased" style={{ fontFamily: "'Inter', system-ui, -apple-system, sans-serif" }}>
+            <body className="antialiased font-sans">
                 <ThemeProvider>
                     {children}
                 </ThemeProvider>

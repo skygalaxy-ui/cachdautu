@@ -1,12 +1,6 @@
 import Link from "next/link";
 import { Hash } from "lucide-react";
-import { createClient } from "@supabase/supabase-js";
-import { publishedFilter } from "@/lib/supabase";
-
-const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+import { supabase, publishedFilter } from "@/core/supabase";
 
 async function getTrendingTags() {
     try {

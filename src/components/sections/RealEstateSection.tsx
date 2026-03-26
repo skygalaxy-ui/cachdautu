@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { Building2, Home, Factory, ArrowRight, MapPin, TrendingUp } from "lucide-react";
 import AnimatedSection from "@/components/ui/Animations";
 
@@ -71,15 +70,13 @@ export default function RealEstateSection() {
                                     )}
                                 </div>
 
-                                {/* Image placeholder */}
-                                <div className="h-32 rounded-2xl bg-gradient-to-br from-pink-900/30 to-purple-900/30 mb-4 border border-white/5 relative overflow-hidden">
-                                    <Image
-                                        src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600"
-                                        alt={properties[0].name}
-                                        fill
-                                        className="object-cover object-center opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-500"
-                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                    />
+                                {/* Decorative visual */}
+                                <div className="h-32 rounded-2xl bg-gradient-to-br from-pink-900/30 via-purple-900/20 to-orange-900/30 mb-4 border border-white/5 relative overflow-hidden">
+                                    <div className="absolute inset-0 flex items-center justify-center gap-6 opacity-20 group-hover:opacity-30 transition-opacity duration-500">
+                                        <Home className="w-16 h-16 text-pink-400" />
+                                        <Building2 className="w-12 h-12 text-purple-400" />
+                                        <TrendingUp className="w-14 h-14 text-orange-400" />
+                                    </div>
                                     <div className="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent" />
                                 </div>
 
