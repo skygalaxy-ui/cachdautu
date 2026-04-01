@@ -226,7 +226,24 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                         </div>
                     }>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-                            {posts.map((post: Post, index: number) => (
+                            {posts.map((post: any, index: number) => {
+                                // Tự động trích xuất ảnh đầu tiên trong content làm Thumbnail nếu ảnh bìa bị trống
+                                let displayImage = post.featured_image;
+                                if (!displayImage && post.content) {
+                                    const imgMatch = post.content.match(/<img[^>]+src="([^">]+)"/);
+                                    if (imgMatch && imgMatch[1]) {
+                                        displayImage = imgMatch[1];
+                                    }
+                                }
+
+                                // Format ngày đăng
+                                const publishedDate = new Date(post.scheduled_at || post.created_at).toLocaleDateString('vi-VN', {
+                                    year: 'numeric',
+                                    month: 'short',
+                                    day: 'numeric'
+                                });
+
+                                return (
                                 <Link
                                     key={post.id}
                                     href={`/blog/${post.categories?.slug || 'uncategorized'}/${post.slug}`}
@@ -234,9 +251,9 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                                 >
                                     {/* Image */}
                                     <div className="aspect-video bg-gradient-to-br from-purple-900/30 to-pink-900/30 relative overflow-hidden">
-                                        {post.featured_image ? (
+                                        {displayImage ? (
                                             <SafeImage
-                                                src={post.featured_image}
+                                                src={displayImage}
                                                 alt={post.title}
                                                 fill
                                                 categorySlug={post.categories?.slug}
@@ -250,12 +267,10 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                                                 <BookOpen className="w-12 h-12 text-white/20" />
                                             </div>
                                         )}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-primary to-transparent" />
-
-                                        {/* Category badge */}
+                                        {/* Lớp phủ cũ đã bị xóa để ảnh hiển thị sáng và rõ nét hơn */}                                        {/* Category badge */}
                                         {post.categories && (
-                                            <div className="absolute top-4 left-4">
-                                                <span className="inline-block px-3 py-1.5 rounded-full bg-gradient-to-r from-purple-500/80 to-pink-500/80 backdrop-blur-md text-xs font-bold uppercase tracking-wide text-white">
+                                            <div className="absolute top-4 left-4 flex gap-2">
+                                                <span className="inline-block px-3 py-1.5 rounded-full bg-gradient-to-r from-purple-500/80 to-pink-500/80 backdrop-blur-md text-xs font-bold uppercase tracking-wide text-white shadow-lg">
                                                     {post.categories.name}
                                                 </span>
                                             </div>
@@ -268,25 +283,32 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                                     </div>
 
                                     {/* Content */}
-                                    <div className="p-5">
-                                        <h3 className="text-white font-bold mt-2 mb-2 line-clamp-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400 transition-all">
-                                            {post.title}
-                                        </h3>
-                                        <p className="text-text-secondary text-sm line-clamp-2 mb-4">
-                                            {post.excerpt}
-                                        </p>
-                                        <div className="flex items-center justify-between text-xs text-text-muted">
-                                            <span className="flex items-center gap-1">
-                                                <Clock className="w-3 h-3" />
-                                                {post.reading_time || '5 phút'}
-                                            </span>
-                                            <span className="flex items-center gap-1 text-purple-400 group-hover:gap-2 transition-all">
-                                                Đọc tiếp <ArrowRight className="w-3 h-3" />
+                                    <div className="p-5 flex flex-col h-full">
+                                        <div className="flex-1">
+                                            <h3 className="text-white font-bold mt-2 mb-2 line-clamp-2 leading-snug group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400 transition-all">
+                                                {post.title}
+                                            </h3>
+                                            <p className="text-text-secondary text-sm line-clamp-2 mb-4">
+                                                {post.excerpt}
+                                            </p>
+                                        </div>
+                                        <div className="flex items-center justify-between text-[11px] sm:text-xs text-text-muted mt-auto pt-4 border-t border-white/5">
+                                            <div className="flex items-center gap-3">
+                                                <span>{publishedDate}</span>
+                                                <span className="w-1 h-1 rounded-full bg-white/20" />
+                                                <span className="flex items-center gap-1">
+                                                    <Clock className="w-3 h-3" />
+                                                    {post.reading_time || '5 phút đọc'}
+                                                </span>
+                                            </div>
+                                            <span className="flex items-center gap-1 text-purple-400 font-medium group-hover:gap-2 transition-all">
+                                                Đọc <ArrowRight className="w-3 h-3" />
                                             </span>
                                         </div>
                                     </div>
                                 </Link>
-                            ))}
+                                );
+                            })}
                         </div>
                     </Suspense>
                 )}

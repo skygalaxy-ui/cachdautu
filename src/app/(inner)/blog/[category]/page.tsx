@@ -161,8 +161,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                                             <BookOpen className="w-12 h-12 text-white/20" />
                                         </div>
                                     )}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-primary to-transparent" />
-
+                                    {/* Lớp phủ cũ đã bị xóa để ảnh hiển thị sáng rõ */}
                                     {/* Arrow on hover */}
                                     <div className="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0 backdrop-blur-sm">
                                         <ArrowUpRight className="w-5 h-5 text-white" />

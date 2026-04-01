@@ -30,7 +30,7 @@ export default function AnimatedSection({
                     if (ref.current) observer.unobserve(ref.current);
                 }
             },
-            { threshold: 0.05, rootMargin: "100px" } // rootMargin dương giúp trigger sớm hơn
+            { threshold: 0.05, rootMargin: "500px" } // rootMargin lớn giúp trigger từ rất sớm, xóa bỏ điểm mù đen khi cuộn nhanh
         );
 
         const currentRef = ref.current;

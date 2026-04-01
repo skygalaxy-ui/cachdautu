@@ -88,6 +88,15 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
     const seoDescription = post.meta_description || post.excerpt || '';
     const imageAlt = post.featured_image_alt || post.title;
 
+    // Tự động phân tích ảnh đầu tiên trong content làm ảnh Meta SEO nếu ảnh bìa bị trống
+    let displayImage = post.featured_image;
+    if (!displayImage && post.content) {
+        const imgMatch = post.content.match(/<img[^>]+src="([^">]+)"/);
+        if (imgMatch && imgMatch[1]) {
+            displayImage = imgMatch[1];
+        }
+    }
+
     return {
         title: seoTitle,
         description: seoDescription,
@@ -98,8 +107,8 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
             type: "article",
             url,
             siteName: "Cách Đầu Tư",
-            images: post.featured_image ? [{
-                url: post.featured_image,
+            images: displayImage ? [{
+                url: displayImage,
                 width: 1200,
                 height: 630,
                 alt: imageAlt
@@ -111,7 +120,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
             card: "summary_large_image",
             title: post.meta_title || post.title,
             description: seoDescription,
-            images: post.featured_image ? [post.featured_image] : [],
+            images: displayImage ? [displayImage] : [],
         },
         alternates: {
             canonical: url,
@@ -131,6 +140,15 @@ export default async function PostPage({ params }: PostPageProps) {
         getArticleSettings(),
     ]);
     const postUrl = `https://cachdautu.com/blog/${category}/${slug}`;
+
+    // Extract display image fallback for JSON-LD and sharing
+    let displayImage = post.featured_image;
+    if (!displayImage && post.content) {
+        const imgMatch = post.content.match(/<img[^>]+src="([^">]+)"/);
+        if (imgMatch && imgMatch[1]) {
+            displayImage = imgMatch[1];
+        }
+    }
 
     // Build CSS custom properties from article settings
     const articleStyle: Record<string, string> = {};
@@ -389,7 +407,7 @@ export default async function PostPage({ params }: PostPageProps) {
         "@type": "BlogPosting",
         headline: post.title,
         description: post.meta_description || post.excerpt,
-        image: post.featured_image,
+        image: displayImage,
         datePublished: post.scheduled_at || post.created_at,
         dateModified: post.updated_at || post.scheduled_at || post.created_at,
         wordCount: post.content?.split(/\s+/).length || 0,
@@ -581,9 +599,9 @@ export default async function PostPage({ params }: PostPageProps) {
                                 </div>
                             </header>
 
-                            {/* Featured Image */}
-                            <div className="w-full aspect-video rounded-3xl mb-8 sm:mb-10 bg-gradient-to-br from-purple-900/30 to-pink-900/30 flex items-center justify-center border border-white/[0.06] overflow-hidden relative">
-                                {post.featured_image ? (
+                            {/* Featured Image - Chỉ hiển thị banner nếu có post.featured_image (Tránh lặp ảnh với content) */}
+                            {post.featured_image && (
+                                <div className="w-full aspect-video rounded-3xl mb-8 sm:mb-10 bg-gradient-to-br from-purple-900/30 to-pink-900/30 flex items-center justify-center border border-white/[0.06] overflow-hidden relative">
                                     <SafeImage
                                         src={post.featured_image}
                                         alt={post.featured_image_alt || post.title}
@@ -593,10 +611,8 @@ export default async function PostPage({ params }: PostPageProps) {
                                         className="object-cover"
                                         sizes="(max-width: 768px) 100vw, 800px"
                                     />
-                                ) : (
-                                    <BookOpen className="w-16 h-16 sm:w-24 sm:h-24 text-white/10" />
-                                )}
-                            </div>
+                                </div>
+                            )}
 
                             {/* Excerpt */}
                             <p className="text-[17px] sm:text-[20px] leading-relaxed sm:leading-[1.8] text-white mb-8 sm:mb-10 font-medium">
@@ -716,16 +732,25 @@ export default async function PostPage({ params }: PostPageProps) {
                                 Bài viết <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">liên quan</span>
                             </h2>
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                                {relatedPosts.map((p: any) => (
+                                {relatedPosts.map((p: any) => {
+                                    let relDisplayImage = p.featured_image;
+                                    if (!relDisplayImage && p.content) {
+                                        const imgMatch = p.content.match(/<img[^>]+src="([^">]+)"/);
+                                        if (imgMatch && imgMatch[1]) {
+                                            relDisplayImage = imgMatch[1];
+                                        }
+                                    }
+
+                                    return (
                                     <Link
                                         key={p.id}
                                         href={`/blog/${p.categories?.slug || 'uncategorized'}/${p.slug}`}
                                         className="group bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.06] rounded-3xl overflow-hidden hover:border-purple-500/30 hover:shadow-glow-purple transition-all hover:-translate-y-1"
                                     >
                                         <div className="aspect-video bg-gradient-to-br from-purple-900/30 to-pink-900/30 relative overflow-hidden">
-                                            {p.featured_image ? (
+                                            {relDisplayImage ? (
                                                 <SafeImage
-                                                    src={p.featured_image}
+                                                    src={relDisplayImage}
                                                     alt={p.title}
                                                     fill
                                                     categorySlug={p.categories?.slug}
@@ -753,7 +778,8 @@ export default async function PostPage({ params }: PostPageProps) {
                                             </span>
                                         </div>
                                     </Link>
-                                ))}
+                                    );
+                                })}
                             </div>
                         </section>
                     )}

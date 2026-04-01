@@ -91,7 +91,15 @@ export default function SeoAuditPage() {
             }
 
             // 4. Featured Image
-            if (!post.featured_image) {
+            let hasImage = !!post.featured_image;
+            if (!hasImage && post.content) {
+                const imgMatch = post.content.match(/<img[^>]+src="([^">]+)"/);
+                if (imgMatch && imgMatch[1]) {
+                    hasImage = true;
+                }
+            }
+
+            if (!hasImage) {
                 issues.push({ label: "Hình ảnh", status: "fail", message: "Thiếu ảnh đại diện" });
             } else {
                 issues.push({ label: "Hình ảnh", status: "pass", message: "Tốt" });

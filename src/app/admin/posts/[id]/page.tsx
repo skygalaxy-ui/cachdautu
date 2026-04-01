@@ -475,7 +475,12 @@ export default function EditPostPage() {
                 {/* Sidebar */}
                 <div className="space-y-6">
                     <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-                        <label className="block text-sm font-medium text-gray-700 mb-3">Ảnh đại diện</label>
+                        <div className="mb-3">
+                            <label className="block text-sm font-medium text-gray-700">Ảnh đại diện</label>
+                            <p className="text-[11px] text-gray-400 mt-1 italic">
+                                *Nếu để trống, hệ thống sẽ tự động dùng ảnh đầu tiên trong bài viết làm ảnh bìa.
+                            </p>
+                        </div>
                         {form.featured_image ? (
                             <>
                                 <div className="relative">

@@ -7,8 +7,8 @@ import { TrendingUp, Building2, PiggyBank, Coins, ScrollText, Briefcase, BarChar
 const floatingIcons = [
     { icon: <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6" />, label: "Chứng khoán", color: "from-purple-500 to-pink-500", delay: "0s", position: "top-[15%] left-[5%] sm:left-[10%]" },
     { icon: <Building2 className="w-5 h-5 sm:w-6 sm:h-6" />, label: "Bất động sản", color: "from-pink-500 to-orange-500", delay: "1s", position: "top-[12%] right-[5%] sm:right-[15%]" },
-    { icon: <PiggyBank className="w-5 h-5 sm:w-6 sm:h-6" />, label: "Tiết kiệm", color: "from-orange-500 to-yellow-500", delay: "2s", position: "top-[32%] left-[2%] sm:left-[5%]" },
-    { icon: <Coins className="w-5 h-5 sm:w-6 sm:h-6" />, label: "Vàng", color: "from-yellow-500 to-green-500", delay: "0.5s", position: "top-[35%] right-[3%] sm:right-[8%]" },
+    { icon: <PiggyBank className="w-5 h-5 sm:w-6 sm:h-6" />, label: "Tiết kiệm", color: "from-orange-500 to-yellow-500", delay: "2s", position: "top-[32%] left-[2%] sm:left-[5%] hidden md:flex" },
+    { icon: <Coins className="w-5 h-5 sm:w-6 sm:h-6" />, label: "Vàng", color: "from-yellow-500 to-green-500", delay: "0.5s", position: "top-[35%] right-[3%] sm:right-[8%] hidden md:flex" },
     { icon: <ScrollText className="w-5 h-5 sm:w-6 sm:h-6" />, label: "Trái phiếu", color: "from-blue-400 to-blue-600", delay: "1.5s", position: "bottom-[32%] left-[5%] sm:left-[12%]" },
     { icon: <Briefcase className="w-5 h-5 sm:w-6 sm:h-6" />, label: "Quỹ đầu tư", color: "from-green-500 to-emerald-500", delay: "2.5s", position: "bottom-[28%] right-[5%] sm:right-[10%]" },
     { icon: <BarChart3 className="w-5 h-5 sm:w-6 sm:h-6" />, label: "Phân tích", color: "from-blue-500 to-purple-500", delay: "0.8s", position: "bottom-[42%] left-[8%] sm:left-[20%] hidden sm:flex" },
