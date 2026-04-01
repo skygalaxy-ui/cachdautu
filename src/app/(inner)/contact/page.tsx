@@ -18,7 +18,7 @@ const contactInfo = [
     {
         icon: <Mail className="w-5 h-5 sm:w-6 sm:h-6" />,
         title: "Email",
-        value: "contact@cachdautu.com",
+        value: "cachdautu.com@gmail.com",
         gradient: "from-purple-500 to-pink-500"
     },
     {
@@ -71,7 +71,16 @@ export default function ContactPage() {
                             </div>
                             Gửi tin nhắn
                         </h3>
-                        <form className="space-y-4 sm:space-y-5">
+                        <form 
+                            action="https://formsubmit.co/cachdautu.com@gmail.com" 
+                            method="POST" 
+                            className="space-y-4 sm:space-y-5"
+                        >
+                            {/* FormSubmit Config */}
+                            <input type="hidden" name="_subject" value="Tin nhắn mới từ website CachDauTu!" />
+                            <input type="hidden" name="_captcha" value="false" />
+                            <input type="hidden" name="_template" value="table" />
+                            <input type="hidden" name="_next" value="https://cachdautu.com/contact" />
                             <div>
                                 <label className="block text-xs sm:text-sm mb-2 text-text-secondary">
                                     Họ và tên
@@ -80,6 +89,8 @@ export default function ContactPage() {
                                     <User className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-text-muted" />
                                     <input
                                         type="text"
+                                        name="Họ Tên"
+                                        required
                                         placeholder="Nguyễn Văn A"
                                         className="w-full pl-10 sm:pl-12 pr-4 py-3 sm:py-4 rounded-xl bg-white/[0.03] border border-white/[0.06] text-white text-sm sm:text-base focus:border-purple-500 focus:outline-none transition-colors placeholder-text-muted"
                                     />
@@ -93,6 +104,8 @@ export default function ContactPage() {
                                     <Mail className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-text-muted" />
                                     <input
                                         type="email"
+                                        name="Email"
+                                        required
                                         placeholder="email@example.com"
                                         className="w-full pl-10 sm:pl-12 pr-4 py-3 sm:py-4 rounded-xl bg-white/[0.03] border border-white/[0.06] text-white text-sm sm:text-base focus:border-purple-500 focus:outline-none transition-colors placeholder-text-muted"
                                     />
@@ -103,6 +116,7 @@ export default function ContactPage() {
                                     Chủ đề
                                 </label>
                                 <select
+                                    name="Chủ đề"
                                     className="w-full px-4 py-3 sm:py-4 rounded-xl bg-white/[0.03] border border-white/[0.06] text-white text-sm sm:text-base focus:border-purple-500 focus:outline-none transition-colors"
                                 >
                                     <option>Câu hỏi chung</option>
@@ -117,6 +131,8 @@ export default function ContactPage() {
                                 </label>
                                 <textarea
                                     rows={4}
+                                    name="Nội dung"
+                                    required
                                     placeholder="Nội dung tin nhắn..."
                                     className="w-full px-4 py-3 sm:py-4 rounded-xl bg-white/[0.03] border border-white/[0.06] text-white text-sm sm:text-base focus:border-purple-500 focus:outline-none transition-colors resize-none placeholder-text-muted"
                                 />

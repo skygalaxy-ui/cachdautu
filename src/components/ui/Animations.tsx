@@ -26,17 +26,28 @@ export default function AnimatedSection({
             ([entry]) => {
                 if (entry.isIntersecting) {
                     setTimeout(() => setIsVisible(true), delay);
+                    // Dừng observer khi đã hiển thị để tối ưu hiệu suất
+                    if (ref.current) observer.unobserve(ref.current);
                 }
             },
-            { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+            { threshold: 0.05, rootMargin: "100px" } // rootMargin dương giúp trigger sớm hơn
         );
 
-        if (ref.current) {
-            observer.observe(ref.current);
+        const currentRef = ref.current;
+        if (currentRef) {
+            observer.observe(currentRef);
         }
 
-        return () => observer.disconnect();
-    }, [delay]);
+        // Fallback: Tự động hiển thị sau 3 giây để đảm bảo không bị kẹt màn hình đen
+        const fallbackTimer = setTimeout(() => {
+            if (!isVisible) setIsVisible(true);
+        }, 3000);
+
+        return () => {
+            if (currentRef) observer.unobserve(currentRef);
+            clearTimeout(fallbackTimer);
+        };
+    }, [delay, isVisible]);
 
     const animationClass = isVisible ? `animate-${animation}` : 'opacity-0';
 

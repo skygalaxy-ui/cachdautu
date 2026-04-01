@@ -56,5 +56,6 @@ export async function deleteImage(url: string): Promise<boolean> {
  * Bài scheduled nhưng chưa publish sẽ KHÔNG hiện trên site
  */
 export function publishedFilter(): string {
-    return `is_published.eq.true`;
+    const now = new Date().toISOString();
+    return `is_published.eq.true,scheduled_at.lte.${now}`;
 }

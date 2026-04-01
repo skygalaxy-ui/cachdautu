@@ -308,7 +308,20 @@ export default function AdminDashboard() {
                                 >
                                     <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-gray-100 to-gray-50 flex items-center justify-center flex-shrink-0 overflow-hidden">
                                         {post.featured_image ? (
-                                            <img src={post.featured_image} alt="" className="w-full h-full object-cover" />
+                                            <>
+                                                <img 
+                                                    src={post.featured_image} 
+                                                    alt="" 
+                                                    className="w-full h-full object-cover" 
+                                                    onError={(e) => {
+                                                        e.currentTarget.style.display = 'none';
+                                                        if (e.currentTarget.nextElementSibling) {
+                                                            e.currentTarget.nextElementSibling.classList.remove('hidden');
+                                                        }
+                                                    }}
+                                                />
+                                                <FileText className="w-5 h-5 text-gray-400 hidden" />
+                                            </>
                                         ) : (
                                             <FileText className="w-5 h-5 text-gray-400" />
                                         )}

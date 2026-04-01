@@ -41,7 +41,7 @@ export default function SettingsPage() {
     const [settings, setSettings] = useState({
         siteName: "Cách Đầu Tư",
         siteDescription: "Nền tảng kiến thức đầu tư hàng đầu Việt Nam",
-        contactEmail: "contact@cachdautu.com",
+        contactEmail: "cachdautu.com@gmail.com",
         facebook: "",
         youtube: "",
         telegram: "",

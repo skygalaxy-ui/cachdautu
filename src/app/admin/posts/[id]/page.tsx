@@ -203,9 +203,60 @@ export default function EditPostPage() {
     }
 
     if (loading) return (
-        <div className="pt-12 lg:pt-0 flex flex-col items-center justify-center py-20">
-            <div className="w-8 h-8 border-2 border-gray-200 border-t-emerald-500 rounded-full animate-spin mb-3" />
-            <p className="text-gray-500 text-sm">Đang tải bài viết...</p>
+        <div className="pt-12 lg:pt-0 max-w-5xl animate-pulse">
+            <div className="h-4 w-48 bg-gray-200 rounded mb-4" />
+            <div className="flex items-center justify-between gap-4 mb-8">
+                <div className="flex items-center gap-4">
+                    <div className="w-9 h-9 bg-gray-200 rounded-lg" />
+                    <div>
+                        <div className="h-8 w-32 bg-gray-200 rounded mb-1.5" />
+                        <div className="h-4 w-64 bg-gray-100 rounded" />
+                    </div>
+                </div>
+                <div className="flex gap-2">
+                    <div className="w-9 h-9 bg-gray-200 rounded-lg" />
+                    <div className="w-9 h-9 bg-gray-200 rounded-lg" />
+                </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {/* Main Skeleton */}
+                <div className="lg:col-span-2 space-y-6">
+                    <div className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm space-y-4">
+                        <div className="h-4 w-16 bg-gray-200 rounded" />
+                        <div className="h-12 w-full bg-gray-100 rounded-lg" />
+                        <div className="h-4 w-24 bg-gray-200 rounded pt-4 mt-4" />
+                        <div className="h-10 w-full bg-gray-100 rounded-lg" />
+                        <div className="h-4 w-32 bg-gray-200 rounded pt-4 mt-4" />
+                        <div className="h-10 w-full bg-gray-100 rounded-lg" />
+                    </div>
+                    <div className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm space-y-4">
+                        <div className="h-4 w-40 bg-gray-200 rounded" />
+                        <div className="h-20 w-full bg-gray-100 rounded-lg" />
+                    </div>
+                    <div className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm space-y-4">
+                        <div className="h-4 w-56 bg-gray-200 rounded" />
+                        <div className="h-20 w-full bg-gray-100 rounded-lg" />
+                    </div>
+                    <div className="bg-white rounded-xl border border-gray-100 shadow-sm h-[600px] flex flex-col">
+                        <div className="h-12 border-b border-gray-100 bg-gray-50 rounded-t-xl" />
+                        <div className="h-10 border-b border-gray-100 bg-gray-50/50" />
+                        <div className="flex-1 bg-gray-50" />
+                    </div>
+                </div>
+
+                {/* Sidebar Skeleton */}
+                <div className="space-y-6">
+                    {[1, 2, 3, 4, 5].map(i => (
+                        <div key={i} className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm space-y-3">
+                            <div className="h-4 w-1/3 bg-gray-200 rounded" />
+                            <div className={`w-full bg-gray-100 rounded-lg ${i === 1 ? 'aspect-video' : 'h-10'}`} />
+                            {i === 1 && <div className="h-10 w-full bg-gray-100 rounded-lg mt-2" />}
+                        </div>
+                    ))}
+                    <div className="h-12 w-full bg-gray-200 rounded-lg" />
+                </div>
+            </div>
         </div>
     );
 

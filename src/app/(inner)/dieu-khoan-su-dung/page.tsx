@@ -69,7 +69,7 @@ const sections = [
         title: "7. Liên hệ",
         content: [
             "Nếu bạn có bất kỳ câu hỏi nào về Điều khoản sử dụng này, vui lòng liên hệ:",
-            "**Email:** contact@cachdautu.com",
+            "**Email:** cachdautu.com@gmail.com",
             "**Website:** cachdautu.com/contact",
             "Điều khoản này được điều chỉnh bởi pháp luật Việt Nam. Mọi tranh chấp phát sinh sẽ được giải quyết tại tòa án có thẩm quyền tại Việt Nam.",
         ]

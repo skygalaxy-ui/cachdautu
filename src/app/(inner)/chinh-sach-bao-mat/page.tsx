@@ -60,7 +60,7 @@ const sections = [
         title: "6. Liên hệ",
         content: [
             "Nếu bạn có bất kỳ câu hỏi nào về Chính sách bảo mật này, vui lòng liên hệ với chúng tôi qua:",
-            "**Email:** contact@cachdautu.com",
+            "**Email:** cachdautu.com@gmail.com",
             "**Website:** cachdautu.com/contact",
             "Chính sách này có hiệu lực từ ngày 01/03/2026 và có thể được cập nhật theo thời gian. Mọi thay đổi sẽ được công bố trên trang này.",
         ]

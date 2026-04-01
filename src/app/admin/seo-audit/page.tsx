@@ -62,6 +62,7 @@ export default function SeoAuditPage() {
                 issues.push({ label: "Tiêu đề", status: "warning", message: `Độ dài không tối ưu (${metaTitle.length}/30-60 ký tự)` });
                 points += 0.5;
             } else {
+                issues.push({ label: "Tiêu đề", status: "pass", message: "Tốt" });
                 points += 1;
             }
 
@@ -73,6 +74,7 @@ export default function SeoAuditPage() {
                 issues.push({ label: "Mô tả SEO", status: "warning", message: `Độ dài không tối ưu (${metaDesc.length}/70-160 ký tự)` });
                 points += 0.5;
             } else {
+                issues.push({ label: "Mô tả SEO", status: "pass", message: "Tốt" });
                 points += 1;
             }
 
@@ -84,6 +86,7 @@ export default function SeoAuditPage() {
                 issues.push({ label: "Độ dài nội dung", status: "warning", message: `Nội dung trung bình (${wordCount} từ). Nên ≥800 từ` });
                 points += 0.5;
             } else {
+                issues.push({ label: "Độ dài nội dung", status: "pass", message: "Tốt" });
                 points += 1;
             }
 
@@ -91,6 +94,7 @@ export default function SeoAuditPage() {
             if (!post.featured_image) {
                 issues.push({ label: "Hình ảnh", status: "fail", message: "Thiếu ảnh đại diện" });
             } else {
+                issues.push({ label: "Hình ảnh", status: "pass", message: "Tốt" });
                 points += 1;
             }
 
@@ -99,6 +103,7 @@ export default function SeoAuditPage() {
                 issues.push({ label: "URL/Slug", status: "warning", message: post.slug ? "Slug quá dài (>75 ký tự)" : "Thiếu Slug" });
                 points += 0.5;
             } else {
+                issues.push({ label: "URL/Slug", status: "pass", message: "Tốt" });
                 points += 1;
             }
 
@@ -108,6 +113,7 @@ export default function SeoAuditPage() {
                 issues.push({ label: "Từ khóa chính", status: "warning", message: "Chưa đặt từ khóa chính (Focus Keyword)" });
                 points += 0.5;
             } else {
+                issues.push({ label: "Từ khóa chính", status: "pass", message: "Tốt" });
                 points += 1;
             }
 
@@ -144,9 +150,44 @@ export default function SeoAuditPage() {
 
     if (loading) {
         return (
-            <div className="flex flex-col items-center justify-center py-20 animate-pulse">
-                <RefreshCcw className="w-10 h-10 text-emerald-500 animate-spin mb-4" />
-                <p className="text-gray-500 font-medium">Đang chạy Audit toàn website...</p>
+            <div className="space-y-6 max-w-7xl mx-auto pb-20 px-4 sm:px-0 mt-6">
+                {/* Header Skeleton */}
+                <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-between">
+                    <div className="space-y-3">
+                        <div className="h-7 w-48 bg-gray-200 rounded-lg animate-pulse" />
+                        <div className="h-4 w-64 bg-gray-100 rounded animate-pulse" />
+                    </div>
+                </div>
+
+                {/* Tabs Skeleton */}
+                <div className="flex gap-4 border-b border-gray-200 pb-2">
+                    <div className="h-8 w-32 bg-gray-200 rounded-md animate-pulse" />
+                    <div className="h-8 w-40 bg-gray-100 rounded-md animate-pulse" />
+                </div>
+
+                {/* Stats Grid Skeleton */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    {[1, 2, 3].map(i => (
+                        <div key={i} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-3">
+                            <div className="h-4 w-32 bg-gray-100 rounded animate-pulse" />
+                            <div className="h-8 w-16 bg-gray-200 rounded animate-pulse" />
+                        </div>
+                    ))}
+                </div>
+
+                {/* List Skeleton */}
+                <div className="space-y-4 mt-8">
+                    {[1, 2, 3, 4, 5].map(i => (
+                        <div key={i} className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex items-center gap-4">
+                            <div className="w-12 h-12 bg-gray-200 rounded-xl animate-pulse shrink-0" />
+                            <div className="flex-1 space-y-2.5">
+                                <div className="h-4 w-2/3 bg-gray-200 rounded animate-pulse" />
+                                <div className="h-3 w-1/3 bg-gray-100 rounded animate-pulse" />
+                            </div>
+                            <div className="w-8 h-8 bg-gray-100 rounded-lg animate-pulse shrink-0" />
+                        </div>
+                    ))}
+                </div>
             </div>
         );
     }
@@ -280,9 +321,13 @@ export default function SeoAuditPage() {
                                                 <h3 className="font-bold text-gray-900 truncate group-hover:text-emerald-600 transition-colors uppercase text-sm tracking-tight">{post.title}</h3>
                                                 <div className="flex items-center gap-3 mt-1 text-xs text-gray-400">
                                                     <span className="flex items-center gap-1"><FileText size={12} /> {post.slug}</span>
-                                                    {issues.length > 0 && (
+                                                    {issues.filter(i => i.status !== 'pass').length > 0 ? (
                                                         <span className={`flex items-center gap-1 font-bold ${issues.some(i => i.status === 'fail') ? 'text-red-500' : 'text-amber-500'}`}>
-                                                            <AlertCircle size={12} /> {issues.length} vấn đề
+                                                            <AlertCircle size={12} /> {issues.filter(i => i.status !== 'pass').length} vấn đề
+                                                        </span>
+                                                    ) : (
+                                                        <span className="flex items-center gap-1 font-bold text-emerald-500">
+                                                            <CheckCircle2 size={12} /> Tối ưu tốt
                                                         </span>
                                                     )}
                                                 </div>
@@ -304,11 +349,16 @@ export default function SeoAuditPage() {
                                         <div className="px-16 pb-6 pt-2 border-t border-gray-50 bg-gray-50/20">
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
                                                 {issues.map((issue, idx) => (
-                                                    <div key={idx} className="flex items-start gap-3 p-3 bg-white rounded-xl border border-gray-100 shadow-sm">
-                                                        {issue.status === "fail" ? <XCircle size={16} className="text-red-500 mt-0.5" /> : <AlertCircle size={16} className="text-amber-500 mt-0.5" />}
+                                                    <div key={idx} className={`flex items-start gap-3 p-3 bg-white rounded-xl shadow-sm border-l-4 ${
+                                                        issue.status === 'fail' ? 'border-l-red-500 border-y-red-100 border-r-red-100' : 
+                                                        issue.status === 'warning' ? 'border-l-amber-500 border-y-amber-100 border-r-amber-100' : 'border-l-emerald-500 border-y-emerald-100 border-r-emerald-100'
+                                                    }`}>
+                                                        {issue.status === "fail" ? <XCircle size={16} className="text-red-500 mt-0.5" /> : 
+                                                         issue.status === "warning" ? <AlertCircle size={16} className="text-amber-500 mt-0.5" /> : 
+                                                         <CheckCircle2 size={16} className="text-emerald-500 mt-0.5" />}
                                                         <div>
                                                             <p className="text-xs font-bold text-gray-900">{issue.label}</p>
-                                                            <p className={`text-xs mt-0.5 ${issue.status === 'fail' ? 'text-red-500' : 'text-amber-600'}`}>{issue.message}</p>
+                                                            <p className={`text-xs mt-0.5 ${issue.status === 'fail' ? 'text-red-600' : issue.status === 'warning' ? 'text-amber-600' : 'text-emerald-600'}`}>{issue.message}</p>
                                                         </div>
                                                     </div>
                                                 ))}

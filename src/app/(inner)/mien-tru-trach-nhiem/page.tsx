@@ -68,7 +68,7 @@ const sections = [
         title: "7. Liên hệ",
         content: [
             "Nếu bạn có bất kỳ câu hỏi nào về Tuyên bố miễn trừ trách nhiệm này, vui lòng liên hệ:",
-            "**Email:** contact@cachdautu.com",
+            "**Email:** cachdautu.com@gmail.com",
             "**Website:** cachdautu.com/contact",
             "Tuyên bố này có hiệu lực từ ngày 01/03/2026 và có thể được cập nhật theo thời gian. Mọi thay đổi sẽ được công bố trên trang này.",
         ]

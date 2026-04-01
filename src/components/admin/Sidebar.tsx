@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import {
     LayoutDashboard,
@@ -88,7 +87,7 @@ export default function AdminSidebar() {
                 </button>
                 <div className="flex items-center gap-2">
                     <div className="w-8 h-8 rounded-lg overflow-hidden">
-                        <Image src="/logo.png" alt="Logo" width={32} height={32} className="w-full h-full object-cover" />
+                        <img src="/logo.png" alt="Logo" width={32} height={32} className="w-full h-full object-cover" />
                     </div>
                     <span className="font-semibold text-gray-900">Admin</span>
                 </div>
@@ -112,7 +111,7 @@ export default function AdminSidebar() {
                 <div className="h-16 flex items-center justify-between px-5 border-b border-white/10">
                     <Link href="/admin" className="flex items-center gap-3">
                         <div className="w-9 h-9 rounded-lg overflow-hidden ring-2 ring-white/20">
-                            <Image src="/logo.png" alt="Logo" width={36} height={36} className="w-full h-full object-cover" />
+                            <img src="/logo.png" alt="Logo" width={36} height={36} className="w-full h-full object-cover" />
                         </div>
                         <div>
                             <p className="font-semibold text-white text-sm">Cách Đầu Tư</p>

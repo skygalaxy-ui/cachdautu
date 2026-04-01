@@ -1,5 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 
 // API Route: GET /api/cron/publish
 // Tự động xuất bản bài viết đã đến giờ scheduled_at
@@ -30,7 +31,7 @@ export async function GET(request: Request) {
         // Tìm bài viết đã đến giờ nhưng chưa xuất bản
         const { data: posts, error: fetchError } = await supabase
             .from("posts")
-            .select("id, title, slug, scheduled_at")
+            .select("id, title, slug, scheduled_at, categories(slug)")
             .eq("is_published", false)
             .not("scheduled_at", "is", null)
             .lte("scheduled_at", now);
@@ -57,6 +58,14 @@ export async function GET(request: Request) {
 
             if (!updateError) {
                 published.push({ title: post.title, slug: post.slug, scheduled_at: post.scheduled_at });
+                
+                // On-demand revalidation: Clear cache immediately
+                const categoryData = post.categories as any;
+                const categorySlug = categoryData?.slug || "uncategorized";
+                revalidatePath("/");
+                revalidatePath("/blog");
+                revalidatePath(`/blog/${categorySlug}`);
+                revalidatePath(`/blog/${categorySlug}/${post.slug}`);
             }
         }
 
