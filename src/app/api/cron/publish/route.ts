@@ -57,15 +57,44 @@ export async function GET(request: Request) {
                 .eq("id", post.id);
 
             if (!updateError) {
-                published.push({ title: post.title, slug: post.slug, scheduled_at: post.scheduled_at });
-                
-                // On-demand revalidation: Clear cache immediately
                 const categoryData = post.categories as any;
                 const categorySlug = categoryData?.slug || "uncategorized";
+                
+                published.push({ title: post.title, slug: post.slug, scheduled_at: post.scheduled_at, categorySlug });
+                
+                // On-demand revalidation: Clear cache immediately
                 revalidatePath("/");
                 revalidatePath("/blog");
                 revalidatePath(`/blog/${categorySlug}`);
                 revalidatePath(`/blog/${categorySlug}/${post.slug}`);
+            }
+        }
+
+        // Gửi thông báo qua Telegram
+        if (published.length > 0) {
+            const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
+            const telegramChatId = process.env.TELEGRAM_CHAT_ID;
+
+            if (telegramToken && telegramChatId) {
+                try {
+                    let message = `✅ *CachDauTu.com* vừa xuất bản thành công ${published.length} bài viết mới:\n\n`;
+                    published.forEach((p, idx) => {
+                        message += `${idx + 1}. [${p.title}](https://cachdautu.com/blog/${p.categorySlug}/${p.slug})\n`;
+                    });
+
+                    await fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            chat_id: telegramChatId,
+                            text: message,
+                            parse_mode: "Markdown",
+                            disable_web_page_preview: true
+                        })
+                    });
+                } catch (err) {
+                    console.error("Lỗi gửi Telegram:", err);
+                }
             }
         }
 
