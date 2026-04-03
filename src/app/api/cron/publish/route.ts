@@ -77,10 +77,40 @@ export async function GET(request: Request) {
 
             if (telegramToken && telegramChatId) {
                 try {
-                    let message = `✅ *CachDauTu.com* vừa xuất bản thành công ${published.length} bài viết mới:\n\n`;
-                    published.forEach((p, idx) => {
-                        message += `${idx + 1}. [${p.title}](https://cachdautu.com/blog/${p.categorySlug}/${p.slug})\n`;
+                    // Lấy danh sách bài đang chờ trong ngày hôm nay (giờ VN)
+                    const nowObj = new Date();
+                    const startOfNextDay = new Date(nowObj);
+                    startOfNextDay.setUTCHours(startOfNextDay.getUTCHours() + 7); // shift to VN
+                    startOfNextDay.setUTCDate(startOfNextDay.getUTCDate() + 1); // next day
+                    startOfNextDay.setUTCHours(0, 0, 0, 0); // start of next day VN
+                    startOfNextDay.setUTCHours(startOfNextDay.getUTCHours() - 7); // back to UTC
+                    
+                    const { data: upcomingPosts } = await supabase
+                        .from("posts")
+                        .select("title, scheduled_at")
+                        .eq("is_published", false)
+                        .not("scheduled_at", "is", null)
+                        .gt("scheduled_at", now)
+                        .lte("scheduled_at", startOfNextDay.toISOString())
+                        .order("scheduled_at", { ascending: true });
+
+                    let message = `✅ *CachDauTu.com* vừa xuất bản bài viết mới:\n\n`;
+                    published.forEach((p) => {
+                        message += `📌 [${p.title}](https://cachdautu.com/blog/${p.categorySlug}/${p.slug})\n`;
                     });
+
+                    if (upcomingPosts && upcomingPosts.length > 0) {
+                        message += `\n⏳ *CÁC BÀI ĐANG CHỜ LÊN SÓNG HÔM NAY:*\n`;
+                        upcomingPosts.forEach((up) => {
+                            const d = new Date(up.scheduled_at);
+                            d.setUTCHours(d.getUTCHours() + 7); // shift to VN time
+                            const h = String(d.getUTCHours()).padStart(2, '0');
+                            const m = String(d.getUTCMinutes()).padStart(2, '0');
+                            message += `- ${h}:${m}: ${up.title}\n`;
+                        });
+                    } else {
+                        message += `\n🎉 Hôm nay đã đăng xong toàn bộ bài viết trong ngày!`;
+                    }
 
                     await fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
                         method: "POST",
