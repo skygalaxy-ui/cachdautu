@@ -23,17 +23,10 @@ export default function MarkdownPreview({ content }: MarkdownPreviewProps) {
     }
 
     return (
-<<<<<<< HEAD
-        <div
-            className="prose-preview content-rendered text-gray-800 [&_p]:!text-gray-800 [&_span]:!text-gray-800 [&_h1]:!text-gray-900 [&_h2]:!text-gray-900 [&_h3]:!text-gray-900 [&_h4]:!text-gray-900 [&_li]:!text-gray-800 [&_strong]:!text-gray-900 [&_b]:!text-gray-900"
-            dangerouslySetInnerHTML={{ __html: html }}
-            style={{
-                lineHeight: '1.8',
-                fontSize: '15px',
-            }}
-        />
-=======
-        <div className="prose-preview content-rendered" style={{ lineHeight: '1.8', fontSize: '15px' }}>
+        <div 
+            className="prose-preview content-rendered text-gray-800 [&_p]:!text-gray-800 [&_span]:!text-gray-800 [&_h1]:!text-gray-900 [&_h2]:!text-gray-900 [&_h3]:!text-gray-900 [&_h4]:!text-gray-900 [&_li]:!text-gray-800 [&_strong]:!text-gray-900 [&_b]:!text-gray-900" 
+            style={{ lineHeight: '1.8', fontSize: '15px' }}
+        >
             {isHTML(content) ? (
                 // Lọc nội dung cũ chứa HTML thuần
                 <div dangerouslySetInnerHTML={{ __html: content }} />
@@ -70,6 +63,5 @@ export default function MarkdownPreview({ content }: MarkdownPreviewProps) {
                 </ReactMarkdown>
             )}
         </div>
->>>>>>> 0d81ab3 (chore: setup github actions CI and fix markdown parser bugs)
     );
 }
