@@ -27,8 +27,9 @@ jobs:
             # Go to app directory
             cd ~/cachdautu
             
-            # Pull latest code
-            git pull origin main
+            # Quy trình Pull an toàn bạo chúa: Huỷ bỏ mọi thay đổi lặt vặt trên VPS, đè code chuẩn từ GitHub lên rập khuôn 100%
+            git fetch --all
+            git reset --hard origin/main
             
             # Install dependencies and build
             npm install
