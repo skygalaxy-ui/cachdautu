@@ -94,13 +94,14 @@ export async function GET(request: Request) {
                         .lte("scheduled_at", startOfNextDay.toISOString())
                         .order("scheduled_at", { ascending: true });
 
-                    let message = `✅ *CachDauTu.com* vừa xuất bản bài viết mới:\n\n`;
+                    let message = `✅ <b>CachDauTu.com</b> vừa xuất bản bài viết mới:\n\n`;
                     published.forEach((p) => {
-                        message += `📌 [${p.title}](https://cachdautu.com/blog/${p.categorySlug}/${p.slug})\n`;
+                        // Tránh lỗi khi title chứa ký tự đặc biệt, dùng HTML an toàn hơn Markdown
+                        message += `📌 <a href="https://cachdautu.com/blog/${p.categorySlug}/${p.slug}">${p.title}</a>\n`;
                     });
 
                     if (upcomingPosts && upcomingPosts.length > 0) {
-                        message += `\n⏳ *CÁC BÀI ĐANG CHỜ LÊN SÓNG HÔM NAY:*\n`;
+                        message += `\n⏳ <b>CÁC BÀI ĐANG CHỜ LÊN SÓNG HÔM NAY:</b>\n`;
                         upcomingPosts.forEach((up) => {
                             const d = new Date(up.scheduled_at);
                             d.setUTCHours(d.getUTCHours() + 7); // shift to VN time
@@ -118,7 +119,7 @@ export async function GET(request: Request) {
                         body: JSON.stringify({
                             chat_id: telegramChatId,
                             text: message,
-                            parse_mode: "Markdown",
+                            parse_mode: "HTML",
                             disable_web_page_preview: true
                         })
                     });
