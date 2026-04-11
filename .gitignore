@@ -40,8 +40,13 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+<<<<<<< HEAD
 # temp scripts
 *.mjs
 
 # agent workflows
 .agents/
+=======
+# backups / duplicates
+cachdautu-repo/
+>>>>>>> 0d81ab3 (chore: setup github actions CI and fix markdown parser bugs)
