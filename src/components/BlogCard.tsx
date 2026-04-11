@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 
 interface BlogPost {
     slug: string;
@@ -17,6 +20,7 @@ interface BlogCardProps {
     post: BlogPost;
 }
 
+// 100% Free Fallback URLs from Unsplash (dựa trên domain đã allow trong config của bạn)
 const getCategoryImage = (category: string) => {
     switch (category) {
         case 'chung-khoan':
@@ -24,30 +28,36 @@ const getCategoryImage = (category: string) => {
         case 'trai-phieu':
         case 'tai-chinh-ca-nhan':
         case 'khoi-nghiep':
-            return '/images/blog/stocks.png'; // High-tech charts concept
+            return 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&auto=format'; // biểu đồ chứng khoán
         case 'bat-dong-san':
-            return '/images/blog/real-estate.png'; // Architecture concept
+            return 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&auto=format'; // toà nhà kiến trúc
         case 'vang':
         case 'dau-tu-thay-the':
-            return '/images/blog/gold.png'; // Gold/Wealth concept
+            return 'https://images.unsplash.com/photo-1610375461246-83df859d849d?w=800&auto=format'; // vàng miếng
         default:
-            return '/images/blog/stocks.png';
+            return 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=800&auto=format';
     }
 };
 
 export default function BlogCard({ post }: BlogCardProps) {
-    const displayImage = post.image || getCategoryImage(post.category);
+    const defaultImage = getCategoryImage(post.category);
+    // Sử dụng state tự động fallback 100% khi ảnh bị lỗi (404/500)
+    const [imgSrc, setImgSrc] = useState(post.image || defaultImage);
 
     return (
         <article className="bg-white/5 rounded-2xl overflow-hidden border border-white/10 hover:border-accent-gold/50 transition-all duration-300 hover:-translate-y-2 group flex flex-col h-full">
             {/* Image container */}
             <div className="h-48 relative bg-primary-light overflow-hidden">
                 <Image
-                    src={displayImage}
+                    src={imgSrc}
                     alt={post.title}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    onError={() => {
+                        // Tự nhẩy sang ảnh dự phòng ngay khi URL kia chết
+                        setImgSrc(defaultImage);
+                    }}
                 />
 
                 {/* Overlay gradient for text readability */}

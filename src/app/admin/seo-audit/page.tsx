@@ -52,7 +52,7 @@ export default function SeoAuditPage() {
         return posts.map(post => {
             const issues: AuditResult['issues'] = [];
             let points = 0;
-            const totalChecks = 6;
+            const totalChecks = 8; // Tăng lên 8 để check thêm outline & table
 
             // 1. Meta Title
             const metaTitle = post.meta_title || post.title;
@@ -122,6 +122,30 @@ export default function SeoAuditPage() {
                 points += 0.5;
             } else {
                 issues.push({ label: "Từ khóa chính", status: "pass", message: "Tốt" });
+                points += 1;
+            }
+
+            // 7. Outline Cấu trúc (H2, H3)
+            const hasH2 = post.content ? /^##\s/m.test(post.content) || /<h2/i.test(post.content) : false;
+            const hasH3 = post.content ? /^###\s/m.test(post.content) || /<h3/i.test(post.content) : false;
+            
+            if (!hasH2) {
+                issues.push({ label: "Cấu trúc Heading", status: "fail", message: "Hoàn toàn thiếu thẻ H2 (##) để chia đoạn" });
+            } else if (!hasH3) {
+                issues.push({ label: "Cấu trúc Heading", status: "warning", message: "Thiếu thẻ nhánh H3 (###) - chưa đủ chuyên sâu" });
+                points += 0.5;
+            } else {
+                issues.push({ label: "Cấu trúc Heading", status: "pass", message: "Tốt" });
+                points += 1;
+            }
+
+            // 8. Bảng Dữ liệu (Tables)
+            const hasTable = post.content ? /\|.*\|/.test(post.content) || /<table/i.test(post.content) : false;
+            if (!hasTable) {
+                issues.push({ label: "Bảng số liệu", status: "warning", message: "Nên chèn bảng so sánh (Markdown table) để tăng chất lượng bài" });
+                points += 0.5;
+            } else {
+                issues.push({ label: "Bảng số liệu", status: "pass", message: "Tốt" });
                 points += 1;
             }
 
@@ -452,7 +476,11 @@ export default function SeoAuditPage() {
                                 </li>
                                 <li className="flex gap-3 text-sm text-gray-600">
                                     <div className="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px] shrink-0 mt-0.5">4</div>
-                                    <span>Tất cả hình ảnh cần có thuộc tính Alt mô tả chứa từ khóa chính.</span>
+                                    <span>Tất cả hình ảnh cần có thuộc tính Alt chứa từ khóa, ưu tiên có ảnh xen kẽ nội dung.</span>
+                                </li>
+                                <li className="flex gap-3 text-sm text-gray-600">
+                                    <div className="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px] shrink-0 mt-0.5">5</div>
+                                    <span>Nên sử dụng Bảng số liệu (Table) hoặc danh sách liệt kê để tăng điểm Trust với Google.</span>
                                 </li>
                             </ul>
                         </div>
