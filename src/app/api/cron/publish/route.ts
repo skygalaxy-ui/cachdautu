@@ -94,10 +94,18 @@ export async function GET(request: Request) {
                         .lte("scheduled_at", startOfNextDay.toISOString())
                         .order("scheduled_at", { ascending: true });
 
+                    // Hàm hỗ trợ escape HTML
+                    const escapeHtml = (text: string) => {
+                        return text
+                            .replace(/&/g, "&amp;")
+                            .replace(/</g, "&lt;")
+                            .replace(/>/g, "&gt;");
+                    };
+
                     let message = `✅ <b>CachDauTu.com</b> vừa xuất bản bài viết mới:\n\n`;
                     published.forEach((p) => {
                         // Tránh lỗi khi title chứa ký tự đặc biệt, dùng HTML an toàn hơn Markdown
-                        message += `📌 <a href="https://cachdautu.com/blog/${p.categorySlug}/${p.slug}">${p.title}</a>\n`;
+                        message += `📌 <a href="https://cachdautu.com/blog/${p.categorySlug}/${p.slug}">${escapeHtml(p.title)}</a>\n`;
                     });
 
                     if (upcomingPosts && upcomingPosts.length > 0) {
@@ -105,15 +113,15 @@ export async function GET(request: Request) {
                         upcomingPosts.forEach((up) => {
                             const d = new Date(up.scheduled_at);
                             d.setUTCHours(d.getUTCHours() + 7); // shift to VN time
-                            const h = String(d.getUTCHours()).padStart(2, '0');
-                            const m = String(d.getUTCMinutes()).padStart(2, '0');
-                            message += `- ${h}:${m}: ${up.title}\n`;
+                            const h = String(d.getUTCHours()).padStart(2, "0");
+                            const m = String(d.getUTCMinutes()).padStart(2, "0");
+                            message += `- ${h}:${m}: ${escapeHtml(up.title)}\n`;
                         });
                     } else {
                         message += `\n🎉 Hôm nay đã đăng xong toàn bộ bài viết trong ngày!`;
                     }
 
-                    await fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
+                    const res = await fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
@@ -123,9 +131,16 @@ export async function GET(request: Request) {
                             disable_web_page_preview: true
                         })
                     });
+                    
+                    if (!res.ok) {
+                        const errText = await res.text();
+                        console.error("Telegram API Error:", errText);
+                    }
                 } catch (err) {
-                    console.error("Lỗi gửi Telegram:", err);
+                    console.error("Lỗi gửi Telegram (Network):", err);
                 }
+            } else {
+                console.warn("Bỏ qua thông báo: Thiếu TELEGRAM_BOT_TOKEN hoặc TELEGRAM_CHAT_ID trong biến môi trường.");
             }
         }
 
