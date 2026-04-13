@@ -78,7 +78,8 @@ export async function GET(request: Request) {
             if (telegramToken && telegramChatId) {
                 try {
                     // Hàm hỗ trợ escape HTML
-                    const escapeHtml = (text: string) => {
+                    const escapeHtml = (text: string | null | undefined) => {
+                        if (!text) return "";
                         return text
                             .replace(/&/g, "&amp;")
                             .replace(/</g, "&lt;")

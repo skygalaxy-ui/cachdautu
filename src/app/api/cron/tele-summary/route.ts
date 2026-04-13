@@ -44,7 +44,8 @@ export async function GET(request: Request) {
         endOfDayVN.setUTCHours(23, 59, 59, 999);
         endOfDayVN.setTime(endOfDayVN.getTime() - 7 * 60 * 60 * 1000);
 
-        const escapeHtml = (text: string) => {
+        const escapeHtml = (text: string | null | undefined) => {
+            if (!text) return "";
             return text
                 .replace(/&/g, "&amp;")
                 .replace(/</g, "&lt;")
@@ -79,7 +80,7 @@ export async function GET(request: Request) {
             if (postsToday && postsToday.length > 0) {
                 message += `📅 <b>Sẽ xuất bản hôm nay (${postsToday.length} bài):</b>\n`;
                 postsToday.forEach((p) => {
-                    const d = new Date(p.scheduled_at);
+                    const d = new Date(p.scheduled_at as string);
                     d.setTime(d.getTime() + 7 * 60 * 60 * 1000); // VN Time
                     const h = String(d.getUTCHours()).padStart(2, "0");
                     const m = String(d.getUTCMinutes()).padStart(2, "0");
