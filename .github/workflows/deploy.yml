@@ -6,13 +6,43 @@ on:
       - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
         
-      - name: Deploy via SSH to VPS
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Next.js
+        run: npm run build
+        env:
+          # Thêm các biến môi trường cần thiết để Build (Next.js yêu cầu có env lúc build)
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          
+      - name: Prepare deployment package
+        run: |
+          tar -czf deploy.tar.gz .next public package.json package-lock.json next.config.js tailwind.config.js postcss.config.js
+
+      - name: Copy files via SSH
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: 22
+          source: "deploy.tar.gz"
+          target: "/tmp/"
+
+      - name: Extract and Restart PM2 on VPS
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -20,20 +50,17 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           port: 22
           script: |
-            # Load NVM (Node Version Manager) if installed to ensure npm works
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             
-            # Go to app directory
             cd ~/cachdautu
             
-            # Quy trình Pull an toàn bạo chúa: Huỷ bỏ mọi thay đổi lặt vặt trên VPS, đè code chuẩn từ GitHub lên rập khuôn 100%
-            git fetch --all
-            git reset --hard origin/main
+            # Giải nén đè lên bản cũ
+            tar -xzf /tmp/deploy.tar.gz -C ~/cachdautu
+            rm /tmp/deploy.tar.gz
             
-            # Install dependencies and build
-            npm install
-            npm run build
+            # Cài đặt các gói production (cực kỳ nhẹ, không gây tốn RAM)
+            npm ci --omit=dev
             
-            # Restart PM2 process
+            # Khởi động lại ứng dụng
             pm2 restart cachdautu --update-env
