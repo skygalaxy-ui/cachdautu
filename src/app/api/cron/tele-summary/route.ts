@@ -23,8 +23,8 @@ export async function GET(request: Request) {
             serviceRoleKey || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
         );
 
-        const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
-        const telegramChatId = process.env.TELEGRAM_CHAT_ID;
+        const telegramToken = process.env.TELEGRAM_BOT_TOKEN || "8746774733:AAH-qbduwnk6jSGbn8ZHn7IAUN_9XVej7jQ";
+        const telegramChatId = process.env.TELEGRAM_CHAT_ID || "7693132516";
 
         if (!telegramToken || !telegramChatId) {
             return NextResponse.json({ error: "Missing Telegram Config" }, { status: 500 });

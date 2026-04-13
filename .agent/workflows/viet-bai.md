@@ -49,8 +49,13 @@ const { error } = await supabase.from('posts').insert({
 ```
 
 ### Bước 5: Lên lịch
-- Set `scheduled_at` theo slot tiếp theo chưa bị chiếm
-- 3 slot/ngày: 00:00 UTC (07:00 VN), 05:00 UTC (12:00 VN), 11:00 UTC (18:00 VN)
+- 6 slot/ngày (thời gian UTC): 
+  + 00:00 UTC (07:00 VN)
+  + 02:30 UTC (09:30 VN)
+  + 05:00 UTC (12:00 VN)
+  + 08:00 UTC (15:00 VN)
+  + 11:00 UTC (18:00 VN)
+  + 13:30 UTC (20:30 VN)
 - `is_published` LUÔN = `false` — hệ thống cron sẽ tự chuyển thành `true` khi đến giờ
 
 ### Bước 6: Xác nhận
