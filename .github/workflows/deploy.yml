@@ -25,8 +25,8 @@ jobs:
         run: npm run build
         env:
           # Thêm các biến môi trường cần thiết để Build (Next.js yêu cầu có env lúc build)
-          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          NEXT_PUBLIC_SUPABASE_URL: "https://pbxpjmklrkkwatdvacap.supabase.co"
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: "sb_publishable_difW1C728CGH7Hgr1g9FOg_QdP0NtFD"
           
       - name: Prepare deployment package
         run: |
