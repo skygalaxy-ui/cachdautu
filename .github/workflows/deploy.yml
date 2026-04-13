@@ -1,4 +1,4 @@
-name: Deploy Next.js to VPS
+name: Deploy to VPS (Zero-Downtime)
 
 on:
   push:
@@ -6,61 +6,116 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-        
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build Next.js
-        run: npm run build
-        env:
-          # Thêm các biến môi trường cần thiết để Build (Next.js yêu cầu có env lúc build)
-          NEXT_PUBLIC_SUPABASE_URL: "https://pbxpjmklrkkwatdvacap.supabase.co"
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: "sb_publishable_difW1C728CGH7Hgr1g9FOg_QdP0NtFD"
-          
-      - name: Prepare deployment package
-        run: |
-          tar -czf deploy.tar.gz .next public package.json package-lock.json next.config.js tailwind.config.js postcss.config.js
-
-      - name: Copy files via SSH
-        uses: appleboy/scp-action@v0.1.7
+      - name: Bước 1 - Kéo Code & Rẽ nhánh dự phòng (Zero-Downtime)
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          port: 22
-          source: "deploy.tar.gz"
-          target: "/tmp/"
-
-      - name: Extract and Restart PM2 on VPS
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USERNAME }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          port: 22
+          command_timeout: 10m
           script: |
+            APP_DIR="$HOME/cachdautu"
+            BUILD_DIR="${APP_DIR}_build_temp"
+            
+            echo ">> Chuẩn bị không gian Build vô hình..."
+            # Tạo bản sao y hệt sang thư mục Build, trừ .next cũ và node_modules nặng
+            rsync -aq --delete --exclude='.next' --exclude='node_modules' $APP_DIR/ $BUILD_DIR/
+            
+            echo ">> Cập nhật code từ GitHub vào thư mục Build..."
+            cd $BUILD_DIR
+            git reset --hard
+            git pull origin main
+
+      - name: Bước 1.5 - Đồng bộ Environment Variables
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            APP_DIR="$HOME/cachdautu"
+            BUILD_DIR="${APP_DIR}_build_temp"
+            
+            # Bơm .env* từ nhà chính sang để Load biến môi trường tĩnh (Supabase Keys)
+            cp $APP_DIR/.env* $BUILD_DIR/ 2>/dev/null || true
+
+      - name: Bước 2 - Cài đặt Modules (NPM Install)
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          command_timeout: 15m
+          script: |
+            APP_DIR="$HOME/cachdautu"
+            BUILD_DIR="${APP_DIR}_build_temp"
+            
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             
-            cd ~/cachdautu
+            cd $BUILD_DIR
+            echo ">> Đang cài NPM Packages..."
+            npm ci --legacy-peer-deps || npm install --legacy-peer-deps
+
+      - name: Bước 3 - Bơm RAM Ảo & Biên dịch ngầm (Zero-Downtime Build)
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          command_timeout: 45m
+          script: |
+            APP_DIR="$HOME/cachdautu"
+            BUILD_DIR="${APP_DIR}_build_temp"
             
-            # Giải nén đè lên bản cũ
-            tar -xzf /tmp/deploy.tar.gz -C ~/cachdautu
-            rm /tmp/deploy.tar.gz
+            # Tạo Swap chống sập Server nếu VPS yếu bỗng dưng hết RAM
+            if [ -z "$(sudo swapon --show)" ]; then
+              echo ">> Bơm thêm 2GB RAM ảo (Swap) cứu rỗi VPS yếu..."
+              sudo fallocate -l 2G /swapfile || sudo dd if=/dev/zero of=/swapfile bs=1M count=2048
+              sudo chmod 600 /swapfile
+              sudo mkswap /swapfile
+              sudo swapon /swapfile || true
+            fi
             
-            # Cài đặt các gói production (cực kỳ nhẹ, không gây tốn RAM)
-            npm ci --omit=dev
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             
-            # Khởi động lại ứng dụng
-            pm2 restart cachdautu --update-env
+            cd $BUILD_DIR
+            echo ">> Tiến hành Build Next.js (Website đang chạy KHÔNG bị ảnh hưởng)..."
+            export NODE_OPTIONS="--max-old-space-size=1024"
+            npm run build
+
+      - name: Bước 4 - Chuyển giao Quyền lực & Tái khởi động PM2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          command_timeout: 5m
+          script: |
+            APP_DIR="$HOME/cachdautu"
+            BUILD_DIR="${APP_DIR}_build_temp"
+            
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            
+            echo ">> Chuyển giao dữ liệu Build sang nhà chính cực nhanh..."
+            # Cập nhật mã nguồn chính
+            cd $APP_DIR
+            git reset --hard
+            git pull origin main
+            
+            # Ghi đè file Next Build & Node Modules hoàn thiện
+            rsync -aq --delete $BUILD_DIR/.next $APP_DIR/
+            rsync -aq $BUILD_DIR/node_modules $APP_DIR/
+            
+            echo ">> Tái khởi động PM2 chớp nhoáng..."
+            pm2 reload cachdautu --update-env || pm2 restart cachdautu --update-env
+            
+            echo ">> Dọn dẹp rác chiến trường..."
+            rm -rf $BUILD_DIR
+            echo "Deploy Zero-Downtime thành công rực rỡ! 🚀"
