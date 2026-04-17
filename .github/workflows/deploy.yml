@@ -39,8 +39,9 @@ jobs:
             
             echo ">> Cập nhật code từ GitHub vào thư mục Build..."
             cd $BUILD_DIR
-            git reset --hard
-            git pull origin main
+            git clean -fd
+            git fetch --all
+            git reset --hard origin/main
 
       - name: Bước 1.5 - Đồng bộ Environment Variables
         uses: appleboy/ssh-action@master
