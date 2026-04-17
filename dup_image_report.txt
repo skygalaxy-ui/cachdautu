@@ -1,0 +1,24 @@
+Total posts with featured images: 252
+Total duplicated images: 136
+
+Top duplicated images:
+[11 times]: https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80
+[9 times]: https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80
+[8 times]: https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=80
+[6 times]: https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=800&q=80
+[6 times]: https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80
+[6 times]: https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=1200&q=80
+[6 times]: https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=80
+[5 times]: https://images.unsplash.com/photo-1579621970795-87f967b1658c?w=1200&h=630&fit=crop&q=80
+[5 times]: https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=630&fit=crop&q=80
+[5 times]: https://images.unsplash.com/photo-1611974714656-718fb361668f?w=1200&h=630&fit=crop&q=80
+[5 times]: https://images.unsplash.com/photo-1559589689-577aabd1db4f?w=1200&q=80
+[4 times]: https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80
+[4 times]: https://images.unsplash.com/photo-1559589689-577aabd1db4f?w=800&q=80
+[4 times]: https://images.unsplash.com/photo-1610375461246-83df859d849d?w=1200&q=80
+[4 times]: https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=80
+[3 times]: https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop&q=80
+[3 times]: https://images.unsplash.com/photo-1610375461246-83df859d849d?w=800&q=80
+[3 times]: https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80
+[3 times]: https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80
+[3 times]: https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=1200&q=80
