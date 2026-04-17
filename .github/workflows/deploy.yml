@@ -21,6 +21,12 @@ jobs:
             APP_DIR="$HOME/cachdautu"
             BUILD_DIR="${APP_DIR}_build_temp"
             
+            echo ">> Dọn dẹp ổ cứng VPS khẩn cấp..."
+            sudo apt-get clean || true
+            sudo journalctl --vacuum-time=1d || true
+            rm -rf $HOME/.npm/_cacache || true
+            rm -rf /tmp/* || true
+            
             if ! command -v rsync &> /dev/null; then
               echo ">> rsync không tồn tại, đang tiến hành cài đặt..."
               sudo apt-get update && sudo apt-get install -y rsync
