@@ -21,8 +21,14 @@ jobs:
             APP_DIR="$HOME/cachdautu"
             BUILD_DIR="${APP_DIR}_build_temp"
             
+            if ! command -v rsync &> /dev/null; then
+              echo ">> rsync không tồn tại, đang tiến hành cài đặt..."
+              sudo apt-get update && sudo apt-get install -y rsync
+            fi
+            
             echo ">> Chuẩn bị không gian Build vô hình..."
             # Tạo bản sao y hệt sang thư mục Build, trừ .next cũ và node_modules nặng
+            mkdir -p $BUILD_DIR
             rsync -aq --delete --exclude='.next' --exclude='node_modules' $APP_DIR/ $BUILD_DIR/
             
             echo ">> Cập nhật code từ GitHub vào thư mục Build..."
